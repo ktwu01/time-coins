@@ -282,7 +282,27 @@
                 </select>
             </div>
             <div class="input-group">
-                <label for="hourlyRate">💵 Hourly Rate ($)</label>
+                <label for="currency">💰 Currency</label>
+                <select id="currency">
+                    <option value="$">$ USD - US Dollar</option>
+                    <option value="€">€ EUR - Euro</option>
+                    <option value="£">£ GBP - British Pound</option>
+                    <option value="¥">¥ JPY - Japanese Yen</option>
+                    <option value="¥">¥ CNY - Chinese Yuan</option>
+                    <option value="₹">₹ INR - Indian Rupee</option>
+                    <option value="A$">A$ AUD - Australian Dollar</option>
+                    <option value="C$">C$ CAD - Canadian Dollar</option>
+                    <option value="R$">R$ BRL - Brazilian Real</option>
+                    <option value="₩">₩ KRW - Korean Won</option>
+                    <option value="CHF">CHF - Swiss Franc</option>
+                    <option value="SEK">SEK - Swedish Krona</option>
+                    <option value="NOK">NOK - Norwegian Krone</option>
+                    <option value="DKK">DKK - Danish Krone</option>
+                    <option value="₽">₽ RUB - Russian Ruble</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="hourlyRate">💵 Hourly Rate</label>
                 <input type="number" id="hourlyRate" value="25" min="1" step="0.5">
             </div>
             <div class="input-group">
@@ -315,11 +335,11 @@
 
         <div class="stats">
             <div class="stat-card">
-                <div class="stat-value" id="currentEarnings">$0.00</div>
+                <div class="stat-value" id="currentEarnings">${settings.currency}0.00</div>
                 <div class="stat-label">Earned Today</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="totalTarget">$200.00</div>
+                <div class="stat-value" id="totalTarget">${settings.currency}200.00</div>
                 <div class="stat-label">Daily Target</div>
             </div>
             <div class="stat-card">
@@ -332,6 +352,7 @@
     <script>
         let settings = {
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            currency: "$",
             hourlyRate: 25,
             startTime: "09:00",
             workHours: 8
