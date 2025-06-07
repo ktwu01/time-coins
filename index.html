@@ -75,7 +75,17 @@
             transition: border-color 0.3s;
         }
 
-        .input-group input:focus {
+        .input-group select {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background: white;
+            cursor: pointer;
+        }
+
+        .input-group select:focus {
             outline: none;
             border-color: #3498db;
         }
@@ -247,6 +257,31 @@
 
         <div class="settings">
             <div class="input-group">
+                <label for="timezone">🌍 Time Zone</label>
+                <select id="timezone">
+                    <option value="America/New_York">🇺🇸 Eastern Time (ET)</option>
+                    <option value="America/Chicago">🇺🇸 Central Time (CT)</option>
+                    <option value="America/Denver">🇺🇸 Mountain Time (MT)</option>
+                    <option value="America/Los_Angeles">🇺🇸 Pacific Time (PT)</option>
+                    <option value="Europe/London">🇬🇧 London (GMT/BST)</option>
+                    <option value="Europe/Paris">🇫🇷 Paris (CET/CEST)</option>
+                    <option value="Europe/Berlin">🇩🇪 Berlin (CET/CEST)</option>
+                    <option value="Europe/Rome">🇮🇹 Rome (CET/CEST)</option>
+                    <option value="Asia/Tokyo">🇯🇵 Tokyo (JST)</option>
+                    <option value="Asia/Shanghai">🇨🇳 Shanghai (CST)</option>
+                    <option value="Asia/Hong_Kong">🇭🇰 Hong Kong (HKT)</option>
+                    <option value="Asia/Singapore">🇸🇬 Singapore (SGT)</option>
+                    <option value="Asia/Kolkata">🇮🇳 India (IST)</option>
+                    <option value="Australia/Sydney">🇦🇺 Sydney (AEST/AEDT)</option>
+                    <option value="Australia/Melbourne">🇦🇺 Melbourne (AEST/AEDT)</option>
+                    <option value="Pacific/Auckland">🇳🇿 Auckland (NZST/NZDT)</option>
+                    <option value="America/Toronto">🇨🇦 Toronto (ET)</option>
+                    <option value="America/Vancouver">🇨🇦 Vancouver (PT)</option>
+                    <option value="Brazil/East">🇧🇷 São Paulo (BRT/BRST)</option>
+                    <option value="America/Mexico_City">🇲🇽 Mexico City (CST/CDT)</option>
+                </select>
+            </div>
+            <div class="input-group">
                 <label for="hourlyRate">💵 Hourly Rate ($)</label>
                 <input type="number" id="hourlyRate" value="25" min="1" step="0.5">
             </div>
@@ -296,6 +331,7 @@
 
     <script>
         let settings = {
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             hourlyRate: 25,
             startTime: "09:00",
             workHours: 8
@@ -311,12 +347,47 @@
             { amount: 10000, message: "👑 PHENOMENAL! $10,000! You're a productivity master!" }
         ];
 
+        function getCurrentTimeInTimezone() {
+            return new Date().toLocaleString("en-US", {
+                timeZone: settings.timezone,
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function getCurrentDateInTimezone() {
+            return new Date().toLocaleDateString("en-US", {
+                timeZone: settings.timezone,
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function initializeTimezone() {
+            const timezoneSelect = document.getElementById('timezone');
+            const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            // Try to set user's detected timezone as default
+            const option = Array.from(timezoneSelect.options).find(opt => opt.value === userTimezone);
+            if (option) {
+                timezoneSelect.value = userTimezone;
+                settings.timezone = userTimezone;
+            } else {
+                // Fallback to first option if user's timezone not in list
+                settings.timezone = timezoneSelect.value;
+            }
+        }
+
         function updateSettings() {
+            settings.timezone = document.getElementById('timezone').value;
             settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
             settings.startTime = document.getElementById('startTime').value;
             settings.workHours = parseFloat(document.getElementById('workHours').value);
             
-            document.getElementById('totalTarget').textContent = `$${(settings.hourlyRate * settings.workHours).toFixed(2)}`;
+            document.getElementById('totalTarget').textContent = `${(settings.hourlyRate * settings.workHours).toFixed(2)}`;
             
             // Show success feedback
             const btn = document.querySelector('.update-btn');
@@ -360,14 +431,24 @@
         }
 
         function updateDisplay() {
-            const now = new Date();
-            const currentTime = now.getHours() * 60 + now.getMinutes();
+            // Get current time in selected timezone
+            const currentTimeStr = getCurrentTimeInTimezone();
+            const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
+            const currentTime = currentHour * 60 + currentMinute;
+            
             const workStartMinutes = parseTimeString(settings.startTime);
             const workEndMinutes = workStartMinutes + (settings.workHours * 60);
             
             let earnings = 0;
             let workingMinutes = 0;
             let progress = 0;
+            
+            // Get current date and time info for display
+            const currentDate = getCurrentDateInTimezone();
+            const timeZoneAbbr = new Date().toLocaleTimeString("en-US", {
+                timeZone: settings.timezone,
+                timeZoneName: 'short'
+            }).split(' ').pop();
             
             if (currentTime >= workStartMinutes) {
                 if (currentTime <= workEndMinutes) {
@@ -377,7 +458,7 @@
                     progress = (workingMinutes / (settings.workHours * 60)) * 100;
                     
                     document.getElementById('timeDisplay').textContent = 
-                        `💼 Working for ${Math.floor(workingMinutes / 60)}h ${workingMinutes % 60}m`;
+                        `💼 Working for ${Math.floor(workingMinutes / 60)}h ${workingMinutes % 60}m | ${currentTimeStr} ${timeZoneAbbr}`;
                 } else {
                     // Work day complete
                     workingMinutes = settings.workHours * 60;
@@ -385,7 +466,7 @@
                     progress = 100;
                     
                     document.getElementById('timeDisplay').textContent = 
-                        `🎯 Work day complete! Great job!`;
+                        `🎯 Work day complete! Great job! | ${currentTimeStr} ${timeZoneAbbr}`;
                 }
             } else {
                 // Before work starts
@@ -394,11 +475,11 @@
                 const minsUntil = minutesUntilWork % 60;
                 
                 document.getElementById('timeDisplay').textContent = 
-                    `⏰ Work starts in ${hoursUntil}h ${minsUntil}m`;
+                    `⏰ Work starts in ${hoursUntil}h ${minsUntil}m | ${currentTimeStr} ${timeZoneAbbr}`;
             }
             
             // Update displays
-            document.getElementById('currentEarnings').textContent = `$${earnings.toFixed(2)}`;
+            document.getElementById('currentEarnings').textContent = `${earnings.toFixed(2)}`;
             document.getElementById('workingTime').textContent = 
                 `${Math.floor(workingMinutes / 60)}:${(workingMinutes % 60).toString().padStart(2, '0')}`;
             document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
@@ -419,6 +500,7 @@
         }
 
         // Initialize
+        initializeTimezone();
         updateSettings();
         updateDisplay();
         
@@ -427,8 +509,11 @@
         
         // Add a coin every 3 seconds during work hours for visual effect
         setInterval(() => {
-            const now = new Date();
-            const currentTime = now.getHours() * 60 + now.getMinutes();
+            // Get current time in selected timezone
+            const currentTimeStr = getCurrentTimeInTimezone();
+            const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
+            const currentTime = currentHour * 60 + currentMinute;
+            
             const workStartMinutes = parseTimeString(settings.startTime);
             const workEndMinutes = workStartMinutes + (settings.workHours * 60);
             
