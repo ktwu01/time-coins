@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time Coins</title>
+    <style>
+        body { font-family: -apple-system; text-align: center; padding: 20px; }
+        .hourglass { font-size: 48px; margin: 20px; }
+        .wasted { color: red; font-size: 24px; }
+        .earned { color: green; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div class="hourglass">⏳</div>
+    <div class="wasted" id="wasted">$0.00 wasted</div>
+    <div class="earned" id="earned">Should earn: $200.00</div>
+    
+    <script>
+        // 上面的计算逻辑
+        function update() {
+            const result = calculateWaste()
+            document.getElementById('wasted').innerText = `$${result.wastedAmount} wasted`
+            document.getElementById('earned').innerText = `Should earn: $${result.shouldEarn}`
+        }
+        
+        setInterval(update, 60000) // 每分钟更新
+        update()
+    </script>
+</body>
+</html>
