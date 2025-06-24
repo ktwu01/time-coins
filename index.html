@@ -188,14 +188,156 @@
                         Time Zone
                     </label>
                     <select id="timezone" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
-                        <option value="America/New_York">🇺🇸 Eastern Time (ET)</option>
-                        <option value="America/Chicago">🇺🇸 Central Time (CT)</option>
-                        <option value="America/Los_Angeles">🇺🇸 Pacific Time (PT)</option>
-                        <option value="Europe/London">🇬🇧 London (GMT)</option>
-                        <option value="Europe/Paris">🇫🇷 Paris (CET)</option>
-                        <option value="Asia/Tokyo">🇯🇵 Tokyo (JST)</option>
-                        <option value="Asia/Shanghai">🇨🇳 Shanghai (CST)</option>
-                        <option value="Asia/Singapore">🇸🇬 Singapore (SGT)</option>
+                        <!-- North America -->
+                        <optgroup label="🌎 North America">
+                            <option value="America/New_York">🇺🇸 New York (EST/EDT) UTC-5/-4</option>
+                            <option value="America/Chicago">🇺🇸 Chicago (CST/CDT) UTC-6/-5</option>
+                            <option value="America/Denver">🇺🇸 Denver (MST/MDT) UTC-7/-6</option>
+                            <option value="America/Phoenix">🇺🇸 Phoenix (MST) UTC-7</option>
+                            <option value="America/Los_Angeles">🇺🇸 Los Angeles (PST/PDT) UTC-8/-7</option>
+                            <option value="America/Anchorage">🇺🇸 Anchorage (AKST/AKDT) UTC-9/-8</option>
+                            <option value="Pacific/Honolulu">🇺🇸 Honolulu (HST) UTC-10</option>
+                            <option value="America/Toronto">🇨🇦 Toronto (EST/EDT) UTC-5/-4</option>
+                            <option value="America/Vancouver">🇨🇦 Vancouver (PST/PDT) UTC-8/-7</option>
+                            <option value="America/Edmonton">🇨🇦 Edmonton (MST/MDT) UTC-7/-6</option>
+                            <option value="America/Winnipeg">🇨🇦 Winnipeg (CST/CDT) UTC-6/-5</option>
+                            <option value="America/Halifax">🇨🇦 Halifax (AST/ADT) UTC-4/-3</option>
+                            <option value="America/St_Johns">🇨🇦 St. John's (NST/NDT) UTC-3:30/-2:30</option>
+                            <option value="America/Mexico_City">🇲🇽 Mexico City (CST/CDT) UTC-6/-5</option>
+                            <option value="America/Cancun">🇲🇽 Cancun (EST) UTC-5</option>
+                            <option value="America/Tijuana">🇲🇽 Tijuana (PST/PDT) UTC-8/-7</option>
+                        </optgroup>
+                        
+                        <!-- Central & South America -->
+                        <optgroup label="🌎 Central & South America">
+                            <option value="America/Guatemala">🇬🇹 Guatemala (CST) UTC-6</option>
+                            <option value="America/Costa_Rica">🇨🇷 Costa Rica (CST) UTC-6</option>
+                            <option value="America/Panama">🇵🇦 Panama (EST) UTC-5</option>
+                            <option value="America/Bogota">🇨🇴 Bogotá (COT) UTC-5</option>
+                            <option value="America/Lima">🇵🇪 Lima (PET) UTC-5</option>
+                            <option value="America/La_Paz">🇧🇴 La Paz (BOT) UTC-4</option>
+                            <option value="America/Caracas">🇻🇪 Caracas (VET) UTC-4</option>
+                            <option value="America/Santiago">🇨🇱 Santiago (CLT/CLST) UTC-4/-3</option>
+                            <option value="America/Argentina/Buenos_Aires">🇦🇷 Buenos Aires (ART) UTC-3</option>
+                            <option value="America/Montevideo">🇺🇾 Montevideo (UYT) UTC-3</option>
+                            <option value="America/Sao_Paulo">🇧🇷 São Paulo (BRT/BRST) UTC-3/-2</option>
+                            <option value="America/Manaus">🇧🇷 Manaus (AMT) UTC-4</option>
+                            <option value="America/Fortaleza">🇧🇷 Fortaleza (BRT) UTC-3</option>
+                        </optgroup>
+                        
+                        <!-- Europe -->
+                        <optgroup label="🌍 Europe">
+                            <option value="Europe/London">🇬🇧 London (GMT/BST) UTC+0/+1</option>
+                            <option value="Europe/Dublin">🇮🇪 Dublin (GMT/IST) UTC+0/+1</option>
+                            <option value="Europe/Lisbon">🇵🇹 Lisbon (WET/WEST) UTC+0/+1</option>
+                            <option value="Europe/Madrid">🇪🇸 Madrid (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Paris">🇫🇷 Paris (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Brussels">🇧🇪 Brussels (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Amsterdam">🇳🇱 Amsterdam (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Berlin">🇩🇪 Berlin (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Zurich">🇨🇭 Zurich (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Vienna">🇦🇹 Vienna (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Rome">🇮🇹 Rome (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Prague">🇨🇿 Prague (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Warsaw">🇵🇱 Warsaw (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Stockholm">🇸🇪 Stockholm (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Oslo">🇳🇴 Oslo (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Copenhagen">🇩🇰 Copenhagen (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Helsinki">🇫🇮 Helsinki (EET/EEST) UTC+2/+3</option>
+                            <option value="Europe/Athens">🇬🇷 Athens (EET/EEST) UTC+2/+3</option>
+                            <option value="Europe/Istanbul">🇹🇷 Istanbul (TRT) UTC+3</option>
+                            <option value="Europe/Bucharest">🇷🇴 Bucharest (EET/EEST) UTC+2/+3</option>
+                            <option value="Europe/Budapest">🇭🇺 Budapest (CET/CEST) UTC+1/+2</option>
+                            <option value="Europe/Moscow">🇷🇺 Moscow (MSK) UTC+3</option>
+                            <option value="Europe/Kiev">🇺🇦 Kyiv (EET/EEST) UTC+2/+3</option>
+                        </optgroup>
+                        
+                        <!-- Africa & Middle East -->
+                        <optgroup label="🌍 Africa & Middle East">
+                            <option value="Africa/Casablanca">🇲🇦 Casablanca (WET/WEST) UTC+0/+1</option>
+                            <option value="Africa/Lagos">🇳🇬 Lagos (WAT) UTC+1</option>
+                            <option value="Africa/Cairo">🇪🇬 Cairo (EET) UTC+2</option>
+                            <option value="Africa/Johannesburg">🇿🇦 Johannesburg (SAST) UTC+2</option>
+                            <option value="Africa/Nairobi">🇰🇪 Nairobi (EAT) UTC+3</option>
+                            <option value="Africa/Addis_Ababa">🇪🇹 Addis Ababa (EAT) UTC+3</option>
+                            <option value="Asia/Jerusalem">🇮🇱 Jerusalem (IST/IDT) UTC+2/+3</option>
+                            <option value="Asia/Dubai">🇦🇪 Dubai (GST) UTC+4</option>
+                            <option value="Asia/Qatar">🇶🇦 Qatar (AST) UTC+3</option>
+                            <option value="Asia/Kuwait">🇰🇼 Kuwait (AST) UTC+3</option>
+                            <option value="Asia/Riyadh">🇸🇦 Riyadh (AST) UTC+3</option>
+                            <option value="Asia/Baghdad">🇮🇶 Baghdad (AST) UTC+3</option>
+                            <option value="Asia/Tehran">🇮🇷 Tehran (IRST/IRDT) UTC+3:30/+4:30</option>
+                        </optgroup>
+                        
+                        <!-- Asia -->
+                        <optgroup label="🌏 Asia">
+                            <option value="Asia/Karachi">🇵🇰 Karachi (PKT) UTC+5</option>
+                            <option value="Asia/Kolkata">🇮🇳 Mumbai/Delhi (IST) UTC+5:30</option>
+                            <option value="Asia/Kathmandu">🇳🇵 Kathmandu (NPT) UTC+5:45</option>
+                            <option value="Asia/Dhaka">🇧🇩 Dhaka (BST) UTC+6</option>
+                            <option value="Asia/Yangon">🇲🇲 Yangon (MMT) UTC+6:30</option>
+                            <option value="Asia/Bangkok">🇹🇭 Bangkok (ICT) UTC+7</option>
+                            <option value="Asia/Ho_Chi_Minh">🇻🇳 Ho Chi Minh City (ICT) UTC+7</option>
+                            <option value="Asia/Jakarta">🇮🇩 Jakarta (WIB) UTC+7</option>
+                            <option value="Asia/Kuala_Lumpur">🇲🇾 Kuala Lumpur (MYT) UTC+8</option>
+                            <option value="Asia/Singapore">🇸🇬 Singapore (SGT) UTC+8</option>
+                            <option value="Asia/Manila">🇵🇭 Manila (PST) UTC+8</option>
+                            <option value="Asia/Hong_Kong">🇭🇰 Hong Kong (HKT) UTC+8</option>
+                            <option value="Asia/Taipei">🇹🇼 Taipei (CST) UTC+8</option>
+                            <option value="Asia/Shanghai">🇨🇳 Beijing/Shanghai (CST) UTC+8</option>
+                            <option value="Asia/Urumqi">🇨🇳 Urumqi (XJT) UTC+6</option>
+                            <option value="Asia/Seoul">🇰🇷 Seoul (KST) UTC+9</option>
+                            <option value="Asia/Tokyo">🇯🇵 Tokyo (JST) UTC+9</option>
+                            <option value="Asia/Almaty">🇰🇿 Almaty (ALMT) UTC+6</option>
+                            <option value="Asia/Tashkent">🇺🇿 Tashkent (UZT) UTC+5</option>
+                            <option value="Asia/Yekaterinburg">🇷🇺 Yekaterinburg (YEKT) UTC+5</option>
+                            <option value="Asia/Novosibirsk">🇷🇺 Novosibirsk (NOVT) UTC+7</option>
+                            <option value="Asia/Irkutsk">🇷🇺 Irkutsk (IRKT) UTC+8</option>
+                            <option value="Asia/Yakutsk">🇷🇺 Yakutsk (YAKT) UTC+9</option>
+                            <option value="Asia/Vladivostok">🇷🇺 Vladivostok (VLAT) UTC+10</option>
+                            <option value="Asia/Sakhalin">🇷🇺 Sakhalin (SAKT) UTC+11</option>
+                            <option value="Asia/Kamchatka">🇷🇺 Kamchatka (PETT) UTC+12</option>
+                        </optgroup>
+                        
+                        <!-- Oceania -->
+                        <optgroup label="🌏 Oceania">
+                            <option value="Australia/Perth">🇦🇺 Perth (AWST) UTC+8</option>
+                            <option value="Australia/Adelaide">🇦🇺 Adelaide (ACST/ACDT) UTC+9:30/+10:30</option>
+                            <option value="Australia/Darwin">🇦🇺 Darwin (ACST) UTC+9:30</option>
+                            <option value="Australia/Brisbane">🇦🇺 Brisbane (AEST) UTC+10</option>
+                            <option value="Australia/Sydney">🇦🇺 Sydney (AEST/AEDT) UTC+10/+11</option>
+                            <option value="Australia/Melbourne">🇦🇺 Melbourne (AEST/AEDT) UTC+10/+11</option>
+                            <option value="Australia/Hobart">🇦🇺 Hobart (AEST/AEDT) UTC+10/+11</option>
+                            <option value="Pacific/Auckland">🇳🇿 Auckland (NZST/NZDT) UTC+12/+13</option>
+                            <option value="Pacific/Fiji">🇫🇯 Fiji (FJT) UTC+12</option>
+                            <option value="Pacific/Guam">🇬🇺 Guam (ChST) UTC+10</option>
+                            <option value="Pacific/Tahiti">🇵🇫 Tahiti (TAHT) UTC-10</option>
+                            <option value="Pacific/Marquesas">🇵🇫 Marquesas (MART) UTC-9:30</option>
+                            <option value="Pacific/Easter">🇨🇱 Easter Island (EAST/EASST) UTC-6/-5</option>
+                        </optgroup>
+                        
+                        <!-- Atlantic -->
+                        <optgroup label="🌊 Atlantic">
+                            <option value="Atlantic/Azores">🇵🇹 Azores (AZOT/AZOST) UTC-1/+0</option>
+                            <option value="Atlantic/Cape_Verde">🇨🇻 Cape Verde (CVT) UTC-1</option>
+                            <option value="Atlantic/Canary">🇪🇸 Canary Islands (WET/WEST) UTC+0/+1</option>
+                            <option value="Atlantic/Reykjavik">🇮🇸 Reykjavik (GMT) UTC+0</option>
+                            <option value="Atlantic/Bermuda">🇧🇲 Bermuda (AST/ADT) UTC-4/-3</option>
+                        </optgroup>
+                        
+                        <!-- Indian Ocean -->
+                        <optgroup label="🌊 Indian Ocean">
+                            <option value="Indian/Mauritius">🇲🇺 Mauritius (MUT) UTC+4</option>
+                            <option value="Indian/Reunion">🇷🇪 Réunion (RET) UTC+4</option>
+                            <option value="Indian/Maldives">🇲🇻 Maldives (MVT) UTC+5</option>
+                            <option value="Indian/Chagos">🇮🇴 Chagos (IOT) UTC+6</option>
+                        </optgroup>
+                        
+                        <!-- Special/Unusual -->
+                        <optgroup label="⚡ Special Zones">
+                            <option value="UTC">🌐 UTC (Coordinated Universal Time) UTC+0</option>
+                            <option value="GMT">🌐 GMT (Greenwich Mean Time) UTC+0</option>
+                        </optgroup>
                     </select>
                 </div>
                 
