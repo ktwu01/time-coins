@@ -212,19 +212,9 @@ We welcome all forms of contributions!
 
 ---
 
-## 🏆 Awards & Recognition
-
-> *"A beautifully crafted tool that makes time management both elegant and motivating"*  
-> — ProductHunt Community
-
-> *"The glassmorphism design is absolutely stunning, and the functionality is spot-on"*  
-> — Design Awards 2024
-
----
-
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International CC BY-NC-ND 4.0 License - see the [LICENSE](LICENSE) file for details
 
 ---
 
@@ -244,14 +234,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Issues**: [Bug Reports](https://github.com/ktwu01/time-coins/issues)
 - **Discussions**: [Feature Requests](https://github.com/ktwu01/time-coins/discussions)
 - **Email**: [Contact Developer](mailto:your-email@example.com)
-
----
-
-## 🚀 Related Projects
-
-- [**Time Tracker Pro**](https://github.com/ktwu01/time-tracker-pro) - Advanced time management suite
-- [**Productivity Hub**](https://github.com/ktwu01/productivity-hub) - Complete productivity ecosystem
-- [**Focus Timer**](https://github.com/ktwu01/focus-timer) - Pomodoro technique implementation
 
 ---
 
