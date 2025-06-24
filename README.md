@@ -1,82 +1,94 @@
-# Time Coins ⏳💰
+# Time Coins - Real-Time Earnings Tracker 💰
 
 [![GitHub stars](https://img.shields.io/github/stars/ktwu01/time-coins)](https://github.com/ktwu01/time-coins) [![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork) ![cc-by-nc-nd](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)
 
 > **Transform every moment into golden value** ✨  
-> A sophisticated time-to-money visualization tool that turns your working hours into tangible value
+> Visualize your earnings in real-time with beautiful hourglass animations and milestone celebrations
 
-[![English](https://img.shields.io/badge/lang-English-blue.svg)](README.EN.md) [![中文](https://img.shields.io/badge/lang-中文-brown.svg)](README.md)
-
-Hey! Transform your precious time into visible wealth with our elegant hourglass visualization.
+[![English](https://img.shields.io/badge/lang-English-blue.svg)](README.md) [![中文](https://img.shields.io/badge/lang-中文-brown.svg)](README.CN.md)
 
 ---
 
-## 🎯 Project Overview
+## 🎯 What is Time Coins?
 
-Time Coins is an elegant productivity tool that helps you visualize the monetary value of your working time in real-time. Through beautiful hourglass animations and golden coin effects, it makes the value of time visible and tangible.
+### **[Click here to see Live Demo](https://ktwu01.github.io/time-coins/)**
 
-### ✨ Core Features
-
-- **🏺 Elegant Hourglass Animation** - Real-time visualization of time flowing
-- **💰 Dynamic Coin System** - Continuous milestone achievements and income accumulation
-- **🌍 Global Timezone Support** - Auto-configuration for 20+ major timezones
-- **💱 Multi-Currency Units** - Support for 15+ major currencies (USD, EUR, GBP, JPY, etc.)
-- **📱 Responsive Design** - Perfect adaptation for desktop and mobile devices
-- **🎨 Glass Gradient Style** - Modern glassmorphism design language
+Experience Time Coins instantly, no installation required
 
 ![Time Coins Screenshot](assets/screenshot.png)
-*Elegant black, white, and gold color scheme creating a premium user experience*
+*Elegant black, white, and gold color scheme for a premium user experience*
+
+Time Coins is an elegant **real-time earnings tracker** that transforms your work hours into visual gold. Watch your income grow minute by minute with stunning hourglass animations, celebrate milestones with golden particle effects, and stay motivated throughout your workday.
+
+Perfect for **freelancers**, **remote workers**, **hourly employees**, and anyone who wants to visualize the monetary value of their time.
+
+### ✨ Key Features
+
+- **🏺 Beautiful Hourglass Animation** - Watch golden particles flow as time passes
+- **💰 Real-Time Income Tracking** - See your earnings update every minute
+- **🏆 Milestone Celebration System** - Achieve goals with satisfying animations
+- **🌍 Global Timezone Support** - 50+ timezones with automatic detection
+- **💱 Multi-Currency Support** - 33 currencies with intelligent locale detection
+- **📱 Responsive Design** - Perfect on desktop, tablet, and mobile
+- **🎨 Glassmorphism UI** - Modern, elegant design with smooth animations
 
 ---
 
-## 🚀 Feature Highlights
+## 🚀 Core Functionality
 
 ### 💼 Smart Work Tracking
-- Automatic work period detection
-- Real-time income calculation
-- Dynamic progress bar showing daily completion
-- Milestone achievement system
+- **Automatic Income Calculation** based on your hourly rate and work schedule
+- **Real-Time Progress Bar** showing daily completion percentage
+- **Work Status Detection** (Before work/Working/Work completed)
+- **Customizable Work Hours** with flexible start times and duration
+
+### 🏅 Achievement System
+- **6 Milestone Tiers**: $10, $50, $100, $200, $500, $1000 (currency adjustable)
+- **Celebration Animations** when milestones are reached
+- **Progress Tracking** to next milestone
+- **Smart Milestone Management** prevents duplicate celebrations
 
 ### ⚙️ Flexible Configuration
-- Custom hourly rate settings
-- Adjustable work start time
-- Customizable daily work hours
-- One-click update for all configurations
+- **Custom Hourly Rate** with decimal precision support
+- **Personalized Work Schedule** - set your daily start time and work duration
+- **Timezone Selection** from 50+ global options
+- **Currency Preferences** with 33+ supported currencies
+- **Instant Settings Preview** with real-time validation
 
-### 🎭 Visual Experience
-- Smooth coin-dropping animations
-- Elegant floating effects
-- Gradient shimmer feedback
-- Deep glass morphism effects
+### 🌐 International Ready
+- **Bilingual Interface** (English/Chinese) with one-click switching
+- **Smart Language Detection** from browser preferences
+- **Localized Currency Names** and formatting
+- **Cultural Milestone Adaptations** for different regions
 
 ---
 
 ## 📸 Interface Preview
 
-| Main Interface | Settings Panel | Mobile View |
-|----------------|----------------|-------------|
+| Main Dashboard | Settings Panel | Mobile Experience |
+|----------------|----------------|-------------------|
 | ![Main Interface](assets/main-interface.png) | ![Settings](assets/settings.png) | ![Mobile](assets/mobile.png) |
-| Hourglass animation with real-time stats | Global timezone and currency configuration | Perfect responsive experience |
+| Real-time earnings with hourglass animation | Global timezone and currency configuration | Responsive design for all devices |
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-- **Frontend Framework**: Pure HTML5 + Vanilla JavaScript
-- **Styling System**: Tailwind CSS 3.0+
-- **Icon Library**: Font Awesome 6.4
-- **Typography**: Inter (Google Fonts)
-- **Animations**: CSS3 + JavaScript
-- **Responsive**: Mobile-first Design
+- **Frontend**: Pure HTML5 + Vanilla JavaScript (no dependencies)
+- **Styling**: Tailwind CSS 3.0+ with custom glassmorphism effects
+- **Icons**: Font Awesome 6.4 for crisp, scalable icons
+- **Fonts**: Inter from Google Fonts for modern typography
+- **Animations**: CSS3 transitions + JavaScript for smooth interactions
+- **Architecture**: Modular ES6+ with intelligent caching system
 
 ---
 
 ## 📦 Quick Start
 
-### Online Experience
-🌐 **[Live Demo](https://ktwu01.github.io/time-coins/)** - Experience instantly without installation
+### 🌐 Try It Now
+**[Live Demo](https://ktwu01.github.io/time-coins/)** - Experience Time Coins instantly, no installation required
 
-### Local Setup
+### 💻 Local Development
 
 ```bash
 # Clone the repository
@@ -85,170 +97,125 @@ git clone https://github.com/ktwu01/time-coins.git
 # Navigate to directory
 cd time-coins
 
-# Run with any HTTP server
-# Option 1: Python
+# Start local server (choose one method)
+
+# Method 1: Python
 python -m http.server 8000
 
-# Option 2: Node.js
+# Method 2: Node.js
 npx serve .
 
-# Option 3: VS Code Live Server
-# Right-click index.html -> Open with Live Server
+# Method 3: VS Code Live Server
+# Right-click index.html → Open with Live Server
 ```
 
-Visit `http://localhost:8000` to start using!
+Visit `http://localhost:8000` and start tracking your earnings!
 
 ---
 
-## ⚡ User Guide
+## ⚡ How to Use
 
-### Basic Configuration
-1. **Select Timezone** - Choose your current timezone from the dropdown
-2. **Set Currency** - Select your preferred currency unit
-3. **Enter Hourly Rate** - Input your hourly wage rate
-4. **Work Schedule** - Set daily start time and work duration
-5. **Apply Settings** - Click "Update Settings" button to save
+### Initial Setup (30 seconds)
+1. **Select Timezone** - Choose from 50+ global timezones
+2. **Pick Currency** - Select from 33 supported currencies  
+3. **Enter Hourly Rate** - Input your earnings per hour
+4. **Set Work Schedule** - Define daily start time and work duration
+5. **Save Settings** - Click "Update Settings" to begin tracking
 
-### Real-time Monitoring
-- 📊 **Progress Bar** - View daily work completion
-- 💰 **Income Statistics** - Real-time display of earned amount
-- ⏱️ **Time Tracking** - Precise work duration down to minutes
-- 🏆 **Achievement System** - Milestone celebrations with animations
+### Real-Time Monitoring
+- 📊 **Progress Visualization** - Watch your daily completion percentage
+- 💰 **Live Earnings Counter** - See income update every minute
+- ⏱️ **Precise Time Tracking** - Accurate to the minute
+- 🏆 **Milestone Celebrations** - Enjoy satisfying achievement animations
+- 🔮 **Hourglass Animation** - Beautiful golden particles flow with time
 
 ---
 
 ## 🎨 Design Philosophy
 
-Time Coins adopts an **"Elegant & Sophisticated"** design philosophy:
+Time Coins embraces **"Elegant Luxury"** design principles:
 
-- **Color Scheme**: Black base + White text + Gold accents
-- **Visual Hierarchy**: Clear glass morphism layering
-- **Interaction Feedback**: Subtle yet elegant animation effects
-- **User Experience**: Simple yet sophisticated operation flow
+- **Premium Color Palette**: Deep black + crisp white + lustrous gold accents
+- **Glassmorphism Effects**: Layered transparency with subtle blur effects  
+- **Micro-Interactions**: Delightful hover states and button feedback
+- **Progressive Enhancement**: Beautiful by default, enhanced with JavaScript
 
 ---
 
-## 📋 Changelog
+## 📋 Version History
 
 ### v2.0.0 (Current)
-- ✅ **[Latest]** Adopted elegant and sophisticated modern design style
-- ✅ **[Latest]** Added multiple currency units
-- ✅ **[Latest]** Add currencies; modified LICENSE file
-- ✅ **[Latest]** Add meta tags for SEO
-- ✅ **[Latest]** Add Google tag
+- ✅ **[Latest]** Redesigned with premium glassmorphism UI
+- ✅ **[Latest]** Expanded currency support (33 currencies)
+- ✅ **[Latest]** Enhanced milestone celebration system
+- ✅ **[Latest]** Improved SEO optimization with meta tags
+- ✅ **[Latest]** Added Google Analytics integration
 - ✅ **[Latest]** Persistent milestone display
-- ✅ **[Latest]** Completely updated dynamic currency units
+- ✅ **[Latest]** Dynamic currency unit system
 
 ### v1.0.0
-- ✅ Dynamic currency units
-- ✅ Persistent display mode
-- ✅ Global timezone expert-level configuration completed
-- ✅ Added page close confirmation prompt
+- ✅ Core earnings tracking functionality
+- ✅ Basic hourglass animation
+- ✅ Global timezone configuration
+- ✅ Page close confirmation dialog
+- ✅ Initial multi-language support
 
 ---
 
 ## 🤝 Contributing
 
-We welcome all forms of contributions!
+We welcome contributions from developers worldwide!
 
 ### How to Contribute
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork** this repository
+2. **Create** feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to branch (`git push origin feature/AmazingFeature`)
+5. **Open** Pull Request
 
 ### Contribution Areas
-- 🐛 Bug fixes
-- ✨ New feature development
-- 📝 Documentation improvements
-- 🎨 UI/UX optimizations
-- 🌍 Internationalization support
-
----
-
-## 🌟 Why Time Coins?
-
-### For Freelancers
-- **Motivation Boost**: Watch your earnings grow in real-time
-- **Time Awareness**: Visual reminder of time's monetary value
-- **Goal Tracking**: Milestone system keeps you motivated
-
-### For Remote Workers
-- **Productivity Focus**: Beautiful interface encourages focus
-- **Value Visualization**: See the tangible worth of your work time
-- **Achievement Recognition**: Celebrate your daily accomplishments
-
-### For Anyone Who Values Time
-- **Time Consciousness**: Develop better time management habits
-- **Value Perception**: Understand the true cost of time
-- **Elegant Experience**: Enjoy a premium productivity tool
-
----
-
-## 🎯 Roadmap
-
-### 🚧 Coming Soon
-- [ ] **Team Collaboration** - Multi-user workspace support
-- [ ] **Data Analytics** - Weekly/monthly earning reports
-- [ ] **Integration APIs** - Connect with time tracking services
-- [ ] **Desktop App** - Native macOS/Windows applications
-- [ ] **Customizable Themes** - More color scheme options
-
-### 💡 Future Vision
-- [ ] **AI Insights** - Productivity pattern analysis
-- [ ] **Cloud Sync** - Cross-device data synchronization
-- [ ] **Widget Support** - Desktop and mobile widgets
-- [ ] **Voice Commands** - Hands-free time tracking
-
----
-
-## 📊 Performance
-
-- **⚡ Lightning Fast**: <100ms loading time
-- **📱 Mobile Optimized**: Perfect responsive design
-- **🔋 Battery Friendly**: Minimal resource consumption
-- **🌐 Cross-Browser**: Works on all modern browsers
+- 🐛 **Bug Fixes** - Help improve stability
+- ✨ **New Features** - Add exciting functionality  
+- 📝 **Documentation** - Improve guides and examples
+- 🎨 **UI/UX Enhancements** - Polish the user experience
+- 🌍 **Internationalization** - Add support for more languages
+- 🔧 **Performance** - Optimize animations and calculations
 
 ---
 
 ## 📄 License
 
-This project is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International CC BY-NC-ND 4.0 License - see the [LICENSE](LICENSE) file for details
+This project is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Design Inspiration**: Glassmorphism design trends
-- **Icons**: Font Awesome community
-- **Fonts**: Google Fonts team
-- **CSS Framework**: Tailwind CSS team
-- **Community**: All contributors and users who make this project better
+- **Design Inspiration**: Modern glassmorphism and premium dashboard trends
+- **Icon Library**: Font Awesome community for beautiful iconography
+- **Typography**: Google Fonts team for the elegant Inter font family
+- **CSS Framework**: Tailwind CSS for rapid, consistent styling
+- **Animation Techniques**: CSS-Tricks and CodePen community examples
 
 ---
 
-## 📞 Contact & Support
+## 📞 Get in Touch
 
-- **GitHub**: [@ktwu01](https://github.com/ktwu01)
-- **Issues**: [Bug Reports](https://github.com/ktwu01/time-coins/issues)
-- **Discussions**: [Feature Requests](https://github.com/ktwu01/time-coins/discussions)
-- **Email**: [Contact Developer](mailto:your-email@example.com)
+- **GitHub Profile**: [@ktwu01](https://github.com/ktwu01)
+- **Report Issues**: [Bug Reports & Feature Requests](https://github.com/ktwu01/time-coins/issues)
+- **Discussions**: [Community Forum](https://github.com/ktwu01/time-coins/discussions)
+- **Live Demo**: [Try Time Coins Now](https://ktwu01.github.io/time-coins/)
 
 ---
 
 <div align="center">
 
-### ⭐ Star this repository if you find it helpful!
+### ⭐ Star this project if it helps you visualize your time's value!
 
-[![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork)
+[![GitHub stars](https://img.shields.io/github/stars/ktwu01/time-coins)](https://github.com/ktwu01/time-coins) [![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork)
 
-<i>Like the project? Please consider following [@ktwu01](https://github.com/ktwu01) or create [PR](https://github.com/ktwu01/time-coins/pulls) and [issues](https://github.com/ktwu01/time-coins/issues) to help improve!</i>
+**⏰ Time is money, make every moment count! Transform your productivity today!**
 
-**⏰ Time is money, make every moment count!**
-
----
-
-*Made with ❤️ by [Koutian Wu](https://github.com/ktwu01)*
+*Perfect for freelancers, remote workers, consultants, and anyone who values their time* 💎
 
 </div>
