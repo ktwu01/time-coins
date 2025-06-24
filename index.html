@@ -17,7 +17,7 @@
     <meta name="author" content="Github ktwu01 (Koutian Wu)">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Coins - Elegant Edition</title>
@@ -808,6 +808,14 @@
 
         // Update every second
         setInterval(updateDisplay, 1000);
+        
+        // 页面关闭确认提示
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = ''; // Chrome需要这行
+            return ''; // 其他浏览器需要这行
+        });
+
     </script>
 </body>
 </html>
