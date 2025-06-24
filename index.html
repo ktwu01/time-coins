@@ -7,7 +7,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-6VVK864R2V');
     </script>
     
@@ -17,10 +16,9 @@
     <meta name="author" content="Github ktwu01 (Koutian Wu)">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Coins - Elegant Edition</title>
+    <title id="pageTitle">Time Coins - Elegant Edition</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,125 +29,17 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* Custom Tailwind Extensions */
-        body { font-family: 'Inter', sans-serif; }
-        
-        /* Glass Morphism Effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .glass-dark {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Gold Gradient */
-        .gold-gradient {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
-        }
-        
-        /* Elegant animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { 
-                transform: scale(1); 
-                opacity: 1;
-            }
-            50% { 
-                transform: scale(1.05); 
-                opacity: 0.9;
-            }
-        }
-        
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-        
-        /* Hourglass specific styles */
-        .hourglass-shape {
-            width: 120px;
-            height: 200px;
-            position: relative;
-            background: linear-gradient(to bottom, 
-                transparent 42%, 
-                rgba(255, 215, 0, 0.3) 47%, 
-                rgba(255, 215, 0, 0.8) 50%, 
-                rgba(255, 215, 0, 0.3) 53%, 
-                transparent 58%);
-            border: 3px solid rgba(255, 215, 0, 0.6);
-            border-radius: 15px 15px 5px 5px;
-            box-shadow: 
-                0 0 30px rgba(255, 215, 0, 0.3),
-                inset 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .coin-particle {
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, #FFD700, #FFA500);
-            border-radius: 50%;
-            position: absolute;
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
-            animation: coinFall 3s ease-in-out infinite;
-        }
-        
-        @keyframes coinFall {
-            0% { 
-                transform: translateY(-150px) scale(0);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% { 
-                transform: translateY(80px) scale(1);
-                opacity: 0.7;
-            }
-        }
-        
-        /* Focus and Hover States */
-        .elegant-input:focus {
-            outline: none;
-            border-color: rgba(255, 215, 0, 0.6);
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
-        }
-        
-        .elegant-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-    </style>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white overflow-x-hidden">
     
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="language-btn active" data-lang="en">🇺🇸 EN</button>
+        <button class="language-btn" data-lang="zh">🇨🇳 中文</button>
+    </div>
+
     <!-- Background Pattern -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform rotate-45 -translate-x-full animate-pulse"></div>
@@ -163,11 +53,11 @@
             <div class="glass rounded-3xl p-8 mb-8">
                 <div class="flex items-center justify-center mb-4">
                     <i class="fas fa-hourglass-half text-4xl text-yellow-400 mr-4 float-animation"></i>
-                    <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">
+                    <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent" data-i18n="title">
                         Time Coins
                     </h1>
                 </div>
-                <p class="text-gray-300 text-lg md:text-xl font-light">
+                <p class="text-gray-300 text-lg md:text-xl font-light" data-i18n="subtitle">
                     Transform every moment into golden value
                 </p>
             </div>
@@ -177,7 +67,7 @@
         <section class="glass-dark rounded-2xl p-6 md:p-8 mb-8">
             <div class="flex items-center mb-6">
                 <i class="fas fa-cog text-yellow-400 text-xl mr-3"></i>
-                <h2 class="text-2xl font-semibold text-white">Configuration</h2>
+                <h2 class="text-2xl font-semibold text-white" data-i18n="settings.title">Configuration</h2>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
@@ -185,159 +75,10 @@
                 <div class="space-y-2">
                     <label class="flex items-center text-sm font-medium text-gray-300">
                         <i class="fas fa-globe text-yellow-400 mr-2"></i>
-                        Time Zone
+                        <span data-i18n="settings.timezone">Time Zone</span>
                     </label>
                     <select id="timezone" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
-                        <!-- North America -->
-                        <optgroup label="🌎 North America">
-                            <option value="America/New_York">🇺🇸 New York (EST/EDT) UTC-5/-4</option>
-                            <option value="America/Chicago">🇺🇸 Chicago (CST/CDT) UTC-6/-5</option>
-                            <option value="America/Denver">🇺🇸 Denver (MST/MDT) UTC-7/-6</option>
-                            <option value="America/Phoenix">🇺🇸 Phoenix (MST) UTC-7</option>
-                            <option value="America/Los_Angeles">🇺🇸 Los Angeles (PST/PDT) UTC-8/-7</option>
-                            <option value="America/Anchorage">🇺🇸 Anchorage (AKST/AKDT) UTC-9/-8</option>
-                            <option value="Pacific/Honolulu">🇺🇸 Honolulu (HST) UTC-10</option>
-                            <option value="America/Toronto">🇨🇦 Toronto (EST/EDT) UTC-5/-4</option>
-                            <option value="America/Vancouver">🇨🇦 Vancouver (PST/PDT) UTC-8/-7</option>
-                            <option value="America/Edmonton">🇨🇦 Edmonton (MST/MDT) UTC-7/-6</option>
-                            <option value="America/Winnipeg">🇨🇦 Winnipeg (CST/CDT) UTC-6/-5</option>
-                            <option value="America/Halifax">🇨🇦 Halifax (AST/ADT) UTC-4/-3</option>
-                            <option value="America/St_Johns">🇨🇦 St. John's (NST/NDT) UTC-3:30/-2:30</option>
-                            <option value="America/Mexico_City">🇲🇽 Mexico City (CST/CDT) UTC-6/-5</option>
-                            <option value="America/Cancun">🇲🇽 Cancun (EST) UTC-5</option>
-                            <option value="America/Tijuana">🇲🇽 Tijuana (PST/PDT) UTC-8/-7</option>
-                        </optgroup>
-                        
-                        <!-- Central & South America -->
-                        <optgroup label="🌎 Central & South America">
-                            <option value="America/Guatemala">🇬🇹 Guatemala (CST) UTC-6</option>
-                            <option value="America/Costa_Rica">🇨🇷 Costa Rica (CST) UTC-6</option>
-                            <option value="America/Panama">🇵🇦 Panama (EST) UTC-5</option>
-                            <option value="America/Bogota">🇨🇴 Bogotá (COT) UTC-5</option>
-                            <option value="America/Lima">🇵🇪 Lima (PET) UTC-5</option>
-                            <option value="America/La_Paz">🇧🇴 La Paz (BOT) UTC-4</option>
-                            <option value="America/Caracas">🇻🇪 Caracas (VET) UTC-4</option>
-                            <option value="America/Santiago">🇨🇱 Santiago (CLT/CLST) UTC-4/-3</option>
-                            <option value="America/Argentina/Buenos_Aires">🇦🇷 Buenos Aires (ART) UTC-3</option>
-                            <option value="America/Montevideo">🇺🇾 Montevideo (UYT) UTC-3</option>
-                            <option value="America/Sao_Paulo">🇧🇷 São Paulo (BRT/BRST) UTC-3/-2</option>
-                            <option value="America/Manaus">🇧🇷 Manaus (AMT) UTC-4</option>
-                            <option value="America/Fortaleza">🇧🇷 Fortaleza (BRT) UTC-3</option>
-                        </optgroup>
-                        
-                        <!-- Europe -->
-                        <optgroup label="🌍 Europe">
-                            <option value="Europe/London">🇬🇧 London (GMT/BST) UTC+0/+1</option>
-                            <option value="Europe/Dublin">🇮🇪 Dublin (GMT/IST) UTC+0/+1</option>
-                            <option value="Europe/Lisbon">🇵🇹 Lisbon (WET/WEST) UTC+0/+1</option>
-                            <option value="Europe/Madrid">🇪🇸 Madrid (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Paris">🇫🇷 Paris (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Brussels">🇧🇪 Brussels (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Amsterdam">🇳🇱 Amsterdam (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Berlin">🇩🇪 Berlin (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Zurich">🇨🇭 Zurich (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Vienna">🇦🇹 Vienna (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Rome">🇮🇹 Rome (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Prague">🇨🇿 Prague (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Warsaw">🇵🇱 Warsaw (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Stockholm">🇸🇪 Stockholm (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Oslo">🇳🇴 Oslo (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Copenhagen">🇩🇰 Copenhagen (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Helsinki">🇫🇮 Helsinki (EET/EEST) UTC+2/+3</option>
-                            <option value="Europe/Athens">🇬🇷 Athens (EET/EEST) UTC+2/+3</option>
-                            <option value="Europe/Istanbul">🇹🇷 Istanbul (TRT) UTC+3</option>
-                            <option value="Europe/Bucharest">🇷🇴 Bucharest (EET/EEST) UTC+2/+3</option>
-                            <option value="Europe/Budapest">🇭🇺 Budapest (CET/CEST) UTC+1/+2</option>
-                            <option value="Europe/Moscow">🇷🇺 Moscow (MSK) UTC+3</option>
-                            <option value="Europe/Kiev">🇺🇦 Kyiv (EET/EEST) UTC+2/+3</option>
-                        </optgroup>
-                        
-                        <!-- Africa & Middle East -->
-                        <optgroup label="🌍 Africa & Middle East">
-                            <option value="Africa/Casablanca">🇲🇦 Casablanca (WET/WEST) UTC+0/+1</option>
-                            <option value="Africa/Lagos">🇳🇬 Lagos (WAT) UTC+1</option>
-                            <option value="Africa/Cairo">🇪🇬 Cairo (EET) UTC+2</option>
-                            <option value="Africa/Johannesburg">🇿🇦 Johannesburg (SAST) UTC+2</option>
-                            <option value="Africa/Nairobi">🇰🇪 Nairobi (EAT) UTC+3</option>
-                            <option value="Africa/Addis_Ababa">🇪🇹 Addis Ababa (EAT) UTC+3</option>
-                            <option value="Asia/Jerusalem">🇮🇱 Jerusalem (IST/IDT) UTC+2/+3</option>
-                            <option value="Asia/Dubai">🇦🇪 Dubai (GST) UTC+4</option>
-                            <option value="Asia/Qatar">🇶🇦 Qatar (AST) UTC+3</option>
-                            <option value="Asia/Kuwait">🇰🇼 Kuwait (AST) UTC+3</option>
-                            <option value="Asia/Riyadh">🇸🇦 Riyadh (AST) UTC+3</option>
-                            <option value="Asia/Baghdad">🇮🇶 Baghdad (AST) UTC+3</option>
-                            <option value="Asia/Tehran">🇮🇷 Tehran (IRST/IRDT) UTC+3:30/+4:30</option>
-                        </optgroup>
-                        
-                        <!-- Asia -->
-                        <optgroup label="🌏 Asia">
-                            <option value="Asia/Karachi">🇵🇰 Karachi (PKT) UTC+5</option>
-                            <option value="Asia/Kolkata">🇮🇳 Mumbai/Delhi (IST) UTC+5:30</option>
-                            <option value="Asia/Kathmandu">🇳🇵 Kathmandu (NPT) UTC+5:45</option>
-                            <option value="Asia/Dhaka">🇧🇩 Dhaka (BST) UTC+6</option>
-                            <option value="Asia/Yangon">🇲🇲 Yangon (MMT) UTC+6:30</option>
-                            <option value="Asia/Bangkok">🇹🇭 Bangkok (ICT) UTC+7</option>
-                            <option value="Asia/Ho_Chi_Minh">🇻🇳 Ho Chi Minh City (ICT) UTC+7</option>
-                            <option value="Asia/Jakarta">🇮🇩 Jakarta (WIB) UTC+7</option>
-                            <option value="Asia/Kuala_Lumpur">🇲🇾 Kuala Lumpur (MYT) UTC+8</option>
-                            <option value="Asia/Singapore">🇸🇬 Singapore (SGT) UTC+8</option>
-                            <option value="Asia/Manila">🇵🇭 Manila (PST) UTC+8</option>
-                            <option value="Asia/Hong_Kong">🇭🇰 Hong Kong (HKT) UTC+8</option>
-                            <option value="Asia/Taipei">🇹🇼 Taipei (CST) UTC+8</option>
-                            <option value="Asia/Shanghai">🇨🇳 Beijing/Shanghai (CST) UTC+8</option>
-                            <option value="Asia/Urumqi">🇨🇳 Urumqi (XJT) UTC+6</option>
-                            <option value="Asia/Seoul">🇰🇷 Seoul (KST) UTC+9</option>
-                            <option value="Asia/Tokyo">🇯🇵 Tokyo (JST) UTC+9</option>
-                            <option value="Asia/Almaty">🇰🇿 Almaty (ALMT) UTC+6</option>
-                            <option value="Asia/Tashkent">🇺🇿 Tashkent (UZT) UTC+5</option>
-                            <option value="Asia/Yekaterinburg">🇷🇺 Yekaterinburg (YEKT) UTC+5</option>
-                            <option value="Asia/Novosibirsk">🇷🇺 Novosibirsk (NOVT) UTC+7</option>
-                            <option value="Asia/Irkutsk">🇷🇺 Irkutsk (IRKT) UTC+8</option>
-                            <option value="Asia/Yakutsk">🇷🇺 Yakutsk (YAKT) UTC+9</option>
-                            <option value="Asia/Vladivostok">🇷🇺 Vladivostok (VLAT) UTC+10</option>
-                            <option value="Asia/Sakhalin">🇷🇺 Sakhalin (SAKT) UTC+11</option>
-                            <option value="Asia/Kamchatka">🇷🇺 Kamchatka (PETT) UTC+12</option>
-                        </optgroup>
-                        
-                        <!-- Oceania -->
-                        <optgroup label="🌏 Oceania">
-                            <option value="Australia/Perth">🇦🇺 Perth (AWST) UTC+8</option>
-                            <option value="Australia/Adelaide">🇦🇺 Adelaide (ACST/ACDT) UTC+9:30/+10:30</option>
-                            <option value="Australia/Darwin">🇦🇺 Darwin (ACST) UTC+9:30</option>
-                            <option value="Australia/Brisbane">🇦🇺 Brisbane (AEST) UTC+10</option>
-                            <option value="Australia/Sydney">🇦🇺 Sydney (AEST/AEDT) UTC+10/+11</option>
-                            <option value="Australia/Melbourne">🇦🇺 Melbourne (AEST/AEDT) UTC+10/+11</option>
-                            <option value="Australia/Hobart">🇦🇺 Hobart (AEST/AEDT) UTC+10/+11</option>
-                            <option value="Pacific/Auckland">🇳🇿 Auckland (NZST/NZDT) UTC+12/+13</option>
-                            <option value="Pacific/Fiji">🇫🇯 Fiji (FJT) UTC+12</option>
-                            <option value="Pacific/Guam">🇬🇺 Guam (ChST) UTC+10</option>
-                            <option value="Pacific/Tahiti">🇵🇫 Tahiti (TAHT) UTC-10</option>
-                            <option value="Pacific/Marquesas">🇵🇫 Marquesas (MART) UTC-9:30</option>
-                            <option value="Pacific/Easter">🇨🇱 Easter Island (EAST/EASST) UTC-6/-5</option>
-                        </optgroup>
-                        
-                        <!-- Atlantic -->
-                        <optgroup label="🌊 Atlantic">
-                            <option value="Atlantic/Azores">🇵🇹 Azores (AZOT/AZOST) UTC-1/+0</option>
-                            <option value="Atlantic/Cape_Verde">🇨🇻 Cape Verde (CVT) UTC-1</option>
-                            <option value="Atlantic/Canary">🇪🇸 Canary Islands (WET/WEST) UTC+0/+1</option>
-                            <option value="Atlantic/Reykjavik">🇮🇸 Reykjavik (GMT) UTC+0</option>
-                            <option value="Atlantic/Bermuda">🇧🇲 Bermuda (AST/ADT) UTC-4/-3</option>
-                        </optgroup>
-                        
-                        <!-- Indian Ocean -->
-                        <optgroup label="🌊 Indian Ocean">
-                            <option value="Indian/Mauritius">🇲🇺 Mauritius (MUT) UTC+4</option>
-                            <option value="Indian/Reunion">🇷🇪 Réunion (RET) UTC+4</option>
-                            <option value="Indian/Maldives">🇲🇻 Maldives (MVT) UTC+5</option>
-                            <option value="Indian/Chagos">🇮🇴 Chagos (IOT) UTC+6</option>
-                        </optgroup>
-                        
-                        <!-- Special/Unusual -->
-                        <optgroup label="⚡ Special Zones">
-                            <option value="UTC">🌐 UTC (Coordinated Universal Time) UTC+0</option>
-                            <option value="GMT">🌐 GMT (Greenwich Mean Time) UTC+0</option>
-                        </optgroup>
+                        <!-- Timezones will be loaded dynamically -->
                     </select>
                 </div>
                 
@@ -345,7 +86,7 @@
                 <div class="space-y-2">
                     <label class="flex items-center text-sm font-medium text-gray-300">
                         <i class="fas fa-coins text-yellow-400 mr-2"></i>
-                        Currency
+                        <span data-i18n="settings.currency">Currency</span>
                     </label>
                     <select id="currency" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
                         <!-- Currencies will be loaded dynamically -->
@@ -356,7 +97,7 @@
                 <div class="space-y-2">
                     <label class="flex items-center text-sm font-medium text-gray-300">
                         <i class="fas fa-dollar-sign text-yellow-400 mr-2"></i>
-                        Hourly Rate
+                        <span data-i18n="settings.hourlyRate">Hourly Rate</span>
                     </label>
                     <input type="number" id="hourlyRate" value="25" min="1" step="0.5" 
                            class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
@@ -366,7 +107,7 @@
                 <div class="space-y-2">
                     <label class="flex items-center text-sm font-medium text-gray-300">
                         <i class="fas fa-clock text-yellow-400 mr-2"></i>
-                        Work Start Time
+                        <span data-i18n="settings.startTime">Work Start Time</span>
                     </label>
                     <input type="time" id="startTime" value="09:00" 
                            class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
@@ -376,7 +117,7 @@
                 <div class="space-y-2">
                     <label class="flex items-center text-sm font-medium text-gray-300">
                         <i class="fas fa-business-time text-yellow-400 mr-2"></i>
-                        Daily Work Hours
+                        <span data-i18n="settings.workHours">Daily Work Hours</span>
                     </label>
                     <input type="number" id="workHours" value="8" min="1" max="24" step="0.5" 
                            class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
@@ -386,13 +127,13 @@
                 <div class="flex items-end">
                     <button id="updateBtn" class="w-full px-6 py-3 gold-gradient text-black font-semibold rounded-xl elegant-button transition-all duration-300 hover:shadow-xl">
                         <i class="fas fa-sync-alt mr-2"></i>
-                        Update Settings
+                        <span data-i18n="settings.updateButton">Update Settings</span>
                     </button>
                 </div>
             </div>
         </section>
         
-        <!-- Milestone Alert - Always Visible When Achieved -->
+        <!-- Milestone Alert -->
         <div id="milestone" class="hidden glass gold-gradient text-black p-4 rounded-2xl mb-8 text-center font-semibold text-lg">
             <i class="fas fa-trophy mr-2"></i>
             <span id="milestoneText"></span>
@@ -408,7 +149,7 @@
             <div class="glass-dark rounded-2xl p-8 text-center">
                 <h3 class="text-xl font-semibold mb-6 flex items-center justify-center">
                     <i class="fas fa-hourglass-start text-yellow-400 mr-3"></i>
-                    Value Generator
+                    <span data-i18n="dashboard.valueGenerator">Value Generator</span>
                 </h3>
                 
                 <div class="flex justify-center mb-6">
@@ -421,7 +162,7 @@
                 <div id="timeDisplay" class="glass rounded-xl p-4 text-center">
                     <div class="flex items-center justify-center text-gray-300">
                         <i class="fas fa-clock mr-2 text-yellow-400"></i>
-                        <span>Initializing...</span>
+                        <span data-i18n="dashboard.initializing">Initializing...</span>
                     </div>
                 </div>
             </div>
@@ -431,7 +172,7 @@
                 <!-- Progress Bar -->
                 <div class="glass-dark rounded-2xl p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-medium text-gray-300">Daily Progress</span>
+                        <span class="text-sm font-medium text-gray-300" data-i18n="dashboard.dailyProgress">Daily Progress</span>
                         <span id="progressPercent" class="text-sm text-yellow-400 font-semibold">0%</span>
                     </div>
                     <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
@@ -445,7 +186,7 @@
                     <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
                         <div class="flex items-center justify-between mb-2">
                             <i class="fas fa-wallet text-yellow-400 text-xl"></i>
-                            <span class="text-xs text-gray-400 uppercase tracking-wide">Earned Today</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wide" data-i18n="dashboard.earnedToday">Earned Today</span>
                         </div>
                         <div id="currentEarnings" class="text-2xl md:text-3xl font-bold text-white">$0.00</div>
                     </div>
@@ -454,7 +195,7 @@
                     <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
                         <div class="flex items-center justify-between mb-2">
                             <i class="fas fa-target text-yellow-400 text-xl"></i>
-                            <span class="text-xs text-gray-400 uppercase tracking-wide">Daily Target</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wide" data-i18n="dashboard.dailyTarget">Daily Target</span>
                         </div>
                         <div id="totalTarget" class="text-2xl md:text-3xl font-bold text-white">$200.00</div>
                     </div>
@@ -463,7 +204,7 @@
                     <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300 sm:col-span-2">
                         <div class="flex items-center justify-between mb-2">
                             <i class="fas fa-stopwatch text-yellow-400 text-xl"></i>
-                            <span class="text-xs text-gray-400 uppercase tracking-wide">Time Working</span>
+                            <span class="text-xs text-gray-400 uppercase tracking-wide" data-i18n="dashboard.timeWorking">Time Working</span>
                         </div>
                         <div id="workingTime" class="text-2xl md:text-3xl font-bold text-white">0:00</div>
                     </div>
@@ -474,348 +215,17 @@
         <!-- Footer -->
         <footer class="text-center text-gray-500 text-sm">
             <div class="glass rounded-xl p-4">
-                <p>Transform your time into value • Built with elegance</p>
+                <p data-i18n="footer.text">Transform your time into value • Built with elegance</p>
             </div>
         </footer>
     </div>
     
-    <script>
-        // Application State
-        let settings = {
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            currency: "$",
-            hourlyRate: 25,
-            startTime: "09:00",
-            workHours: 8
-        };
-
-        // Default settings for reset
-        const defaultSettings = {
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            currency: "$",
-            hourlyRate: 25,
-            startTime: "09:00",
-            workHours: 8
-        };
-
-        let lastMilestone = 0;
-        let currentDisplayedMilestone = null;
-        let coinAnimationInterval;
-        let hasUnsavedChanges = false;
-
-        // Milestone configurations
-        const milestones = [
-            { amount: 10, message: "🎉 First milestone achieved!", icon: "fas fa-star" },
-            { amount: 50, message: "🚀 Great progress milestone!", icon: "fas fa-rocket" },
-            { amount: 100, message: "💎 Excellent performance!", icon: "fas fa-gem" },
-            { amount: 200, message: "🏅 Daily target achieved!", icon: "fas fa-medal" },
-            { amount: 500, message: "👑 Outstanding achievement!", icon: "fas fa-crown" },
-            { amount: 1000, message: "🏆 Legendary performance!", icon: "fas fa-trophy" }
-        ];
-
-        // Load currencies from external file
-        async function loadCurrencies() {
-            try {
-                const response = await fetch('./currencies.json');
-                const currencies = await response.json();
-                
-                const currencySelect = document.getElementById('currency');
-                currencySelect.innerHTML = ''; // Clear existing options
-                
-                currencies.forEach(currency => {
-                    const option = document.createElement('option');
-                    option.value = currency.symbol;
-                    option.textContent = `${currency.flag} ${currency.symbol} ${currency.code} - ${currency.name}`;
-                    option.setAttribute('data-code', currency.code);
-                    option.setAttribute('data-flag', currency.flag);
-                    currencySelect.appendChild(option);
-                });
-                
-                // Set default currency
-                currencySelect.value = defaultSettings.currency;
-                
-            } catch (error) {
-                console.warn('Could not load currencies file, using fallback options');
-                loadFallbackCurrencies();
-            }
-        }
-
-        // Fallback currencies if external file fails
-        function loadFallbackCurrencies() {
-            const currencySelect = document.getElementById('currency');
-            const fallbackCurrencies = [
-                { symbol: '$', code: 'USD', name: 'US Dollar', flag: '🇺🇸' },
-                { symbol: '€', code: 'EUR', name: 'Euro', flag: '🇪🇺' },
-                { symbol: '£', code: 'GBP', name: 'British Pound', flag: '🇬🇧' },
-                { symbol: '¥', code: 'JPY', name: 'Japanese Yen', flag: '🇯🇵' },
-                { symbol: '₹', code: 'INR', name: 'Indian Rupee', flag: '🇮🇳' }
-            ];
-            
-            currencySelect.innerHTML = '';
-            fallbackCurrencies.forEach(currency => {
-                const option = document.createElement('option');
-                option.value = currency.symbol;
-                option.textContent = `${currency.flag} ${currency.symbol} ${currency.code} - ${currency.name}`;
-                currencySelect.appendChild(option);
-            });
-            
-            currencySelect.value = defaultSettings.currency;
-        }
-
-        // Page unload warning
-        function setupUnloadWarning() {
-            window.addEventListener('beforeunload', function(e) {
-                if (hasUnsavedChanges || isWorkingTime()) {
-                    const message = 'Are you sure you want to leave? Your current progress and settings will be lost, and all settings will reset to default values when you return.';
-                    e.preventDefault();
-                    e.returnValue = message;
-                    return message;
-                }
-            });
-        }
-
-        // Check if currently in working time
-        function isWorkingTime() {
-            const currentTimeStr = getCurrentTimeInTimezone();
-            const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
-            const currentTime = currentHour * 60 + currentMinute;
-            
-            const workStartMinutes = parseTimeString(settings.startTime);
-            const workEndMinutes = workStartMinutes + (settings.workHours * 60);
-            
-            return currentTime >= workStartMinutes && currentTime <= workEndMinutes;
-        }
-
-        // Track changes to settings
-        function trackChanges() {
-            const inputs = ['timezone', 'currency', 'hourlyRate', 'startTime', 'workHours'];
-            
-            inputs.forEach(inputId => {
-                const element = document.getElementById(inputId);
-                element.addEventListener('change', () => {
-                    hasUnsavedChanges = true;
-                });
-            });
-        }
-
-        // Utility Functions
-        function getCurrentTimeInTimezone() {
-            return new Date().toLocaleString("en-US", {
-                timeZone: settings.timezone,
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-
-        function parseTimeString(timeStr) {
-            const [hours, minutes] = timeStr.split(':').map(Number);
-            return hours * 60 + minutes;
-        }
-
-        function formatTime(minutes) {
-            const hours = Math.floor(minutes / 60);
-            const mins = minutes % 60;
-            return `${hours}:${mins.toString().padStart(2, '0')}`;
-        }
-
-        // Initialize Settings
-        async function initializeSettings() {
-            // Load currencies first
-            await loadCurrencies();
-            
-            const timezoneSelect = document.getElementById('timezone');
-            const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            
-            // Set user's timezone if available
-            const option = Array.from(timezoneSelect.options).find(opt => opt.value === userTimezone);
-            if (option) {
-                timezoneSelect.value = userTimezone;
-                settings.timezone = userTimezone;
-                defaultSettings.timezone = userTimezone; // Update default too
-            }
-
-            // Initialize other settings from form elements
-            settings.currency = document.getElementById('currency').value;
-            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
-            settings.startTime = document.getElementById('startTime').value;
-            settings.workHours = parseFloat(document.getElementById('workHours').value);
-            
-            // Setup change tracking and unload warning
-            trackChanges();
-            setupUnloadWarning();
-        }
-
-        // Update Settings
-        function updateSettings() {
-            settings.timezone = document.getElementById('timezone').value;
-            settings.currency = document.getElementById('currency').value;
-            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
-            settings.startTime = document.getElementById('startTime').value;
-            settings.workHours = parseFloat(document.getElementById('workHours').value);
-            
-            // Mark changes as saved
-            hasUnsavedChanges = false;
-            
-            // Update total target display
-            const dailyTarget = (settings.hourlyRate * settings.workHours).toFixed(2);
-            document.getElementById('totalTarget').textContent = `${settings.currency}${dailyTarget}`;
-            
-            // Show success feedback
-            const btn = document.getElementById('updateBtn');
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Settings Saved!';
-            btn.classList.add('shimmer');
-            
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.classList.remove('shimmer');
-            }, 2000);
-        }
-
-        // Coin Animation
-        function createCoin() {
-            const container = document.getElementById('coinContainer');
-            const coin = document.createElement('div');
-            coin.className = 'coin-particle';
-            coin.style.left = Math.random() * 80 + 20 + '%';
-            coin.style.animationDelay = Math.random() * 2 + 's';
-            container.appendChild(coin);
-            
-            // Remove coin after animation
-            setTimeout(() => {
-                if (coin.parentNode) {
-                    coin.parentNode.removeChild(coin);
-                }
-            }, 3000);
-        }
-
-        // Milestone Display - Persistent
-        function updateMilestoneDisplay(earnings) {
-            const milestoneEl = document.getElementById('milestone');
-            const milestoneTextEl = document.getElementById('milestoneText');
-            const milestoneProgressEl = document.getElementById('milestoneProgress');
-            
-            // Find current achieved milestone
-            const achievedMilestone = milestones.filter(m => earnings >= m.amount).pop();
-            
-            if (achievedMilestone) {
-                // Show current milestone persistently
-                const nextMilestone = milestones.find(m => m.amount > earnings);
-                
-                milestoneTextEl.textContent = `${achievedMilestone.message} ${settings.currency}${achievedMilestone.amount} earned!`;
-                
-                if (nextMilestone) {
-                    const remaining = nextMilestone.amount - earnings;
-                    milestoneProgressEl.textContent = `Next milestone: ${settings.currency}${remaining.toFixed(2)} to reach ${settings.currency}${nextMilestone.amount}`;
-                } else {
-                    milestoneProgressEl.textContent = "🌟 All milestones completed! You're a champion!";
-                }
-                
-                milestoneEl.classList.remove('hidden');
-                
-                // Animate when reaching a new milestone
-                if (!currentDisplayedMilestone || achievedMilestone.amount > currentDisplayedMilestone.amount) {
-                    milestoneEl.style.animation = 'none';
-                    setTimeout(() => {
-                        milestoneEl.style.animation = 'pulse 1s ease-in-out 3';
-                    }, 10);
-                    currentDisplayedMilestone = achievedMilestone;
-                }
-            } else {
-                // No milestone achieved yet, show progress to first milestone
-                const firstMilestone = milestones[0];
-                const remaining = firstMilestone.amount - earnings;
-                
-                if (earnings > 0) {
-                    milestoneTextEl.textContent = "🎯 Working towards your first milestone!";
-                    milestoneProgressEl.textContent = `${settings.currency}${remaining.toFixed(2)} to reach ${settings.currency}${firstMilestone.amount}`;
-                    milestoneEl.classList.remove('hidden');
-                } else {
-                    milestoneEl.classList.add('hidden');
-                }
-                currentDisplayedMilestone = null;
-            }
-        }
-
-        // Main Update Function
-        function updateDisplay() {
-            // Get current time
-            const currentTimeStr = getCurrentTimeInTimezone();
-            const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
-            const currentTime = currentHour * 60 + currentMinute;
-            
-            const workStartMinutes = parseTimeString(settings.startTime);
-            const workEndMinutes = workStartMinutes + (settings.workHours * 60);
-            
-            let earnings = 0;
-            let workingMinutes = 0;
-            let progress = 0;
-            let statusMessage = '';
-            
-            // Calculate current status
-            if (currentTime < workStartMinutes) {
-                // Before work starts
-                const minutesUntilWork = workStartMinutes - currentTime;
-                statusMessage = `Work starts in ${formatTime(minutesUntilWork)}`;
-            } else if (currentTime <= workEndMinutes) {
-                // Currently working
-                workingMinutes = currentTime - workStartMinutes;
-                earnings = (workingMinutes / 60) * settings.hourlyRate;
-                progress = (workingMinutes / (settings.workHours * 60)) * 100;
-                statusMessage = `Working for ${formatTime(workingMinutes)}`;
-            } else {
-                // Work day complete
-                workingMinutes = settings.workHours * 60;
-                earnings = settings.hourlyRate * settings.workHours;
-                progress = 100;
-                statusMessage = 'Work day complete! 🎉';
-            }
-            
-            // Update displays
-            document.getElementById('currentEarnings').textContent = `${settings.currency}${earnings.toFixed(2)}`;
-            document.getElementById('workingTime').textContent = formatTime(workingMinutes);
-            document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
-            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
-            
-            // Update time display
-            const timeZoneAbbr = new Date().toLocaleTimeString("en-US", {
-                timeZone: settings.timezone,
-                timeZoneName: 'short'
-            }).split(' ').pop();
-            document.getElementById('timeDisplay').innerHTML = `
-                <div class="text-lg font-semibold text-white">${statusMessage}</div>
-                <div class="text-sm text-gray-400 mt-1">${currentTimeStr} ${timeZoneAbbr}</div>
-            `;
-            
-            // Update milestone display - always show current status
-            updateMilestoneDisplay(earnings);
-            
-            // Create coins during work hours
-            if (workingMinutes > 0 && Math.random() < 0.3) {
-                createCoin();
-            }
-        }
-
-        // Event Listeners
-        document.getElementById('updateBtn').addEventListener('click', updateSettings);
-
-        // Initialize and start
-        initializeSettings().then(() => {
-            updateSettings();
-            updateDisplay();
-        });
-
-        // Update every second
-        setInterval(updateDisplay, 1000);
-        
-        // 页面关闭确认提示
-        window.addEventListener('beforeunload', function(e) {
-            e.preventDefault();
-            e.returnValue = ''; // Chrome需要这行
-            return ''; // 其他浏览器需要这行
-        });
-
-    </script>
+    <!-- JavaScript Files -->
+    <script src="js/config.js"></script>
+    <script src="js/cache.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/currency.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
