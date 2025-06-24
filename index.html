@@ -3,371 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Coins - Your Value Generator</title>
+    <title>Time Coins - Elegant Edition</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Custom Tailwind Extensions */
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Glass Morphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            min-height: 100vh;
-            padding: 20px;
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        
+        /* Gold Gradient */
+        .gold-gradient {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
+        
+        /* Elegant animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
-
-        .title {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
+        
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
-
-        .subtitle {
-            font-size: 1.1em;
-            color: #7f8c8d;
-            margin-bottom: 20px;
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
         }
-
-        .settings {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
+        
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
         }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-
-        .input-group input {
-            padding: 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .input-group select {
-            padding: 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-            background: white;
-            cursor: pointer;
-        }
-
-        .input-group select:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .update-btn {
-            grid-column: 1 / -1;
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .update-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-        }
-
-        .hourglass-container {
+        
+        /* Hourglass specific styles */
+        .hourglass-shape {
+            width: 120px;
+            height: 200px;
             position: relative;
-            width: 200px;
-            height: 300px;
-            margin: 0 auto 30px;
+            background: linear-gradient(to bottom, 
+                transparent 42%, 
+                rgba(255, 215, 0, 0.3) 47%, 
+                rgba(255, 215, 0, 0.8) 50%, 
+                rgba(255, 215, 0, 0.3) 53%, 
+                transparent 58%);
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            border-radius: 15px 15px 5px 5px;
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.3),
+                inset 0 0 20px rgba(0, 0, 0, 0.1);
         }
-
-        .hourglass {
-            width: 100%;
-            height: 100%;
-            border: 4px solid #8b4513;
-            border-radius: 20px 20px 5px 5px;
-            background: linear-gradient(to bottom, transparent 45%, #8b4513 48%, #8b4513 52%, transparent 55%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .top-chamber {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            height: 40%;
-            overflow: hidden;
-        }
-
-        .bottom-chamber {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            right: 10px;
-            height: 40%;
-            display: flex;
-            flex-wrap: wrap;
-            align-content: flex-end;
-            overflow: hidden;
-        }
-
-        .coin {
-            width: 8px;
-            height: 8px;
-            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+        
+        .coin-particle {
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFD700, #FFA500);
             border-radius: 50%;
-            margin: 1px;
-            box-shadow: 0 0 3px rgba(255, 215, 0, 0.7);
-            animation: fall 2s ease-in forwards;
+            position: absolute;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+            animation: coinFall 3s ease-in-out infinite;
         }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-300px);
+        
+        @keyframes coinFall {
+            0% { 
+                transform: translateY(-150px) scale(0);
                 opacity: 0;
             }
-            50% {
+            20% {
                 opacity: 1;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-value {
-            font-size: 2.5em;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-
-        .milestone {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 1.3em;
-            font-weight: 600;
-            animation: celebrate 0.6s ease-out;
-        }
-
-        @keyframes celebrate {
-            0% { 
-                transform: scale(0.8) rotate(-5deg); 
-                opacity: 0; 
-            }
-            50% { 
-                transform: scale(1.1) rotate(2deg); 
+                transform: scale(1);
             }
             100% { 
-                transform: scale(1) rotate(0deg); 
-                opacity: 1; 
+                transform: translateY(80px) scale(1);
+                opacity: 0.7;
             }
         }
-
-        .progress-bar {
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 20px;
-            margin: 20px 0;
+        
+        /* Focus and Hover States */
+        .elegant-input:focus {
+            outline: none;
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
         }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-            height: 100%;
-            width: 0%;
-            transition: width 1s ease;
-            border-radius: 10px;
+        
+        .elegant-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
         }
-
-        .time-display {
-            text-align: center;
-            font-size: 1.2em;
-            color: #2c3e50;
-            margin: 10px 0;
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1 class="title">💰 Time Coins</h1>
-            <p class="subtitle">Watch your value grow with every passing moment</p>
-        </div>
-
-        <div class="settings">
-            <div class="input-group">
-                <label for="timezone">🌍 Time Zone</label>
-                <select id="timezone">
-                    <option value="America/New_York">🇺🇸 Eastern Time (ET)</option>
-                    <option value="America/Chicago">🇺🇸 Central Time (CT)</option>
-                    <option value="America/Denver">🇺🇸 Mountain Time (MT)</option>
-                    <option value="America/Los_Angeles">🇺🇸 Pacific Time (PT)</option>
-                    <option value="Europe/London">🇬🇧 London (GMT/BST)</option>
-                    <option value="Europe/Paris">🇫🇷 Paris (CET/CEST)</option>
-                    <option value="Europe/Berlin">🇩🇪 Berlin (CET/CEST)</option>
-                    <option value="Europe/Rome">🇮🇹 Rome (CET/CEST)</option>
-                    <option value="Asia/Tokyo">🇯🇵 Tokyo (JST)</option>
-                    <option value="Asia/Shanghai">🇨🇳 Shanghai (CST)</option>
-                    <option value="Asia/Hong_Kong">🇭🇰 Hong Kong (HKT)</option>
-                    <option value="Asia/Singapore">🇸🇬 Singapore (SGT)</option>
-                    <option value="Asia/Kolkata">🇮🇳 India (IST)</option>
-                    <option value="Australia/Sydney">🇦🇺 Sydney (AEST/AEDT)</option>
-                    <option value="Australia/Melbourne">🇦🇺 Melbourne (AEST/AEDT)</option>
-                    <option value="Pacific/Auckland">🇳🇿 Auckland (NZST/NZDT)</option>
-                    <option value="America/Toronto">🇨🇦 Toronto (ET)</option>
-                    <option value="America/Vancouver">🇨🇦 Vancouver (PT)</option>
-                    <option value="Brazil/East">🇧🇷 São Paulo (BRT/BRST)</option>
-                    <option value="America/Mexico_City">🇲🇽 Mexico City (CST/CDT)</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="currency">💰 Currency</label>
-                <select id="currency">
-                    <option value="$">$ USD - US Dollar</option>
-                    <option value="€">€ EUR - Euro</option>
-                    <option value="£">£ GBP - British Pound</option>
-                    <option value="¥">¥ JPY - Japanese Yen</option>
-                    <option value="¥">¥ CNY - Chinese Yuan</option>
-                    <option value="₹">₹ INR - Indian Rupee</option>
-                    <option value="A$">A$ AUD - Australian Dollar</option>
-                    <option value="C$">C$ CAD - Canadian Dollar</option>
-                    <option value="R$">R$ BRL - Brazilian Real</option>
-                    <option value="₩">₩ KRW - Korean Won</option>
-                    <option value="CHF">CHF - Swiss Franc</option>
-                    <option value="SEK">SEK - Swedish Krona</option>
-                    <option value="NOK">NOK - Norwegian Krone</option>
-                    <option value="DKK">DKK - Danish Krone</option>
-                    <option value="₽">₽ RUB - Russian Ruble</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="hourlyRate">💵 Hourly Rate</label>
-                <input type="number" id="hourlyRate" value="25" min="1" step="0.5">
-            </div>
-            <div class="input-group">
-                <label for="startTime">🕘 Work Start Time</label>
-                <input type="time" id="startTime" value="09:00">
-            </div>
-            <div class="input-group">
-                <label for="workHours">⏰ Daily Work Hours</label>
-                <input type="number" id="workHours" value="8" min="1" max="24" step="0.5">
-            </div>
-            <button class="update-btn" id="updateBtn">✨ Update Settings</button>
-        </div>
-
-        <div class="milestone" id="milestone" style="display: none;"></div>
-
-        <div class="hourglass-container">
-            <div class="hourglass">
-                <div class="top-chamber" id="topChamber"></div>
-                <div class="bottom-chamber" id="bottomChamber"></div>
-            </div>
-        </div>
-
-        <div class="time-display" id="timeDisplay">
-            ⏰ Work starts at 09:00
-        </div>
-
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-value" id="currentEarnings">${settings.currency}0.00</div>
-                <div class="stat-label">Earned Today</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="totalTarget">${settings.currency}200.00</div>
-                <div class="stat-label">Daily Target</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="workingTime">0:00</div>
-                <div class="stat-label">Time Working</div>
-            </div>
-        </div>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white overflow-x-hidden">
+    
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform rotate-45 -translate-x-full animate-pulse"></div>
     </div>
-
+    
+    <!-- Main Container -->
+    <div class="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <div class="glass rounded-3xl p-8 mb-8">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fas fa-hourglass-half text-4xl text-yellow-400 mr-4 float-animation"></i>
+                    <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">
+                        Time Coins
+                    </h1>
+                </div>
+                <p class="text-gray-300 text-lg md:text-xl font-light">
+                    Transform every moment into golden value
+                </p>
+            </div>
+        </header>
+        
+        <!-- Settings Panel -->
+        <section class="glass-dark rounded-2xl p-6 md:p-8 mb-8">
+            <div class="flex items-center mb-6">
+                <i class="fas fa-cog text-yellow-400 text-xl mr-3"></i>
+                <h2 class="text-2xl font-semibold text-white">Configuration</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                <!-- Timezone -->
+                <div class="space-y-2">
+                    <label class="flex items-center text-sm font-medium text-gray-300">
+                        <i class="fas fa-globe text-yellow-400 mr-2"></i>
+                        Time Zone
+                    </label>
+                    <select id="timezone" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
+                        <option value="America/New_York">🇺🇸 Eastern Time (ET)</option>
+                        <option value="America/Chicago">🇺🇸 Central Time (CT)</option>
+                        <option value="America/Los_Angeles">🇺🇸 Pacific Time (PT)</option>
+                        <option value="Europe/London">🇬🇧 London (GMT)</option>
+                        <option value="Europe/Paris">🇫🇷 Paris (CET)</option>
+                        <option value="Asia/Tokyo">🇯🇵 Tokyo (JST)</option>
+                        <option value="Asia/Shanghai">🇨🇳 Shanghai (CST)</option>
+                        <option value="Asia/Singapore">🇸🇬 Singapore (SGT)</option>
+                    </select>
+                </div>
+                
+                <!-- Currency -->
+                <div class="space-y-2">
+                    <label class="flex items-center text-sm font-medium text-gray-300">
+                        <i class="fas fa-coins text-yellow-400 mr-2"></i>
+                        Currency
+                    </label>
+                    <select id="currency" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
+                        <option value="$">$ USD - US Dollar</option>
+                        <option value="€">€ EUR - Euro</option>
+                        <option value="£">£ GBP - British Pound</option>
+                        <option value="¥">¥ JPY - Japanese Yen</option>
+                        <option value="₹">₹ INR - Indian Rupee</option>
+                    </select>
+                </div>
+                
+                <!-- Hourly Rate -->
+                <div class="space-y-2">
+                    <label class="flex items-center text-sm font-medium text-gray-300">
+                        <i class="fas fa-dollar-sign text-yellow-400 mr-2"></i>
+                        Hourly Rate
+                    </label>
+                    <input type="number" id="hourlyRate" value="25" min="1" step="0.5" 
+                           class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
+                </div>
+                
+                <!-- Start Time -->
+                <div class="space-y-2">
+                    <label class="flex items-center text-sm font-medium text-gray-300">
+                        <i class="fas fa-clock text-yellow-400 mr-2"></i>
+                        Work Start Time
+                    </label>
+                    <input type="time" id="startTime" value="09:00" 
+                           class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
+                </div>
+                
+                <!-- Work Hours -->
+                <div class="space-y-2">
+                    <label class="flex items-center text-sm font-medium text-gray-300">
+                        <i class="fas fa-business-time text-yellow-400 mr-2"></i>
+                        Daily Work Hours
+                    </label>
+                    <input type="number" id="workHours" value="8" min="1" max="24" step="0.5" 
+                           class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
+                </div>
+                
+                <!-- Update Button -->
+                <div class="flex items-end">
+                    <button id="updateBtn" class="w-full px-6 py-3 gold-gradient text-black font-semibold rounded-xl elegant-button transition-all duration-300 hover:shadow-xl">
+                        <i class="fas fa-sync-alt mr-2"></i>
+                        Update Settings
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Milestone Alert -->
+        <div id="milestone" class="hidden glass gold-gradient text-black p-4 rounded-2xl mb-8 text-center font-semibold text-lg animate-pulse">
+            <i class="fas fa-trophy mr-2"></i>
+            <span id="milestoneText"></span>
+        </div>
+        
+        <!-- Main Dashboard -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            
+            <!-- Hourglass Visualization -->
+            <div class="glass-dark rounded-2xl p-8 text-center">
+                <h3 class="text-xl font-semibold mb-6 flex items-center justify-center">
+                    <i class="fas fa-hourglass-start text-yellow-400 mr-3"></i>
+                    Value Generator
+                </h3>
+                
+                <div class="flex justify-center mb-6">
+                    <div class="hourglass-shape float-animation" id="hourglassContainer">
+                        <div id="coinContainer" class="absolute inset-0"></div>
+                    </div>
+                </div>
+                
+                <!-- Time Display -->
+                <div id="timeDisplay" class="glass rounded-xl p-4 text-center">
+                    <div class="flex items-center justify-center text-gray-300">
+                        <i class="fas fa-clock mr-2 text-yellow-400"></i>
+                        <span>Initializing...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics -->
+            <div class="space-y-6">
+                <!-- Progress Bar -->
+                <div class="glass-dark rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm font-medium text-gray-300">Daily Progress</span>
+                        <span id="progressPercent" class="text-sm text-yellow-400 font-semibold">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
+                        <div id="progressFill" class="h-full gold-gradient transition-all duration-1000 ease-out rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Current Earnings -->
+                    <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <i class="fas fa-wallet text-yellow-400 text-xl"></i>
+                            <span class="text-xs text-gray-400 uppercase tracking-wide">Earned Today</span>
+                        </div>
+                        <div id="currentEarnings" class="text-2xl md:text-3xl font-bold text-white">$0.00</div>
+                    </div>
+                    
+                    <!-- Daily Target -->
+                    <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <i class="fas fa-target text-yellow-400 text-xl"></i>
+                            <span class="text-xs text-gray-400 uppercase tracking-wide">Daily Target</span>
+                        </div>
+                        <div id="totalTarget" class="text-2xl md:text-3xl font-bold text-white">$200.00</div>
+                    </div>
+                    
+                    <!-- Working Time -->
+                    <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300 sm:col-span-2">
+                        <div class="flex items-center justify-between mb-2">
+                            <i class="fas fa-stopwatch text-yellow-400 text-xl"></i>
+                            <span class="text-xs text-gray-400 uppercase tracking-wide">Time Working</span>
+                        </div>
+                        <div id="workingTime" class="text-2xl md:text-3xl font-bold text-white">0:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm">
+            <div class="glass rounded-xl p-4">
+                <p>Transform your time into value • Built with elegance</p>
+            </div>
+        </footer>
+    </div>
+    
     <script>
+        // Application State
         let settings = {
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            currency: "$", // Will be updated by initializeSettings()
+            currency: "$",
             hourlyRate: 25,
             startTime: "09:00",
             workHours: 8
         };
 
         let lastMilestone = 0;
-        let lastShownMilestone = null;
-        let coinCount = 0;
+        let coinAnimationInterval;
 
+        // Milestone configurations
         const milestones = [
-            { amount: 10, message: (currency) => `🎉 Amazing start! You've earned your first ${currency}10!` },
-            { amount: 100, message: (currency) => `🚀 Incredible! ${currency}100 earned! You're on fire!` },
-            { amount: 1000, message: (currency) => `💎 LEGENDARY! ${currency}1000! You're absolutely crushing it!` },
-            { amount: 10000, message: (currency) => `👑 PHENOMENAL! ${currency}10,000! You're a productivity master!` }
+            { amount: 10, message: "🎉 First milestone! You've earned your first {currency}10!" },
+            { amount: 50, message: "🚀 Great progress! {currency}50 earned!" },
+            { amount: 100, message: "💎 Excellent! {currency}100 milestone reached!" },
+            { amount: 500, message: "👑 Outstanding! {currency}500 achieved!" },
+            { amount: 1000, message: "🏆 Legendary! {currency}1000 milestone!" }
         ];
 
+        // Utility Functions
         function getCurrentTimeInTimezone() {
             return new Date().toLocaleString("en-US", {
                 timeZone: settings.timezone,
@@ -377,92 +342,93 @@
             });
         }
 
-        function getCurrentDateInTimezone() {
-            return new Date().toLocaleDateString("en-US", {
-                timeZone: settings.timezone,
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-        }
-
-        function initializeTimezone() {
-            const timezoneSelect = document.getElementById('timezone');
-            const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            
-            // Try to set user's detected timezone as default
-            const option = Array.from(timezoneSelect.options).find(opt => opt.value === userTimezone);
-            if (option) {
-                timezoneSelect.value = userTimezone;
-                settings.timezone = userTimezone;
-            } else {
-                // Fallback to first option if user's timezone not in list
-                settings.timezone = timezoneSelect.value;
-            }
-        }
-
-        function initializeSettings() {
-            // Initialize timezone
-            initializeTimezone();
-            
-            // Initialize currency from select element
-            const currencySelect = document.getElementById('currency');
-            settings.currency = currencySelect.value;
-            
-            // Initialize other settings from form elements
-            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
-            settings.startTime = document.getElementById('startTime').value;
-            settings.workHours = parseFloat(document.getElementById('workHours').value);
-        }
-
-        function updateSettings() {
-            settings.timezone = document.getElementById('timezone').value;
-            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
-            settings.startTime = document.getElementById('startTime').value;
-            settings.workHours = parseFloat(document.getElementById('workHours').value);
-            
-            document.getElementById('totalTarget').textContent = `${(settings.hourlyRate * settings.workHours).toFixed(2)}`;
-            
-            // Show success feedback
-            const btn = document.querySelector('.update-btn');
-            const originalText = btn.textContent;
-            btn.textContent = '✅ Updated!';
-            btn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
-            
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
-            }, 1500);
-        }
-
         function parseTimeString(timeStr) {
             const [hours, minutes] = timeStr.split(':').map(Number);
             return hours * 60 + minutes;
         }
 
-        function addCoin() {
-            const bottomChamber = document.getElementById('bottomChamber');
-            const coin = document.createElement('div');
-            coin.className = 'coin';
-            bottomChamber.appendChild(coin);
-            coinCount++;
+        function formatTime(minutes) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            return `${hours}:${mins.toString().padStart(2, '0')}`;
+        }
+
+        // Initialize Settings
+        function initializeSettings() {
+            const timezoneSelect = document.getElementById('timezone');
+            const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             
-            // Remove coins if too many (keep last 100)
-            const coins = bottomChamber.querySelectorAll('.coin');
-            if (coins.length > 100) {
-                coins[0].remove();
+            // Set user's timezone if available
+            const option = Array.from(timezoneSelect.options).find(opt => opt.value === userTimezone);
+            if (option) {
+                timezoneSelect.value = userTimezone;
+                settings.timezone = userTimezone;
             }
+
+            // Initialize other settings
+            settings.currency = document.getElementById('currency').value;
+            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
+            settings.startTime = document.getElementById('startTime').value;
+            settings.workHours = parseFloat(document.getElementById('workHours').value);
         }
 
-        function showPersistentMilestone(milestone) {
+        // Update Settings
+        function updateSettings() {
+            settings.timezone = document.getElementById('timezone').value;
+            settings.currency = document.getElementById('currency').value;
+            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
+            settings.startTime = document.getElementById('startTime').value;
+            settings.workHours = parseFloat(document.getElementById('workHours').value);
+            
+            // Update total target display
+            const dailyTarget = (settings.hourlyRate * settings.workHours).toFixed(2);
+            document.getElementById('totalTarget').textContent = `${settings.currency}${dailyTarget}`;
+            
+            // Show success feedback
+            const btn = document.getElementById('updateBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Updated!';
+            btn.classList.add('shimmer');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('shimmer');
+            }, 2000);
+        }
+
+        // Coin Animation
+        function createCoin() {
+            const container = document.getElementById('coinContainer');
+            const coin = document.createElement('div');
+            coin.className = 'coin-particle';
+            coin.style.left = Math.random() * 80 + 20 + '%';
+            coin.style.animationDelay = Math.random() * 2 + 's';
+            container.appendChild(coin);
+            
+            // Remove coin after animation
+            setTimeout(() => {
+                if (coin.parentNode) {
+                    coin.parentNode.removeChild(coin);
+                }
+            }, 3000);
+        }
+
+        // Milestone Display
+        function showMilestone(milestone) {
             const milestoneEl = document.getElementById('milestone');
-            milestoneEl.textContent = milestone.message(settings.currency);
-            milestoneEl.style.display = 'block';
+            const messageText = milestone.message.replace('{currency}', settings.currency);
+            document.getElementById('milestoneText').textContent = messageText;
+            milestoneEl.classList.remove('hidden');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                milestoneEl.classList.add('hidden');
+            }, 5000);
         }
 
+        // Main Update Function
         function updateDisplay() {
-            // Get current time in selected timezone
+            // Get current time
             const currentTimeStr = getCurrentTimeInTimezone();
             const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
             const currentTime = currentHour * 60 + currentMinute;
@@ -473,113 +439,66 @@
             let earnings = 0;
             let workingMinutes = 0;
             let progress = 0;
+            let statusMessage = '';
             
-            // Get current date and time info for display
-            const currentDate = getCurrentDateInTimezone();
+            // Calculate current status
+            if (currentTime < workStartMinutes) {
+                // Before work starts
+                const minutesUntilWork = workStartMinutes - currentTime;
+                statusMessage = `Work starts in ${formatTime(minutesUntilWork)}`;
+            } else if (currentTime <= workEndMinutes) {
+                // Currently working
+                workingMinutes = currentTime - workStartMinutes;
+                earnings = (workingMinutes / 60) * settings.hourlyRate;
+                progress = (workingMinutes / (settings.workHours * 60)) * 100;
+                statusMessage = `Working for ${formatTime(workingMinutes)}`;
+            } else {
+                // Work day complete
+                workingMinutes = settings.workHours * 60;
+                earnings = settings.hourlyRate * settings.workHours;
+                progress = 100;
+                statusMessage = 'Work day complete! 🎉';
+            }
+            
+            // Update displays
+            document.getElementById('currentEarnings').textContent = `${settings.currency}${earnings.toFixed(2)}`;
+            document.getElementById('workingTime').textContent = formatTime(workingMinutes);
+            document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
+            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+            
+            // Update time display
             const timeZoneAbbr = new Date().toLocaleTimeString("en-US", {
                 timeZone: settings.timezone,
                 timeZoneName: 'short'
             }).split(' ').pop();
+            document.getElementById('timeDisplay').innerHTML = `
+                <div class="text-lg font-semibold text-white">${statusMessage}</div>
+                <div class="text-sm text-gray-400 mt-1">${currentTimeStr} ${timeZoneAbbr}</div>
+            `;
             
-            if (currentTime >= workStartMinutes) {
-                if (currentTime <= workEndMinutes) {
-                    // Currently working
-                    workingMinutes = currentTime - workStartMinutes;
-                    earnings = (workingMinutes / 60) * settings.hourlyRate;
-                    progress = (workingMinutes / (settings.workHours * 60)) * 100;
-                    
-                    document.getElementById('timeDisplay').textContent = 
-                        `💼 Working for ${Math.floor(workingMinutes / 60)}h ${workingMinutes % 60}m | ${currentTimeStr} ${timeZoneAbbr}`;
-                } else {
-                    // Work day complete
-                    workingMinutes = settings.workHours * 60;
-                    earnings = settings.hourlyRate * settings.workHours;
-                    progress = 100;
-                    
-                    document.getElementById('timeDisplay').textContent = 
-                        `🎯 Work day complete! Great job! | ${currentTimeStr} ${timeZoneAbbr}`;
-                }
-            } else {
-                // Before work starts
-                const minutesUntilWork = workStartMinutes - currentTime;
-                const hoursUntil = Math.floor(minutesUntilWork / 60);
-                const minsUntil = minutesUntilWork % 60;
-                
-                document.getElementById('timeDisplay').textContent = 
-                    `⏰ Work starts in ${hoursUntil}h ${minsUntil}m | ${currentTimeStr} ${timeZoneAbbr}`;
-            }
-            
-            // Update displays
-            document.getElementById('currentEarnings').textContent = `${earnings.toFixed(2)}`;
-            document.getElementById('workingTime').textContent = 
-                `${Math.floor(workingMinutes / 60)}:${(workingMinutes % 60).toString().padStart(2, '0')}`;
-            document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
-            
-            // Check for milestones - show current achieved milestone persistently
+            // Check for milestones
             const currentMilestone = milestones.filter(m => earnings >= m.amount).pop();
-            if (currentMilestone) {
-                // Always update the milestone display with current currency
-                showPersistentMilestone(currentMilestone);
-                lastShownMilestone = currentMilestone;
-            } else if (earnings === 0) {
-                // Clear milestone when earnings reset to 0
-                document.getElementById('milestone').style.display = 'none';
-                lastShownMilestone = null;
+            if (currentMilestone && currentMilestone.amount > lastMilestone) {
+                showMilestone(currentMilestone);
+                lastMilestone = currentMilestone.amount;
             }
             
-            // Add coins based on earnings (1 coin per $1 earned)
-            const targetCoins = Math.floor(earnings);
-            while (coinCount < targetCoins) {
-                addCoin();
+            // Create coins during work hours
+            if (workingMinutes > 0 && Math.random() < 0.3) {
+                createCoin();
             }
         }
 
-        // Initialize
+        // Event Listeners
+        document.getElementById('updateBtn').addEventListener('click', updateSettings);
+
+        // Initialize and start
         initializeSettings();
         updateSettings();
         updateDisplay();
-        
-        // 绑定按钮事件
-        document.getElementById('updateBtn').addEventListener('click', function() {
-            console.log('Button clicked!');
-            
-            // 更新所有设置
-            settings.timezone = document.getElementById('timezone').value;
-            settings.currency = document.getElementById('currency').value;
-            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
-            settings.startTime = document.getElementById('startTime').value;
-            settings.workHours = parseFloat(document.getElementById('workHours').value);
-            
-            console.log('Settings updated with currency:', settings.currency);
-            
-            // 立即调用updateDisplay来应用新设置
-            updateDisplay();
-            
-            console.log('Display updated');
-        });
-        
+
         // Update every second
         setInterval(updateDisplay, 1000);
-        
-        // Add a coin every 3 seconds during work hours for visual effect
-        setInterval(() => {
-            // Get current time in selected timezone
-            const currentTimeStr = getCurrentTimeInTimezone();
-            const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
-            const currentTime = currentHour * 60 + currentMinute;
-            
-            const workStartMinutes = parseTimeString(settings.startTime);
-            const workEndMinutes = workStartMinutes + (settings.workHours * 60);
-            
-            if (currentTime >= workStartMinutes && currentTime <= workEndMinutes) {
-                // Add a bonus visual coin during work hours
-                const bottomChamber = document.getElementById('bottomChamber');
-                const coin = document.createElement('div');
-                coin.className = 'coin';
-                coin.style.animationDelay = Math.random() * 0.5 + 's';
-                bottomChamber.appendChild(coin);
-            }
-        }, 3000);
     </script>
 </body>
 </html>
