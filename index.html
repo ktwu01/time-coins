@@ -16,6 +16,8 @@
     <meta name="keywords" content="Time Coins, Time Tracking, Earnings, Hourglass, Elegant Dashboard, Productivity, Time Management, Financial Goals, Milestones">
     <meta name="author" content="Github ktwu01 (Koutian Wu)">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Coins - Elegant Edition</title>
@@ -57,6 +59,11 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
         
         @keyframes pulse {
@@ -199,11 +206,7 @@
                         Currency
                     </label>
                     <select id="currency" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
-                        <option value="$">$ USD - US Dollar</option>
-                        <option value="€">€ EUR - Euro</option>
-                        <option value="£">£ GBP - British Pound</option>
-                        <option value="¥">¥ JPY - Japanese Yen</option>
-                        <option value="₹">₹ INR - Indian Rupee</option>
+                        <!-- Currencies will be loaded dynamically -->
                     </select>
                 </div>
                 
@@ -344,9 +347,19 @@
             workHours: 8
         };
 
+        // Default settings for reset
+        const defaultSettings = {
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            currency: "$",
+            hourlyRate: 25,
+            startTime: "09:00",
+            workHours: 8
+        };
+
         let lastMilestone = 0;
         let currentDisplayedMilestone = null;
         let coinAnimationInterval;
+        let hasUnsavedChanges = false;
 
         // Milestone configurations
         const milestones = [
@@ -357,6 +370,91 @@
             { amount: 500, message: "👑 Outstanding achievement!", icon: "fas fa-crown" },
             { amount: 1000, message: "🏆 Legendary performance!", icon: "fas fa-trophy" }
         ];
+
+        // Load currencies from external file
+        async function loadCurrencies() {
+            try {
+                const response = await fetch('./currencies.json');
+                const currencies = await response.json();
+                
+                const currencySelect = document.getElementById('currency');
+                currencySelect.innerHTML = ''; // Clear existing options
+                
+                currencies.forEach(currency => {
+                    const option = document.createElement('option');
+                    option.value = currency.symbol;
+                    option.textContent = `${currency.flag} ${currency.symbol} ${currency.code} - ${currency.name}`;
+                    option.setAttribute('data-code', currency.code);
+                    option.setAttribute('data-flag', currency.flag);
+                    currencySelect.appendChild(option);
+                });
+                
+                // Set default currency
+                currencySelect.value = defaultSettings.currency;
+                
+            } catch (error) {
+                console.warn('Could not load currencies file, using fallback options');
+                loadFallbackCurrencies();
+            }
+        }
+
+        // Fallback currencies if external file fails
+        function loadFallbackCurrencies() {
+            const currencySelect = document.getElementById('currency');
+            const fallbackCurrencies = [
+                { symbol: '$', code: 'USD', name: 'US Dollar', flag: '🇺🇸' },
+                { symbol: '€', code: 'EUR', name: 'Euro', flag: '🇪🇺' },
+                { symbol: '£', code: 'GBP', name: 'British Pound', flag: '🇬🇧' },
+                { symbol: '¥', code: 'JPY', name: 'Japanese Yen', flag: '🇯🇵' },
+                { symbol: '₹', code: 'INR', name: 'Indian Rupee', flag: '🇮🇳' }
+            ];
+            
+            currencySelect.innerHTML = '';
+            fallbackCurrencies.forEach(currency => {
+                const option = document.createElement('option');
+                option.value = currency.symbol;
+                option.textContent = `${currency.flag} ${currency.symbol} ${currency.code} - ${currency.name}`;
+                currencySelect.appendChild(option);
+            });
+            
+            currencySelect.value = defaultSettings.currency;
+        }
+
+        // Page unload warning
+        function setupUnloadWarning() {
+            window.addEventListener('beforeunload', function(e) {
+                if (hasUnsavedChanges || isWorkingTime()) {
+                    const message = 'Are you sure you want to leave? Your current progress and settings will be lost, and all settings will reset to default values when you return.';
+                    e.preventDefault();
+                    e.returnValue = message;
+                    return message;
+                }
+            });
+        }
+
+        // Check if currently in working time
+        function isWorkingTime() {
+            const currentTimeStr = getCurrentTimeInTimezone();
+            const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
+            const currentTime = currentHour * 60 + currentMinute;
+            
+            const workStartMinutes = parseTimeString(settings.startTime);
+            const workEndMinutes = workStartMinutes + (settings.workHours * 60);
+            
+            return currentTime >= workStartMinutes && currentTime <= workEndMinutes;
+        }
+
+        // Track changes to settings
+        function trackChanges() {
+            const inputs = ['timezone', 'currency', 'hourlyRate', 'startTime', 'workHours'];
+            
+            inputs.forEach(inputId => {
+                const element = document.getElementById(inputId);
+                element.addEventListener('change', () => {
+                    hasUnsavedChanges = true;
+                });
+            });
+        }
 
         // Utility Functions
         function getCurrentTimeInTimezone() {
@@ -380,7 +478,10 @@
         }
 
         // Initialize Settings
-        function initializeSettings() {
+        async function initializeSettings() {
+            // Load currencies first
+            await loadCurrencies();
+            
             const timezoneSelect = document.getElementById('timezone');
             const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             
@@ -389,13 +490,18 @@
             if (option) {
                 timezoneSelect.value = userTimezone;
                 settings.timezone = userTimezone;
+                defaultSettings.timezone = userTimezone; // Update default too
             }
 
-            // Initialize other settings
+            // Initialize other settings from form elements
             settings.currency = document.getElementById('currency').value;
             settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
             settings.startTime = document.getElementById('startTime').value;
             settings.workHours = parseFloat(document.getElementById('workHours').value);
+            
+            // Setup change tracking and unload warning
+            trackChanges();
+            setupUnloadWarning();
         }
 
         // Update Settings
@@ -406,6 +512,9 @@
             settings.startTime = document.getElementById('startTime').value;
             settings.workHours = parseFloat(document.getElementById('workHours').value);
             
+            // Mark changes as saved
+            hasUnsavedChanges = false;
+            
             // Update total target display
             const dailyTarget = (settings.hourlyRate * settings.workHours).toFixed(2);
             document.getElementById('totalTarget').textContent = `${settings.currency}${dailyTarget}`;
@@ -413,7 +522,7 @@
             // Show success feedback
             const btn = document.getElementById('updateBtn');
             const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Updated!';
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Settings Saved!';
             btn.classList.add('shimmer');
             
             setTimeout(() => {
@@ -550,9 +659,10 @@
         document.getElementById('updateBtn').addEventListener('click', updateSettings);
 
         // Initialize and start
-        initializeSettings();
-        updateSettings();
-        updateDisplay();
+        initializeSettings().then(() => {
+            updateSettings();
+            updateDisplay();
+        });
 
         // Update every second
         setInterval(updateDisplay, 1000);
