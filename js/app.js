@@ -439,13 +439,15 @@ class TimeCoinsApp {
             const progress = this.calculateProgress();
             const dailyTarget = this.calculateDailyTarget();
 
-            // Debug logging for troubleshooting
-            console.log('Display Update:', {
-                earnings: earnings.toFixed(2),
-                workingTime,
-                progress: progress.toFixed(1),
-                dailyTarget: dailyTarget.toFixed(2)
-            });
+            // Debug logging for troubleshooting (reduce frequency)
+            if (Math.abs(earnings - this.lastEarnings) >= 1) {
+                console.log('Display Update:', {
+                    earnings: earnings.toFixed(2),
+                    workingTime,
+                    progress: progress.toFixed(1),
+                    dailyTarget: dailyTarget.toFixed(2)
+                });
+            }
 
             // Update earnings display with consistent formatting
             const earningsText = this.formatCurrency(earnings);
