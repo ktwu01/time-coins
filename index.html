@@ -44,9 +44,15 @@
             50% { transform: translateY(-10px); }
         }
         
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1); 
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.05); 
+                opacity: 0.9;
+            }
         }
         
         .float-animation {
@@ -226,10 +232,13 @@
             </div>
         </section>
         
-        <!-- Milestone Alert -->
-        <div id="milestone" class="hidden glass gold-gradient text-black p-4 rounded-2xl mb-8 text-center font-semibold text-lg animate-pulse">
+        <!-- Milestone Alert - Always Visible When Achieved -->
+        <div id="milestone" class="hidden glass gold-gradient text-black p-4 rounded-2xl mb-8 text-center font-semibold text-lg">
             <i class="fas fa-trophy mr-2"></i>
             <span id="milestoneText"></span>
+            <div class="text-sm mt-1 opacity-75">
+                <span id="milestoneProgress"></span>
+            </div>
         </div>
         
         <!-- Main Dashboard -->
@@ -321,15 +330,17 @@
         };
 
         let lastMilestone = 0;
+        let currentDisplayedMilestone = null;
         let coinAnimationInterval;
 
         // Milestone configurations
         const milestones = [
-            { amount: 10, message: "🎉 First milestone! You've earned your first {currency}10!" },
-            { amount: 50, message: "🚀 Great progress! {currency}50 earned!" },
-            { amount: 100, message: "💎 Excellent! {currency}100 milestone reached!" },
-            { amount: 500, message: "👑 Outstanding! {currency}500 achieved!" },
-            { amount: 1000, message: "🏆 Legendary! {currency}1000 milestone!" }
+            { amount: 10, message: "🎉 First milestone achieved!", icon: "fas fa-star" },
+            { amount: 50, message: "🚀 Great progress milestone!", icon: "fas fa-rocket" },
+            { amount: 100, message: "💎 Excellent performance!", icon: "fas fa-gem" },
+            { amount: 200, message: "🏅 Daily target achieved!", icon: "fas fa-medal" },
+            { amount: 500, message: "👑 Outstanding achievement!", icon: "fas fa-crown" },
+            { amount: 1000, message: "🏆 Legendary performance!", icon: "fas fa-trophy" }
         ];
 
         // Utility Functions
@@ -413,17 +424,52 @@
             }, 3000);
         }
 
-        // Milestone Display
-        function showMilestone(milestone) {
+        // Milestone Display - Persistent
+        function updateMilestoneDisplay(earnings) {
             const milestoneEl = document.getElementById('milestone');
-            const messageText = milestone.message.replace('{currency}', settings.currency);
-            document.getElementById('milestoneText').textContent = messageText;
-            milestoneEl.classList.remove('hidden');
+            const milestoneTextEl = document.getElementById('milestoneText');
+            const milestoneProgressEl = document.getElementById('milestoneProgress');
             
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                milestoneEl.classList.add('hidden');
-            }, 5000);
+            // Find current achieved milestone
+            const achievedMilestone = milestones.filter(m => earnings >= m.amount).pop();
+            
+            if (achievedMilestone) {
+                // Show current milestone persistently
+                const nextMilestone = milestones.find(m => m.amount > earnings);
+                
+                milestoneTextEl.textContent = `${achievedMilestone.message} ${settings.currency}${achievedMilestone.amount} earned!`;
+                
+                if (nextMilestone) {
+                    const remaining = nextMilestone.amount - earnings;
+                    milestoneProgressEl.textContent = `Next milestone: ${settings.currency}${remaining.toFixed(2)} to reach ${settings.currency}${nextMilestone.amount}`;
+                } else {
+                    milestoneProgressEl.textContent = "🌟 All milestones completed! You're a champion!";
+                }
+                
+                milestoneEl.classList.remove('hidden');
+                
+                // Animate when reaching a new milestone
+                if (!currentDisplayedMilestone || achievedMilestone.amount > currentDisplayedMilestone.amount) {
+                    milestoneEl.style.animation = 'none';
+                    setTimeout(() => {
+                        milestoneEl.style.animation = 'pulse 1s ease-in-out 3';
+                    }, 10);
+                    currentDisplayedMilestone = achievedMilestone;
+                }
+            } else {
+                // No milestone achieved yet, show progress to first milestone
+                const firstMilestone = milestones[0];
+                const remaining = firstMilestone.amount - earnings;
+                
+                if (earnings > 0) {
+                    milestoneTextEl.textContent = "🎯 Working towards your first milestone!";
+                    milestoneProgressEl.textContent = `${settings.currency}${remaining.toFixed(2)} to reach ${settings.currency}${firstMilestone.amount}`;
+                    milestoneEl.classList.remove('hidden');
+                } else {
+                    milestoneEl.classList.add('hidden');
+                }
+                currentDisplayedMilestone = null;
+            }
         }
 
         // Main Update Function
@@ -476,12 +522,8 @@
                 <div class="text-sm text-gray-400 mt-1">${currentTimeStr} ${timeZoneAbbr}</div>
             `;
             
-            // Check for milestones
-            const currentMilestone = milestones.filter(m => earnings >= m.amount).pop();
-            if (currentMilestone && currentMilestone.amount > lastMilestone) {
-                showMilestone(currentMilestone);
-                lastMilestone = currentMilestone.amount;
-            }
+            // Update milestone display - always show current status
+            updateMilestoneDisplay(earnings);
             
             // Create coins during work hours
             if (workingMinutes > 0 && Math.random() < 0.3) {
