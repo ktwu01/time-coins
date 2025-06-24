@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Hourglass outline -->
+  <path d="M6 4 L26 4 L24 6 L24 12 L16 16 L24 20 L24 26 L26 28 L6 28 L8 26 L8 20 L16 16 L8 12 L8 6 Z" 
+        fill="none" 
+        stroke="url(#goldGradient)" 
+        stroke-width="2"/>
+  
+  <!-- Top sand -->
+  <path d="M8 6 L24 6 L24 12 L16 16 L8 12 Z" 
+        fill="url(#goldGradient)" 
+        opacity="0.7"/>
+  
+  <!-- Bottom sand -->
+  <path d="M8 20 L16 16 L20 18 L20 26 L8 26 Z" 
+        fill="url(#goldGradient)" 
+        opacity="0.9"/>
+  
+  <!-- Falling sand particles -->
+  <circle cx="16" cy="14" r="0.5" fill="#FFD700"/>
+  <circle cx="15.5" cy="15.5" r="0.5" fill="#FFA500"/>
+  <circle cx="16.5" cy="17" r="0.5" fill="#FFD700"/>
+</svg>

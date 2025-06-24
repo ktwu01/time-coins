@@ -837,6 +837,12 @@ class TimeCoinsApp {
     onLanguageChanged(detail) {
         try {
             console.log('Language changed to:', detail.language);
+            
+            // Update currency display with new language
+            if (window.currencyManager) {
+                window.currencyManager.updateLanguageDisplay();
+            }
+            
             // Update milestone display with new language
             this.checkMilestones(this.lastEarnings);
             this.updateStatusMessage();
