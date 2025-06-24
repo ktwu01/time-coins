@@ -351,7 +351,7 @@
     <script>
         let settings = {
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            currency: "$",
+            currency: "$", // Will be updated by initializeSettings()
             hourlyRate: 25,
             startTime: "09:00",
             workHours: 8
@@ -400,6 +400,20 @@
                 // Fallback to first option if user's timezone not in list
                 settings.timezone = timezoneSelect.value;
             }
+        }
+
+        function initializeSettings() {
+            // Initialize timezone
+            initializeTimezone();
+            
+            // Initialize currency from select element
+            const currencySelect = document.getElementById('currency');
+            settings.currency = currencySelect.value;
+            
+            // Initialize other settings from form elements
+            settings.hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
+            settings.startTime = document.getElementById('startTime').value;
+            settings.workHours = parseFloat(document.getElementById('workHours').value);
         }
 
         function updateSettings() {
@@ -503,10 +517,11 @@
             
             // Check for milestones - show current achieved milestone persistently
             const currentMilestone = milestones.filter(m => earnings >= m.amount).pop();
-            if (currentMilestone && currentMilestone !== lastShownMilestone) {
+            if (currentMilestone) {
+                // Always update the milestone display with current currency
                 showPersistentMilestone(currentMilestone);
                 lastShownMilestone = currentMilestone;
-            } else if (!currentMilestone && earnings === 0) {
+            } else if (earnings === 0) {
                 // Clear milestone when earnings reset to 0
                 document.getElementById('milestone').style.display = 'none';
                 lastShownMilestone = null;
@@ -520,7 +535,7 @@
         }
 
         // Initialize
-        initializeTimezone();
+        initializeSettings();
         updateSettings();
         updateDisplay();
         
