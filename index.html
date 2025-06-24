@@ -362,10 +362,10 @@
         let coinCount = 0;
 
         const milestones = [
-            { amount: 10, message: "🎉 Amazing start! You've earned your first $10!" },
-            { amount: 100, message: "🚀 Incredible! $100 earned! You're on fire!" },
-            { amount: 1000, message: "💎 LEGENDARY! $1000! You're absolutely crushing it!" },
-            { amount: 10000, message: "👑 PHENOMENAL! $10,000! You're a productivity master!" }
+            { amount: 10, message: (currency) => `🎉 Amazing start! You've earned your first ${currency}10!` },
+            { amount: 100, message: (currency) => `🚀 Incredible! ${currency}100 earned! You're on fire!` },
+            { amount: 1000, message: (currency) => `💎 LEGENDARY! ${currency}1000! You're absolutely crushing it!` },
+            { amount: 10000, message: (currency) => `👑 PHENOMENAL! ${currency}10,000! You're a productivity master!` }
         ];
 
         function getCurrentTimeInTimezone() {
@@ -443,7 +443,7 @@
 
         function showPersistentMilestone(milestone) {
             const milestoneEl = document.getElementById('milestone');
-            milestoneEl.textContent = milestone.message;
+            milestoneEl.textContent = milestone.message(settings.currency);
             milestoneEl.style.display = 'block';
         }
 
