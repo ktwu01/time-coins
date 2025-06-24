@@ -15,7 +15,7 @@
 
 立即体验时间金币，无需安装
 
-![Time Coins Screenshot](assets/screenshot.png)
+![Time Coins Screenshot](assets/Screenshot-Multiple-Device-time-coins.png)
 *优雅的黑白金配色方案，营造尊贵的用户体验*
 
 Time Coins 是一个优雅的**实时收入追踪工具**，将您的工作时间转化为可视化的黄金价值。通过精美的沙漏动画实时观看收入增长，用金色粒子效果庆祝里程碑成就，在整个工作日保持动力。

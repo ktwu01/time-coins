@@ -11,11 +11,11 @@
 
 ## 🎯 What is Time Coins?
 
-### **[Click here to see Live Demo](https://ktwu01.github.io/time-coins/)**
+### **[Click here to see Live Website](https://ktwu01.github.io/time-coins/)**
 
 Experience Time Coins instantly, no installation required
 
-![Time Coins Screenshot](assets/screenshot.png)
+![Time Coins Screenshot](assets/Screenshot-Multiple-Device-time-coins.png)
 *Elegant black, white, and gold color scheme for a premium user experience*
 
 Time Coins is an elegant **real-time earnings tracker** that transforms your work hours into visual gold. Watch your income grow minute by minute with stunning hourglass animations, celebrate milestones with golden particle effects, and stay motivated throughout your workday.
