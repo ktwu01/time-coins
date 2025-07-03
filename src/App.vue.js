@@ -12,28 +12,14 @@ const DEFAULT_SETTINGS = {
 }
 
 const MILESTONES = [
-  { amount: 10, message: '🎉 First $10 earned!' },
-  { amount: 25, message: '💪 Quarter century milestone!' },
-  { amount: 50, message: '🚀 Halfway to $100!' },
-  { amount: 100, message: '💯 Century achieved!' },
-  { amount: 200, message: '🏆 Double century!' }
+  { amount: 10, messageKey: 'milestones.first' },
+  { amount: 25, messageKey: 'milestones.great' },
+  { amount: 50, messageKey: 'milestones.excellent' },
+  { amount: 100, messageKey: 'milestones.target' },
+  { amount: 200, messageKey: 'milestones.outstanding' }
 ]
 
-const TIMEZONES = [
-  { value: 'UTC', label: 'UTC' },
-  { value: 'America/New_York', label: 'Eastern Time' },
-  { value: 'America/Chicago', label: 'Central Time' },
-  { value: 'America/Denver', label: 'Mountain Time' },
-  { value: 'America/Los_Angeles', label: 'Pacific Time' }
-]
 
-const CURRENCIES = [
-  { symbol: '$', code: 'USD', name: 'US Dollar', flag: '🇺🇸' },
-  { symbol: '€', code: 'EUR', name: 'Euro', flag: '🇪🇺' },
-  { symbol: '£', code: 'GBP', name: 'British Pound', flag: '🇬🇧' },
-  { symbol: '¥', code: 'JPY', name: 'Japanese Yen', flag: '🇯🇵' },
-  { symbol: '¥', code: 'CNY', name: 'Chinese Yuan', flag: '🇨🇳' }
-]
 
 // import i18n from '../js/i18n.js';
 
@@ -65,31 +51,29 @@ export default {
     this.isLoading = false;
   },
   computed: {
+    nowInTz() {
+      return this.getNowInTimezone(this.settings.timezone);
+    },
     startDate() {
-      const [h, m] = this.settings.startTime.split(':')
-      const d = new Date()
-      d.setHours(parseInt(h), parseInt(m), 0, 0)
-      return d
+      return this.getStartDate();
     },
     endDate() {
-      const d = new Date(this.startDate)
-      d.setHours(d.getHours() + Number(this.settings.workHours))
-      return d
+      return this.getEndDate();
     },
     earnings() {
-      const ms = Math.min(Math.max(this.now - this.startDate, 0), this.endDate - this.startDate)
-      const hours = ms / 3600000
-      return Math.max(hours * this.settings.hourlyRate, 0)
+      const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
+      const hours = ms / 3600000;
+      return Math.max(hours * this.settings.hourlyRate, 0);
     },
     progress() {
-      const total = this.endDate - this.startDate
-      const done = Math.min(Math.max(this.now - this.startDate, 0), total)
-      return total ? (done / total) * 100 : 0
+      const total = this.endDate - this.startDate;
+      const done = Math.min(Math.max(this.nowInTz - this.startDate, 0), total);
+      return total ? (done / total) * 100 : 0;
     },
     workingTime() {
-      const ms = Math.min(Math.max(this.now - this.startDate, 0), this.endDate - this.startDate)
-      const minutes = Math.floor(ms / 60000)
-      return `${Math.floor(minutes/60)}:${String(minutes%60).padStart(2,'0')}`
+      const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
+      const minutes = Math.floor(ms / 60000);
+      return `${Math.floor(minutes/60)}:${String(minutes%60).padStart(2,'0')}`;
     },
     nextMilestone() {
       return MILESTONES.find(m => this.earnings < m.amount) || null
@@ -105,10 +89,10 @@ export default {
         : 0
     },
     overtimeEarnings() {
-      return this.settings.overtimeDays * this.settings.workHours * this.settings.overtimeRate
+      return (this.settings.overtimeDays || 0) * (this.settings.workHours || 0) * (this.settings.overtimeRate || 0)
     },
     monthlyEarnings() {
-      return this.settings.monthlyIncome + this.overtimeEarnings
+      return (this.settings.monthlyIncome || 0) + this.overtimeEarnings
     },
     incomePerSecond() {
       return this.hourlyIncome / 3600
@@ -123,7 +107,7 @@ export default {
       return this.dailyIncome
     },
     monthlyProgress() {
-      return this.earnings / this.monthlyEarnings * 100
+      return this.monthlyEarnings > 0 ? (this.earnings / this.monthlyEarnings * 100) : 0
     },
     currencyOptions() {
       return this.currencies.map(c => ({
@@ -189,37 +173,14 @@ export default {
       const d = new Date(this.getStartDate());
       d.setHours(d.getHours() + Number(this.settings.workHours));
       return d;
-    }
-  },
-  computed: {
-    nowInTz() {
-      return this.getNowInTimezone(this.settings.timezone);
-    },
-    startDate() {
-      return this.getStartDate();
-    },
-    endDate() {
-      return this.getEndDate();
-    },
-    earnings() {
-      const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
-      const hours = ms / 3600000;
-      return Math.max(hours * this.settings.hourlyRate, 0);
-    },
-    progress() {
-      const total = this.endDate - this.startDate;
-      const done = Math.min(Math.max(this.nowInTz - this.startDate, 0), total);
-      return total ? (done / total) * 100 : 0;
-    },
-    workingTime() {
-      const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
-      const minutes = Math.floor(ms / 60000);
-      return `${Math.floor(minutes/60)}:${String(minutes%60).padStart(2,'0')}`;
     },
     checkMilestones() {
       const reached = MILESTONES.filter(m => this.earnings >= m.amount).pop() || null
       if (reached && (!this.milestone || reached.amount > this.milestone.amount)) {
-        this.milestone = reached
+        this.milestone = {
+          ...reached,
+          message: this.t(reached.messageKey)
+        }
       }
     }
   },
@@ -255,46 +216,46 @@ export default {
           <i class="fas fa-coins mr-2"></i> {{ t('salary.mySalary') }}
         </div>
         <div class="flex flex-wrap gap-4 text-base font-semibold">
-          <div>{{ t('salary.monthlyTotal') }}：<span class="text-yellow-700">{{ settings.currency }}{{ monthlyEarnings.toFixed(2) }}</span></div>
-          <div>{{ t('salary.monthlyProgress') }}：<span class="text-yellow-700">{{ monthlyProgress.toFixed(1) }}%</span></div>
+          <div>{{ t('salary.monthlyTotal') }}：<span class="text-yellow-700">{{ settings.currency }}{{ monthlyEarnings?.toFixed(2) || '0.00' }}</span></div>
+          <div>{{ t('salary.monthlyProgress') }}：<span class="text-yellow-700">{{ monthlyProgress?.toFixed(1) || '0.0' }}%</span></div>
         </div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.baseIncome') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ settings.monthlyIncome.toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ settings.monthlyIncome?.toFixed(2) || '0.00' }}</div>
           <div class="text-xs text-gray-500">{{ t('salary.workDays') }}: {{ settings.workDays }} {{ t('salary.days') }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.overtimeIncome') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ overtimeEarnings.toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ overtimeEarnings?.toFixed(2) || '0.00' }}</div>
           <div class="text-xs text-gray-500">{{ t('salary.overtimeDays') }}: {{ settings.overtimeDays }} {{ t('salary.days') }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.todayEarnings') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ earnings.toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ earnings?.toFixed(2) || '0.00' }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.perSecond') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerSecond.toFixed(4) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerSecond?.toFixed(4) || '0.0000' }}</div>
         </div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.perMinute') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerMinute.toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerMinute?.toFixed(2) || '0.00' }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.perHour') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerHour.toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerHour?.toFixed(2) || '0.00' }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.perDay') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerDay.toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerDay?.toFixed(2) || '0.00' }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.monthLeft') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ (monthlyEarnings - earnings).toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ ((monthlyEarnings || 0) - (earnings || 0)).toFixed(2) }}</div>
         </div>
       </div>
     </section>
@@ -328,21 +289,21 @@ export default {
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
             <i class="fas fa-dollar-sign text-yellow-400 mr-2"></i>
-            <span>Hourly Rate</span>
+            <span>{{ t('settings.hourlyRate') }}</span>
           </label>
           <input type="number" v-model.number="settings.hourlyRate" min="1" step="0.5" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
             <i class="fas fa-clock text-yellow-400 mr-2"></i>
-            <span>Work Start Time</span>
+            <span>{{ t('settings.startTime') }}</span>
           </label>
           <input type="time" v-model="settings.startTime" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
             <i class="fas fa-business-time text-yellow-400 mr-2"></i>
-            <span>Daily Work Hours</span>
+            <span>{{ t('settings.workHours') }}</span>
           </label>
           <input type="number" v-model.number="settings.workHours" min="1" max="24" step="0.5" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
@@ -381,7 +342,7 @@ export default {
       <i class="fas fa-trophy mr-2"></i>
       <span>{{ milestone.message }}</span>
       <div class="text-sm mt-1 opacity-75" v-if="nextMilestone">
-        <span>{{ settings.currency }}{{ (nextMilestone.amount - earnings).toFixed(2) }} to next milestone</span>
+        <span>{{ settings.currency }}{{ ((nextMilestone?.amount || 0) - (earnings || 0)).toFixed(2) }} {{ t('milestones.toReach') }}</span>
       </div>
     </div>
 
@@ -389,7 +350,7 @@ export default {
       <div class="glass-dark rounded-2xl p-8 text-center">
         <h3 class="text-xl font-semibold mb-6 flex items-center justify-center">
           <i class="fas fa-hourglass-start text-yellow-400 mr-3"></i>
-          <span>Value Generator</span>
+          <span>{{ t('dashboard.valueGenerator') }}</span>
         </h3>
         <div class="flex justify-center mb-6">
           <div class="hourglass-shape float-animation" id="hourglassContainer">
@@ -407,8 +368,8 @@ export default {
       <div class="space-y-6">
         <div class="glass-dark rounded-2xl p-6">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-sm font-medium text-gray-300">Daily Progress</span>
-            <span class="text-sm text-yellow-400 font-semibold">{{ progress.toFixed(0) }}%</span>
+            <span class="text-sm font-medium text-gray-300">{{ t('dashboard.dailyProgress') }}</span>
+            <span class="text-sm text-yellow-400 font-semibold">{{ progress?.toFixed(0) || '0' }}%</span>
           </div>
           <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
             <div class="h-full gold-gradient transition-all duration-1000 ease-out rounded-full" :style="{ width: progress + '%' }"></div>
@@ -419,21 +380,21 @@ export default {
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
             <div class="flex items-center justify-between mb-2">
               <i class="fas fa-wallet text-yellow-400 text-xl"></i>
-              <span class="text-xs text-gray-400 uppercase tracking-wide">Earned Today</span>
+              <span class="text-xs text-gray-400 uppercase tracking-wide">{{ t('dashboard.earnedToday') }}</span>
             </div>
-            <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ earnings.toFixed(2) }}</div>
+            <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ earnings?.toFixed(2) || '0.00' }}</div>
           </div>
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
             <div class="flex items-center justify-between mb-2">
               <i class="fas fa-target text-yellow-400 text-xl"></i>
-              <span class="text-xs text-gray-400 uppercase tracking-wide">Daily Target</span>
+              <span class="text-xs text-gray-400 uppercase tracking-wide">{{ t('dashboard.dailyTarget') }}</span>
             </div>
-            <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ (settings.hourlyRate * settings.workHours).toFixed(2) }}</div>
+            <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ ((settings.hourlyRate || 0) * (settings.workHours || 0)).toFixed(2) }}</div>
           </div>
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300 sm:col-span-2">
             <div class="flex items-center justify-between mb-2">
               <i class="fas fa-stopwatch text-yellow-400 text-xl"></i>
-              <span class="text-xs text-gray-400 uppercase tracking-wide">Time Working</span>
+              <span class="text-xs text-gray-400 uppercase tracking-wide">{{ t('dashboard.timeWorking') }}</span>
             </div>
             <div class="text-2xl md:text-3xl font-bold text-white">{{ workingTime }}</div>
           </div>
