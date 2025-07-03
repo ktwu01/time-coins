@@ -49,6 +49,22 @@ const translations = {
             invalidInput: "Please enter valid values.",
             cacheUnavailable: "Browser storage unavailable. Settings won't be saved."
         },
+        salary: {
+            mySalary: "My Real-Time Salary",
+            monthlyTotal: "Monthly Total Income",
+            monthlyProgress: "Monthly Salary Progress",
+            baseIncome: "Base Salary Income",
+            workDays: "Work Days This Month",
+            overtimeIncome: "Overtime Bonus Income",
+            overtimeDays: "Overtime Days This Month",
+            todayEarnings: "Today's Earnings",
+            perSecond: "Per Second Income",
+            perMinute: "Per Minute Income",
+            perHour: "Per Hour Income",
+            perDay: "Per Workday Income",
+            monthLeft: "Remaining This Month",
+            days: "days"
+        },
         success: {
             settingsSaved: "Settings saved successfully!",
             settingsUpdated: "Settings updated!"
@@ -99,6 +115,22 @@ const translations = {
             loadSettings: "加载设置失败，使用默认设置。",
             invalidInput: "请输入有效值。",
             cacheUnavailable: "浏览器存储不可用，设置将不会被保存。"
+        },
+        salary: {
+            mySalary: "我的实时工资",
+            monthlyTotal: "本月累计收入",
+            monthlyProgress: "本月薪资进度",
+            baseIncome: "基本工资收入",
+            workDays: "本月工作天数",
+            overtimeIncome: "加班福利收入",
+            overtimeDays: "本月加班天数",
+            todayEarnings: "今日入账工资",
+            perSecond: "每秒收入",
+            perMinute: "每分钟收入",
+            perHour: "每小时收入",
+            perDay: "每工作日收入",
+            monthLeft: "本月剩余",
+            days: "天"
         },
         success: {
             settingsSaved: "设置保存成功！",

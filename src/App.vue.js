@@ -161,6 +161,61 @@ export default {
       this.currentLanguage = lang;
       window.i18n.switchLanguage(lang);
     },
+    getNowInTimezone(timezone) {
+      // 获取指定时区的当前时间
+      const now = new Date();
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: timezone,
+        hour12: false,
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      }).formatToParts(now);
+      const y = parts.find(p => p.type === 'year').value;
+      const m = parts.find(p => p.type === 'month').value;
+      const d = parts.find(p => p.type === 'day').value;
+      const h = parts.find(p => p.type === 'hour').value;
+      const min = parts.find(p => p.type === 'minute').value;
+      const s = parts.find(p => p.type === 'second').value;
+      return new Date(`${y}-${m}-${d}T${h}:${min}:${s}`);
+    },
+    getStartDate() {
+      const now = this.getNowInTimezone(this.settings.timezone);
+      const [h, m] = this.settings.startTime.split(':');
+      const d = new Date(now);
+      d.setHours(parseInt(h), parseInt(m), 0, 0);
+      return d;
+    },
+    getEndDate() {
+      const d = new Date(this.getStartDate());
+      d.setHours(d.getHours() + Number(this.settings.workHours));
+      return d;
+    }
+  },
+  computed: {
+    nowInTz() {
+      return this.getNowInTimezone(this.settings.timezone);
+    },
+    startDate() {
+      return this.getStartDate();
+    },
+    endDate() {
+      return this.getEndDate();
+    },
+    earnings() {
+      const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
+      const hours = ms / 3600000;
+      return Math.max(hours * this.settings.hourlyRate, 0);
+    },
+    progress() {
+      const total = this.endDate - this.startDate;
+      const done = Math.min(Math.max(this.nowInTz - this.startDate, 0), total);
+      return total ? (done / total) * 100 : 0;
+    },
+    workingTime() {
+      const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
+      const minutes = Math.floor(ms / 60000);
+      return `${Math.floor(minutes/60)}:${String(minutes%60).padStart(2,'0')}`;
+    },
     checkMilestones() {
       const reached = MILESTONES.filter(m => this.earnings >= m.amount).pop() || null
       if (reached && (!this.milestone || reached.amount > this.milestone.amount)) {
@@ -197,48 +252,48 @@ export default {
     <section class="glass gold-gradient text-black p-6 rounded-2xl mb-8">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div class="text-2xl font-bold flex items-center mb-2 md:mb-0">
-          <i class="fas fa-coins mr-2"></i> 我的实时工资
+          <i class="fas fa-coins mr-2"></i> {{ t('salary.mySalary') }}
         </div>
         <div class="flex flex-wrap gap-4 text-base font-semibold">
-          <div>本月累计收入：<span class="text-yellow-700">{{ settings.currency }}{{ monthlyEarnings.toFixed(2) }}</span></div>
-          <div>本月薪资进度：<span class="text-yellow-700">{{ monthlyProgress.toFixed(1) }}%</span></div>
+          <div>{{ t('salary.monthlyTotal') }}：<span class="text-yellow-700">{{ settings.currency }}{{ monthlyEarnings.toFixed(2) }}</span></div>
+          <div>{{ t('salary.monthlyProgress') }}：<span class="text-yellow-700">{{ monthlyProgress.toFixed(1) }}%</span></div>
         </div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">基本工资收入</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.baseIncome') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ settings.monthlyIncome.toFixed(2) }}</div>
-          <div class="text-xs text-gray-500">本月工作天数: {{ settings.workDays }} 天</div>
+          <div class="text-xs text-gray-500">{{ t('salary.workDays') }}: {{ settings.workDays }} {{ t('salary.days') }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">加班福利收入</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.overtimeIncome') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ overtimeEarnings.toFixed(2) }}</div>
-          <div class="text-xs text-gray-500">本月加班天数: {{ settings.overtimeDays }} 天</div>
+          <div class="text-xs text-gray-500">{{ t('salary.overtimeDays') }}: {{ settings.overtimeDays }} {{ t('salary.days') }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">今日入账工资</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.todayEarnings') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ earnings.toFixed(2) }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">每秒收入</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.perSecond') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerSecond.toFixed(4) }}</div>
         </div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">每分钟收入</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.perMinute') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerMinute.toFixed(2) }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">每小时收入</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.perHour') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerHour.toFixed(2) }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">每工作日收入</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.perDay') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ incomePerDay.toFixed(2) }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
-          <div class="text-xs text-gray-600 mb-1">本月剩余</div>
+          <div class="text-xs text-gray-600 mb-1">{{ t('salary.monthLeft') }}</div>
           <div class="text-xl font-bold">{{ settings.currency }}{{ (monthlyEarnings - earnings).toFixed(2) }}</div>
         </div>
       </div>
