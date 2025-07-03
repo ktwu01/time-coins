@@ -48,13 +48,6 @@ export default {
     // 语言初始化
     this.currentLanguage = window.i18n.getCurrentLanguage();
     this.isLoading = false;
-    
-    // 初始化动画系统
-    this.$nextTick(() => {
-      if (window.animationManager) {
-        window.animationManager.init();
-      }
-    });
   },
   computed: {
     nowInTz() {
@@ -82,19 +75,24 @@ export default {
       return `${Math.floor(minutes/60)}:${String(minutes%60).padStart(2,'0')}`;
     },
     nextMilestone() {
-      return MILESTONES.find(m => this.earnings < m.amount) || null
+      return MILESTONES.find(m => m.amount > this.earnings) || null
     },
     milestoneProgress() {
       if (!this.nextMilestone) return 100;
-      const prevMilestone = MILESTONES.filter(m => m.amount <= this.earnings).pop();
+      
+      const currentEarnings = Math.max(0, this.earnings);
+      const prevMilestone = MILESTONES.filter(m => m.amount <= currentEarnings).pop();
       const prevAmount = prevMilestone ? prevMilestone.amount : 0;
       const nextAmount = this.nextMilestone.amount;
-      const currentProgress = this.earnings - prevAmount;
+      
+      const currentProgress = currentEarnings - prevAmount;
       const totalNeeded = nextAmount - prevAmount;
-      return totalNeeded > 0 ? (currentProgress / totalNeeded) * 100 : 0;
+      
+      const progress = totalNeeded > 0 ? (currentProgress / totalNeeded) * 100 : 0;
+      return Math.max(0, Math.min(100, progress));
     },
     remainingToNextMilestone() {
-      return this.nextMilestone ? this.nextMilestone.amount - this.earnings : 0;
+      return this.nextMilestone ? Math.max(0, this.nextMilestone.amount - this.earnings) : 0;
     },
     // All calculations based on hourly rate as primary source
     hourlyRate() {
@@ -194,15 +192,22 @@ export default {
       return d;
     },
     checkMilestones() {
+      // Only check milestones if we have reasonable earnings (not immediately on load)
+      if (this.earnings <= 0) return;
+      
       const reached = MILESTONES.filter(m => this.earnings >= m.amount).pop() || null
       if (reached && (!this.milestone || reached.amount > this.milestone.amount)) {
-        this.milestone = {
-          ...reached,
-          message: this.t(reached.messageKey)
-        }
-        // Trigger celebration animation
-        if (window.animationManager) {
-          window.animationManager.celebrateMilestone(reached.amount);
+        // Prevent duplicate milestone celebrations
+        const lastReachedAmount = this.milestone ? this.milestone.amount : 0;
+        if (reached.amount > lastReachedAmount) {
+          this.milestone = {
+            ...reached,
+            message: this.t(reached.messageKey)
+          }
+          // Trigger celebration animation only for new milestones
+          if (window.animationManager && document.getElementById('hourglassContainer')) {
+            window.animationManager.celebrateMilestone(reached.amount);
+          }
         }
       }
     }
@@ -213,12 +218,22 @@ export default {
       this.checkMilestones()
     }, 1000)
     
-    // 确保动画系统已初始化
-    this.$nextTick(() => {
+    // 初始化动画系统 - 等待DOM完全渲染
+    setTimeout(() => {
       if (window.animationManager && !window.animationManager.isAnimating) {
-        window.animationManager.init();
+        const container = document.getElementById('hourglassContainer');
+        if (container) {
+          window.animationManager.init();
+        } else {
+          console.warn('Hourglass container not found, retrying...');
+          setTimeout(() => {
+            if (document.getElementById('hourglassContainer')) {
+              window.animationManager.init();
+            }
+          }, 1000);
+        }
       }
-    });
+    }, 500);
   },
   beforeUnmount() {
     clearInterval(this.timer)
