@@ -1,4 +1,5 @@
 # Time Coins - Real-Time Earnings Tracker 💰
+**Vue Version**: This repository now features a full Vue 3 implementation using Vite. The legacy static version is preserved as `legacy-index.html`.
 
 [![Website](https://img.shields.io/website?url=https%3A//ktwu01.github.io/time-coins)](https://ktwu01.github.io/time-coins/) [![GitHub stars](https://img.shields.io/github/stars/ktwu01/time-coins)](https://github.com/ktwu01/time-coins) [![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork) ![cc-by-nc-nd](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)
 
@@ -74,7 +75,7 @@ Perfect for **freelancers**, **remote workers**, **hourly employees**, and anyon
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Pure HTML5 + Vanilla JavaScript (no dependencies)
+- **Frontend**: Vue 3 powered by Vite
 - **Styling**: Tailwind CSS 3.0+ with custom glassmorphism effects
 - **Icons**: Font Awesome 6.4 for crisp, scalable icons
 - **Fonts**: Inter from Google Fonts for modern typography
@@ -97,23 +98,13 @@ git clone https://github.com/ktwu01/time-coins.git
 # Navigate to directory
 cd time-coins
 
-# Start local server (choose one method)
+# Install dependencies (requires network access)
+npm install
 
-# Method 1: Python
-python -m http.server 8000
+# Start development server
+npm run dev
 
-# Method 2: Node.js
-npx serve .
-
-# Method 3: VS Code Live Server
-# Right-click index.html → Open with Live Server
-```
-
-Visit `http://localhost:8000` and start tracking your earnings!
-
----
-
-## ⚡ How to Use
+Visit `http://localhost:5173` to view the Vue version.
 
 ### Initial Setup (30 seconds)
 1. **Select Timezone** - Choose from 50+ global timezones

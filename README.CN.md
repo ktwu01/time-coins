@@ -1,4 +1,5 @@
 # 一寸光阴一寸金 Time Coins - 实时收入追踪器 💰
+**Vue 版本**：本仓库现已升级为完整的 Vue 3 + Vite 实现，旧的静态页面保留在 `legacy-index.html`。
 
 
 [![Website](https://img.shields.io/website?url=https%3A//ktwu01.github.io/time-coins)](https://ktwu01.github.io/time-coins/) [![GitHub stars](https://img.shields.io/github/stars/ktwu01/time-coins)](https://github.com/ktwu01/time-coins) [![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork) ![cc-by-nc-nd](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)
@@ -75,7 +76,7 @@ Time Coins 是一个优雅的**实时收入追踪工具**，将您的工作时�
 
 ## 🛠️ 技术栈
 
-- **前端框架**: 纯HTML5 + 原生JavaScript（零依赖）
+- **前端框架**: Vue 3 + Vite
 - **样式系统**: Tailwind CSS 3.0+ 配自定义毛玻璃效果
 - **图标库**: Font Awesome 6.4 提供清晰可缩放图标
 - **字体**: Google Fonts的Inter字体，现代化排版
@@ -98,19 +99,14 @@ git clone https://github.com/ktwu01/time-coins.git
 # 进入目录
 cd time-coins
 
-# 启动本地服务器（选择一种方法）
+# 安装依赖（需要网络）
+npm install
 
-# 方法1: Python
-python -m http.server 8000
-
-# 方法2: Node.js
-npx serve .
-
-# 方法3: VS Code Live Server
-# 右键点击 index.html → Open with Live Server
+# 启动开发服务器
+npm run dev
 ```
 
-访问 `http://localhost:8000` 开始追踪您的收入！
+访问 `http://localhost:5173` 查看 Vue 版本
 
 ---
 
