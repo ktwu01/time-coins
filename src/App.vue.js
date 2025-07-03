@@ -147,8 +147,42 @@ export default {
     incomePerDay() {
       return this.dailyIncome;
     },
+    remainingDaysInMonth() {
+      // Calculate remaining workdays in the month
+      const today = new Date();
+      const currentDay = today.getDate();
+      const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+      const totalRemainingDays = daysInMonth - currentDay;
+      
+      // Assume same ratio of work days to total days for remaining days
+      const workDayRatio = (this.settings.workDays || 0) / daysInMonth;
+      const remainingWorkDays = Math.floor(totalRemainingDays * workDayRatio);
+      
+      return Math.max(0, remainingWorkDays);
+    },
+    remainingMonthlyIncome() {
+      // Remaining workdays × daily income
+      return this.remainingDaysInMonth * this.dailyIncome;
+    },
+    workedDaysThisMonth() {
+      // Calculate how many workdays have been worked so far this month
+      const today = new Date();
+      const currentDay = today.getDate();
+      const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+      
+      // Assume same ratio of work days to total days for days worked
+      const workDayRatio = (this.settings.workDays || 0) / daysInMonth;
+      const workedDays = Math.floor(currentDay * workDayRatio);
+      
+      return Math.max(0, workedDays);
+    },
+    actualMonthlyEarnings() {
+      // Actual earnings so far this month = worked days × daily income
+      return this.workedDaysThisMonth * this.dailyIncome;
+    },
     monthlyProgress() {
-      return this.monthlyEarnings > 0 ? (this.earnings / this.monthlyEarnings * 100) : 0
+      // Progress = actual monthly earnings so far / total monthly target
+      return this.monthlyEarnings > 0 ? (this.actualMonthlyEarnings / this.monthlyEarnings * 100) : 0
     },
     currencyOptions() {
       return this.currencies.map(c => ({
@@ -301,7 +335,7 @@ export default {
           <i class="fas fa-coins mr-2"></i> {{ t('salary.mySalary') }}
         </div>
         <div class="flex flex-wrap gap-4 text-base font-semibold">
-          <div>{{ t('salary.monthlyTotal') }}：<span class="text-yellow-700">{{ settings.currency }}{{ monthlyEarnings?.toFixed(2) || '0.00' }}</span></div>
+          <div>{{ t('salary.monthlyTotal') }}：<span class="text-yellow-700">{{ settings.currency }}{{ actualMonthlyEarnings?.toFixed(2) || '0.00' }}</span></div>
           <div>{{ t('salary.monthlyProgress') }}：<span class="text-yellow-700">{{ monthlyProgress?.toFixed(1) || '0.0' }}%</span></div>
         </div>
       </div>
@@ -340,7 +374,7 @@ export default {
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.monthLeft') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ ((monthlyEarnings || 0) - (earnings || 0)).toFixed(2) }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ remainingMonthlyIncome?.toFixed(2) || '0.00' }}</div>
         </div>
       </div>
     </section>
