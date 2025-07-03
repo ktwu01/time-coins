@@ -1,4 +1,5 @@
 # Time Coins - Real-Time Earnings Tracker 💰
+
 **Vue Version**: This repository now features a full Vue 3 implementation using Vite. The legacy static version is preserved as `legacy-index.html`.
 
 [![Website](https://img.shields.io/website?url=https%3A//ktwu01.github.io/time-coins)](https://ktwu01.github.io/time-coins/) [![GitHub stars](https://img.shields.io/github/stars/ktwu01/time-coins)](https://github.com/ktwu01/time-coins) [![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork) ![cc-by-nc-nd](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)

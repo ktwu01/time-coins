@@ -5,13 +5,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext .vue,.js,.ts",
+    "lint:fix": "eslint src --ext .vue,.js,.ts --fix"
   },
   "dependencies": {
     "vue": "^3.4.15"
   },
   "devDependencies": {
     "vite": "^5.2.0",
-    "@vitejs/plugin-vue": "^5.2.0"
+    "@vitejs/plugin-vue": "^5.2.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.22.0",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.2.5"
   }
 }

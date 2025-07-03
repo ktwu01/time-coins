@@ -1,5 +1,37 @@
-import { DEFAULT_SETTINGS, MILESTONES, TIMEZONES, CURRENCIES } from './constants.js'
+// constants.js content (create this file separately)
+const DEFAULT_SETTINGS = {
+  hourlyRate: 25,
+  startTime: '09:00',
+  workHours: 8,
+  timezone: 'UTC',
+  currency: '$'
+}
 
+const MILESTONES = [
+  { amount: 10, message: '🎉 First $10 earned!' },
+  { amount: 25, message: '💪 Quarter century milestone!' },
+  { amount: 50, message: '🚀 Halfway to $100!' },
+  { amount: 100, message: '💯 Century achieved!' },
+  { amount: 200, message: '🏆 Double century!' }
+]
+
+const TIMEZONES = [
+  { value: 'UTC', label: 'UTC' },
+  { value: 'America/New_York', label: 'Eastern Time' },
+  { value: 'America/Chicago', label: 'Central Time' },
+  { value: 'America/Denver', label: 'Mountain Time' },
+  { value: 'America/Los_Angeles', label: 'Pacific Time' }
+]
+
+const CURRENCIES = [
+  { symbol: '$', code: 'USD', name: 'US Dollar', flag: '🇺🇸' },
+  { symbol: '€', code: 'EUR', name: 'Euro', flag: '🇪🇺' },
+  { symbol: '£', code: 'GBP', name: 'British Pound', flag: '🇬🇧' },
+  { symbol: '¥', code: 'JPY', name: 'Japanese Yen', flag: '🇯🇵' },
+  { symbol: '¥', code: 'CNY', name: 'Chinese Yuan', flag: '🇨🇳' }
+]
+
+// App.vue component
 export default {
   data() {
     const saved = JSON.parse(localStorage.getItem('settings') || 'null')
@@ -27,7 +59,7 @@ export default {
     earnings() {
       const ms = Math.min(Math.max(this.now - this.startDate, 0), this.endDate - this.startDate)
       const hours = ms / 3600000
-      return hours * this.settings.hourlyRate
+      return Math.max(hours * this.settings.hourlyRate, 0)
     },
     progress() {
       const total = this.endDate - this.startDate
@@ -79,6 +111,7 @@ export default {
         <p class="text-gray-300 text-lg md:text-xl font-light">Transform every moment into golden value</p>
       </div>
     </header>
+
     <section class="glass-dark rounded-2xl p-6 md:p-8 mb-8">
       <div class="flex items-center mb-6">
         <i class="fas fa-cog text-yellow-400 text-xl mr-3"></i>
@@ -91,7 +124,7 @@ export default {
             <span>Time Zone</span>
           </label>
           <select v-model="settings.timezone" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
-            <option v-for="tz in TIMEZONES" :value="tz.value">{{ tz.label }}</option>
+            <option v-for="tz in TIMEZONES" :key="tz.value" :value="tz.value">{{ tz.label }}</option>
           </select>
         </div>
         <div class="space-y-2">
@@ -100,7 +133,7 @@ export default {
             <span>Currency</span>
           </label>
           <select v-model="settings.currency" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
-            <option v-for="c in CURRENCIES" :value="c.symbol">{{ c.flag }} {{ c.symbol }} {{ c.code }} - {{ c.name }}</option>
+            <option v-for="c in CURRENCIES" :key="c.code" :value="c.symbol">{{ c.flag }} {{ c.symbol }} {{ c.code }} - {{ c.name }}</option>
           </select>
         </div>
         <div class="space-y-2">
@@ -126,6 +159,7 @@ export default {
         </div>
       </div>
     </section>
+
     <div v-if="milestone" class="glass gold-gradient text-black p-4 rounded-2xl mb-8 text-center font-semibold text-lg">
       <i class="fas fa-trophy mr-2"></i>
       <span>{{ milestone.message }}</span>
@@ -133,6 +167,7 @@ export default {
         <span>{{ settings.currency }}{{ (nextMilestone.amount - earnings).toFixed(2) }} to next milestone</span>
       </div>
     </div>
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
       <div class="glass-dark rounded-2xl p-8 text-center">
         <h3 class="text-xl font-semibold mb-6 flex items-center justify-center">
@@ -151,6 +186,7 @@ export default {
           </div>
         </div>
       </div>
+
       <div class="space-y-6">
         <div class="glass-dark rounded-2xl p-6">
           <div class="flex items-center justify-between mb-4">
@@ -161,6 +197,7 @@ export default {
             <div class="h-full gold-gradient transition-all duration-1000 ease-out rounded-full" :style="{ width: progress + '%' }"></div>
           </div>
         </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
             <div class="flex items-center justify-between mb-2">
@@ -186,6 +223,7 @@ export default {
         </div>
       </div>
     </div>
+
     <footer class="text-center text-gray-500 text-sm">
       <div class="glass rounded-xl p-4">
         <p>Transform your time into value • Built with elegance</p>

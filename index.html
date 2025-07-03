@@ -11,30 +11,36 @@
   </script>
 
   <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Time Coins - Transform every moment into golden value. An elegant dashboard to track your time and earnings with a beautiful hourglass visualization.">
   <meta name="keywords" content="Time Coins, Time Tracking, Earnings, Hourglass, Elegant Dashboard, Productivity, Time Management, Financial Goals, Milestones">
   <meta name="author" content="Github ktwu01 (Koutian Wu)">
+  
+  <!-- Favicons -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>Time Coins Vue</title>
 
-  <!-- Tailwind CSS CDN -->
+  <!-- External Dependencies -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Custom Styles -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white overflow-x-hidden">
+  <!-- Background Animation -->
   <div class="absolute inset-0 opacity-10">
     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform rotate-45 -translate-x-full animate-pulse"></div>
   </div>
+  
+  <!-- Vue App Mount Point -->
   <div id="app"></div>
+  
+  <!-- Vue Application Entry -->
   <script type="module" src="src/main.js"></script>
 </body>
 </html>
