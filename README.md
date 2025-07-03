@@ -2,6 +2,8 @@
 
 **Vue Version**: This repository now features a full Vue 3 implementation using Vite. The legacy static version is preserved as `legacy-index.html`.
 
+> **Note:** The main `index.html` is now a mount point for the Vue 3 app. All new features, bugfixes, and improvements are made in the Vue codebase (`src/`). The legacy static HTML/JS version is available for reference in `legacy-index.html`.
+
 [![Website](https://img.shields.io/website?url=https%3A//ktwu01.github.io/time-coins)](https://ktwu01.github.io/time-coins/) [![GitHub stars](https://img.shields.io/github/stars/ktwu01/time-coins)](https://github.com/ktwu01/time-coins) [![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork) ![cc-by-nc-nd](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)
 
 > **Transform every moment into golden value** ✨  
@@ -76,12 +78,22 @@ Perfect for **freelancers**, **remote workers**, **hourly employees**, and anyon
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Vue 3 powered by Vite
+- **Frontend**: Vue 3 powered by Vite (see `src/` for main logic)
+- **Legacy**: Pure HTML5 + Vanilla JavaScript (see `legacy-index.html`)
 - **Styling**: Tailwind CSS 3.0+ with custom glassmorphism effects
 - **Icons**: Font Awesome 6.4 for crisp, scalable icons
 - **Fonts**: Inter from Google Fonts for modern typography
 - **Animations**: CSS3 transitions + JavaScript for smooth interactions
 - **Architecture**: Modular ES6+ with intelligent caching system
+
+## 🏛️ Legacy Version
+
+The original static HTML/JS version is preserved for reference and can be found in [`legacy-index.html`](legacy-index.html).
+
+- **To use the legacy version:**
+  - Open `legacy-index.html` directly in your browser (no build or server required).
+  - This version is pure HTML5 + Vanilla JS, and does not include the new Vue features or enhancements.
+  - No npm, Vite, or build step is needed for the legacy version.
 
 ---
 
@@ -90,7 +102,7 @@ Perfect for **freelancers**, **remote workers**, **hourly employees**, and anyon
 ### 🌐 Try It Now
 **[Live Demo](https://ktwu01.github.io/time-coins/)** - Experience Time Coins instantly, no installation required
 
-### 💻 Local Development
+### 💻 Local Development (Vue 3 + Vite)
 
 ```bash
 # Clone the repository
@@ -104,8 +116,13 @@ npm install
 
 # Start development server
 npm run dev
+```
 
 Visit `http://localhost:5173` to view the Vue version.
+
+### 🏛️ Legacy Static Version
+
+- Open `legacy-index.html` in your browser for the original static HTML/JS version (no build or server required).
 
 ### Initial Setup (30 seconds)
 1. **Select Timezone** - Choose from 50+ global timezones

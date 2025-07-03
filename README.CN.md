@@ -2,6 +2,8 @@
 
 **Vue 版本**：本仓库现已升级为完整的 Vue 3 + Vite 实现，旧的静态页面保留在 `legacy-index.html`。
 
+> **注意：** 现在主 `index.html` 仅作为 Vue 3 应用的挂载点，所有新功能、修复和改进都在 `src/` 目录下进行。原始静态 HTML/JS 版本保留在 `legacy-index.html` 供参考。
+
 [![Website](https://img.shields.io/website?url=https%3A//ktwu01.github.io/time-coins)](https://ktwu01.github.io/time-coins/) [![GitHub stars](https://img.shields.io/github/stars/ktwu01/time-coins)](https://github.com/ktwu01/time-coins) [![GitHub forks](https://img.shields.io/github/forks/ktwu01/time-coins)](https://github.com/ktwu01/time-coins/fork) ![cc-by-nc-nd](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)
 
 > **让每一刻都闪闪发光** ✨  
@@ -107,6 +109,15 @@ npm run dev
 ```
 
 访问 `http://localhost:5173` 查看 Vue 版本
+
+## 🏛️ 旧版说明
+
+原始静态 HTML/JS 版本已保留在 [`legacy-index.html`](legacy-index.html) 文件中，供参考。
+
+- **如何使用旧版：**
+  - 直接用浏览器打开 `legacy-index.html`（无需构建或服务器）。
+  - 该版本为纯 HTML5 + 原生 JS，不包含 Vue 新特性和增强。
+  - 旧版无需 npm、Vite 或任何构建步骤。
 
 ---
 
