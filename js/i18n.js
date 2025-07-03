@@ -13,6 +13,9 @@ const translations = {
             hourlyRate: "Hourly Rate",
             startTime: "Work Start Time",
             workHours: "Daily Work Hours",
+            workDays: "Work Days per Month",
+            overtimeDays: "Overtime Days per Month",
+            overtimeRate: "Overtime Hourly Rate",
             updateButton: "Update Settings"
         },
         dashboard: {
@@ -80,6 +83,9 @@ const translations = {
             hourlyRate: "时薪",
             startTime: "工作开始时间", 
             workHours: "每日工作小时",
+            workDays: "本月工作天数",
+            overtimeDays: "本月加班天数",
+            overtimeRate: "加班时薪",
             updateButton: "更新设置"
         },
         dashboard: {

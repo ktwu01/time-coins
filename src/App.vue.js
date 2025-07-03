@@ -5,10 +5,9 @@ const DEFAULT_SETTINGS = {
   workHours: 8,
   timezone: 'UTC',
   currency: '$',
-  monthlyIncome: 15000,
   workDays: 21,
   overtimeDays: 0,
-  overtimeRate: 0
+  overtimeRate: 37.5
 }
 
 const MILESTONES = [
@@ -70,7 +69,7 @@ export default {
     earnings() {
       const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
       const hours = ms / 3600000;
-      return Math.max(hours * this.settings.hourlyRate, 0);
+      return Math.max(hours * this.hourlyRate, 0);
     },
     progress() {
       const total = this.endDate - this.startDate;
@@ -97,36 +96,34 @@ export default {
     remainingToNextMilestone() {
       return this.nextMilestone ? this.nextMilestone.amount - this.earnings : 0;
     },
-    dailyIncome() {
-      return this.settings.monthlyIncome && this.settings.workDays
-        ? this.settings.monthlyIncome / this.settings.workDays
-        : 0
+    // All calculations based on hourly rate as primary source
+    hourlyRate() {
+      return this.settings.hourlyRate || 0;
     },
-    hourlyIncome() {
-      return this.dailyIncome && this.settings.workHours
-        ? this.dailyIncome / this.settings.workHours
-        : this.settings.hourlyRate || 0
+    dailyIncome() {
+      return this.hourlyRate * (this.settings.workHours || 0);
+    },
+    monthlyBaseIncome() {
+      return this.dailyIncome * (this.settings.workDays || 0);
     },
     overtimeEarnings() {
       return (this.settings.overtimeDays || 0) * (this.settings.workHours || 0) * (this.settings.overtimeRate || 0)
     },
     monthlyEarnings() {
-      // Calculate based on hourly rate if monthlyIncome is not set
-      const baseMonthly = this.settings.monthlyIncome || 
-        (this.settings.hourlyRate * this.settings.workHours * this.settings.workDays);
-      return baseMonthly + this.overtimeEarnings;
+      // Always calculate from hourly rate
+      return this.monthlyBaseIncome + this.overtimeEarnings;
     },
     incomePerSecond() {
-      return this.hourlyIncome / 3600
+      return this.hourlyRate / 3600;
     },
     incomePerMinute() {
-      return this.hourlyIncome / 60
+      return this.hourlyRate / 60;
     },
     incomePerHour() {
-      return this.hourlyIncome
+      return this.hourlyRate;
     },
     incomePerDay() {
-      return this.dailyIncome
+      return this.dailyIncome;
     },
     monthlyProgress() {
       return this.monthlyEarnings > 0 ? (this.earnings / this.monthlyEarnings * 100) : 0
@@ -259,7 +256,7 @@ export default {
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
         <div class="bg-white/80 rounded-xl p-4 text-center">
           <div class="text-xs text-gray-600 mb-1">{{ t('salary.baseIncome') }}</div>
-          <div class="text-xl font-bold">{{ settings.currency }}{{ settings.monthlyIncome?.toFixed(2) || '0.00' }}</div>
+          <div class="text-xl font-bold">{{ settings.currency }}{{ monthlyBaseIncome?.toFixed(2) || '0.00' }}</div>
           <div class="text-xs text-gray-500">{{ t('salary.workDays') }}: {{ settings.workDays }} {{ t('salary.days') }}</div>
         </div>
         <div class="bg-white/80 rounded-xl p-4 text-center">
@@ -345,29 +342,22 @@ export default {
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-yen-sign text-yellow-400 mr-2"></i>
-            <span>月收入金额</span>
-          </label>
-          <input type="number" v-model.number="settings.monthlyIncome" min="0" step="0.01" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
-        </div>
-        <div class="space-y-2">
-          <label class="flex items-center text-sm font-medium text-gray-300">
             <i class="fas fa-calendar-alt text-yellow-400 mr-2"></i>
-            <span>本月工作天数</span>
+            <span>{{ t('settings.workDays') }}</span>
           </label>
           <input type="number" v-model.number="settings.workDays" min="1" max="31" step="1" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
             <i class="fas fa-plus-circle text-yellow-400 mr-2"></i>
-            <span>本月加班天数</span>
+            <span>{{ t('settings.overtimeDays') }}</span>
           </label>
           <input type="number" v-model.number="settings.overtimeDays" min="0" max="31" step="1" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
             <i class="fas fa-bolt text-yellow-400 mr-2"></i>
-            <span>加班时薪</span>
+            <span>{{ t('settings.overtimeRate') }}</span>
           </label>
           <input type="number" v-model.number="settings.overtimeRate" min="0" step="0.01" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
@@ -441,7 +431,7 @@ export default {
               <i class="fas fa-target text-yellow-400 text-xl"></i>
               <span class="text-xs text-gray-400 uppercase tracking-wide">{{ t('dashboard.dailyTarget') }}</span>
             </div>
-            <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ ((settings.hourlyRate || 0) * (settings.workHours || 0)).toFixed(2) }}</div>
+            <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ dailyIncome?.toFixed(2) || '0.00' }}</div>
           </div>
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300 sm:col-span-2">
             <div class="flex items-center justify-between mb-2">
