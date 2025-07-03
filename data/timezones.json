@@ -1,0 +1,16 @@
+[
+  { "value": "Asia/Shanghai", "label": { "en": "🇨🇳 Beijing/Shanghai (CST) UTC+8", "zh": "🇨🇳 北京/上海 (CST) UTC+8" }, "group": { "en": "Asia", "zh": "亚洲" } },
+  { "value": "Asia/Hong_Kong", "label": { "en": "🇭🇰 Hong Kong (HKT) UTC+8", "zh": "🇭🇰 香港 (HKT) UTC+8" }, "group": { "en": "Asia", "zh": "亚洲" } },
+  { "value": "Asia/Taipei", "label": { "en": "🇹🇼 Taipei (CST) UTC+8", "zh": "🇹🇼 台北 (CST) UTC+8" }, "group": { "en": "Asia", "zh": "亚洲" } },
+  { "value": "Asia/Tokyo", "label": { "en": "🇯🇵 Tokyo (JST) UTC+9", "zh": "🇯🇵 东京 (JST) UTC+9" }, "group": { "en": "Asia", "zh": "亚洲" } },
+  { "value": "Asia/Seoul", "label": { "en": "🇰🇷 Seoul (KST) UTC+9", "zh": "🇰🇷 首尔 (KST) UTC+9" }, "group": { "en": "Asia", "zh": "亚洲" } },
+  { "value": "Europe/London", "label": { "en": "🇬🇧 London (GMT/BST) UTC+0/+1", "zh": "🇬🇧 伦敦 (GMT/BST) UTC+0/+1" }, "group": { "en": "Europe", "zh": "欧洲" } },
+  { "value": "Europe/Paris", "label": { "en": "🇫🇷 Paris (CET/CEST) UTC+1/+2", "zh": "🇫🇷 巴黎 (CET/CEST) UTC+1/+2" }, "group": { "en": "Europe", "zh": "欧洲" } },
+  { "value": "Europe/Berlin", "label": { "en": "🇩🇪 Berlin (CET/CEST) UTC+1/+2", "zh": "🇩🇪 柏林 (CET/CEST) UTC+1/+2" }, "group": { "en": "Europe", "zh": "欧洲" } },
+  { "value": "America/New_York", "label": { "en": "🇺🇸 New York (EST/EDT) UTC-5/-4", "zh": "🇺🇸 纽约 (EST/EDT) UTC-5/-4" }, "group": { "en": "America", "zh": "美洲" } },
+  { "value": "America/Los_Angeles", "label": { "en": "🇺🇸 Los Angeles (PST/PDT) UTC-8/-7", "zh": "🇺🇸 洛杉矶 (PST/PDT) UTC-8/-7" }, "group": { "en": "America", "zh": "美洲" } },
+  { "value": "America/Chicago", "label": { "en": "🇺🇸 Chicago (CST/CDT) UTC-6/-5", "zh": "🇺🇸 芝加哥 (CST/CDT) UTC-6/-5" }, "group": { "en": "America", "zh": "美洲" } },
+  { "value": "America/Toronto", "label": { "en": "🇨🇦 Toronto (EST/EDT) UTC-5/-4", "zh": "🇨🇦 多伦多 (EST/EDT) UTC-5/-4" }, "group": { "en": "America", "zh": "美洲" } },
+  { "value": "Australia/Sydney", "label": { "en": "🇦🇺 Sydney (AEST/AEDT) UTC+10/+11", "zh": "🇦🇺 悉尼 (AEST/AEDT) UTC+10/+11" }, "group": { "en": "Oceania", "zh": "大洋洲" } },
+  { "value": "Pacific/Auckland", "label": { "en": "🇳🇿 Auckland (NZST/NZDT) UTC+12/+13", "zh": "🇳🇿 奥克兰 (NZST/NZDT) UTC+12/+13" }, "group": { "en": "Oceania", "zh": "大洋洲" } }
+] 
