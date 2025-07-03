@@ -49,6 +49,13 @@ export default {
     // 语言初始化
     this.currentLanguage = window.i18n.getCurrentLanguage();
     this.isLoading = false;
+    
+    // 初始化动画系统
+    this.$nextTick(() => {
+      if (window.animationManager) {
+        window.animationManager.init();
+      }
+    });
   },
   computed: {
     nowInTz() {
@@ -78,6 +85,18 @@ export default {
     nextMilestone() {
       return MILESTONES.find(m => this.earnings < m.amount) || null
     },
+    milestoneProgress() {
+      if (!this.nextMilestone) return 100;
+      const prevMilestone = MILESTONES.filter(m => m.amount <= this.earnings).pop();
+      const prevAmount = prevMilestone ? prevMilestone.amount : 0;
+      const nextAmount = this.nextMilestone.amount;
+      const currentProgress = this.earnings - prevAmount;
+      const totalNeeded = nextAmount - prevAmount;
+      return totalNeeded > 0 ? (currentProgress / totalNeeded) * 100 : 0;
+    },
+    remainingToNextMilestone() {
+      return this.nextMilestone ? this.nextMilestone.amount - this.earnings : 0;
+    },
     dailyIncome() {
       return this.settings.monthlyIncome && this.settings.workDays
         ? this.settings.monthlyIncome / this.settings.workDays
@@ -86,13 +105,16 @@ export default {
     hourlyIncome() {
       return this.dailyIncome && this.settings.workHours
         ? this.dailyIncome / this.settings.workHours
-        : 0
+        : this.settings.hourlyRate || 0
     },
     overtimeEarnings() {
       return (this.settings.overtimeDays || 0) * (this.settings.workHours || 0) * (this.settings.overtimeRate || 0)
     },
     monthlyEarnings() {
-      return (this.settings.monthlyIncome || 0) + this.overtimeEarnings
+      // Calculate based on hourly rate if monthlyIncome is not set
+      const baseMonthly = this.settings.monthlyIncome || 
+        (this.settings.hourlyRate * this.settings.workHours * this.settings.workDays);
+      return baseMonthly + this.overtimeEarnings;
     },
     incomePerSecond() {
       return this.hourlyIncome / 3600
@@ -181,6 +203,10 @@ export default {
           ...reached,
           message: this.t(reached.messageKey)
         }
+        // Trigger celebration animation
+        if (window.animationManager) {
+          window.animationManager.celebrateMilestone(reached.amount);
+        }
       }
     }
   },
@@ -189,9 +215,19 @@ export default {
       this.now = new Date()
       this.checkMilestones()
     }, 1000)
+    
+    // 确保动画系统已初始化
+    this.$nextTick(() => {
+      if (window.animationManager && !window.animationManager.isAnimating) {
+        window.animationManager.init();
+      }
+    });
   },
   beforeUnmount() {
     clearInterval(this.timer)
+    if (window.animationManager) {
+      window.animationManager.cleanup();
+    }
   },
   template: `
   <div v-if="isLoading" class="text-center py-12">Loading...</div>
@@ -342,7 +378,23 @@ export default {
       <i class="fas fa-trophy mr-2"></i>
       <span>{{ milestone.message }}</span>
       <div class="text-sm mt-1 opacity-75" v-if="nextMilestone">
-        <span>{{ settings.currency }}{{ ((nextMilestone?.amount || 0) - (earnings || 0)).toFixed(2) }} {{ t('milestones.toReach') }}</span>
+        <span>{{ t('milestones.nextMilestone') }} {{ settings.currency }}{{ remainingToNextMilestone.toFixed(2) }}</span>
+        <div class="w-full bg-black/20 rounded-full h-2 mt-2">
+          <div class="h-full bg-white/60 rounded-full transition-all duration-1000" :style="{ width: milestoneProgress + '%' }"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div v-else-if="nextMilestone" class="glass-dark rounded-2xl p-4 mb-8 text-center">
+      <div class="text-white text-lg font-medium mb-2">
+        <i class="fas fa-target mr-2 text-yellow-400"></i>
+        {{ t('milestones.nextMilestone') }} {{ settings.currency }}{{ nextMilestone.amount }}
+      </div>
+      <div class="text-gray-300 text-sm mb-3">
+        {{ t('milestones.toReach') }}: {{ settings.currency }}{{ remainingToNextMilestone.toFixed(2) }}
+      </div>
+      <div class="w-full bg-gray-700 rounded-full h-3">
+        <div class="h-full gold-gradient rounded-full transition-all duration-1000" :style="{ width: milestoneProgress + '%' }"></div>
       </div>
     </div>
 
