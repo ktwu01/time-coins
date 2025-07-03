@@ -1,0 +1,116 @@
+export const DEFAULT_SETTINGS = {
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  currency: '$',
+  hourlyRate: 25,
+  startTime: '09:00',
+  workHours: 8
+};
+
+export const MILESTONES = [
+  { amount: 10, message: '🎉 First milestone achieved!' },
+  { amount: 50, message: '🚀 Great progress milestone!' },
+  { amount: 100, message: '💎 Excellent performance!' },
+  { amount: 200, message: '🏅 Daily target achieved!' },
+  { amount: 500, message: '👑 Outstanding achievement!' },
+  { amount: 1000, message: '🏆 Legendary performance!' }
+];
+
+export const TIMEZONES = [
+        // North America
+        { value: "America/New_York", label: "🇺🇸 New York (EST/EDT) UTC-5/-4", group: "🌎 North America" },
+        { value: "America/Chicago", label: "🇺🇸 Chicago (CST/CDT) UTC-6/-5", group: "🌎 North America" },
+        { value: "America/Denver", label: "🇺🇸 Denver (MST/MDT) UTC-7/-6", group: "🌎 North America" },
+        { value: "America/Phoenix", label: "🇺🇸 Phoenix (MST) UTC-7", group: "🌎 North America" },
+        { value: "America/Los_Angeles", label: "🇺🇸 Los Angeles (PST/PDT) UTC-8/-7", group: "🌎 North America" },
+        { value: "America/Anchorage", label: "🇺🇸 Anchorage (AKST/AKDT) UTC-9/-8", group: "🌎 North America" },
+        { value: "Pacific/Honolulu", label: "🇺🇸 Honolulu (HST) UTC-10", group: "🌎 North America" },
+        { value: "America/Toronto", label: "🇨🇦 Toronto (EST/EDT) UTC-5/-4", group: "🌎 North America" },
+        { value: "America/Vancouver", label: "🇨🇦 Vancouver (PST/PDT) UTC-8/-7", group: "🌎 North America" },
+        { value: "America/Edmonton", label: "🇨🇦 Edmonton (MST/MDT) UTC-7/-6", group: "🌎 North America" },
+        { value: "America/Winnipeg", label: "🇨🇦 Winnipeg (CST/CDT) UTC-6/-5", group: "🌎 North America" },
+        { value: "America/Halifax", label: "🇨🇦 Halifax (AST/ADT) UTC-4/-3", group: "🌎 North America" },
+        { value: "America/St_Johns", label: "🇨🇦 St. John's (NST/NDT) UTC-3:30/-2:30", group: "🌎 North America" },
+        { value: "America/Mexico_City", label: "🇲🇽 Mexico City (CST/CDT) UTC-6/-5", group: "🌎 North America" },
+        { value: "America/Cancun", label: "🇲🇽 Cancun (EST) UTC-5", group: "🌎 North America" },
+        { value: "America/Tijuana", label: "🇲🇽 Tijuana (PST/PDT) UTC-8/-7", group: "🌎 North America" },
+        
+        // Europe
+        { value: "Europe/London", label: "🇬🇧 London (GMT/BST) UTC+0/+1", group: "🌍 Europe" },
+        { value: "Europe/Dublin", label: "🇮🇪 Dublin (GMT/IST) UTC+0/+1", group: "🌍 Europe" },
+        { value: "Europe/Lisbon", label: "🇵🇹 Lisbon (WET/WEST) UTC+0/+1", group: "🌍 Europe" },
+        { value: "Europe/Madrid", label: "🇪🇸 Madrid (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Paris", label: "🇫🇷 Paris (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Brussels", label: "🇧🇪 Brussels (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Amsterdam", label: "🇳🇱 Amsterdam (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Berlin", label: "🇩🇪 Berlin (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Zurich", label: "🇨🇭 Zurich (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Vienna", label: "🇦🇹 Vienna (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Rome", label: "🇮🇹 Rome (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Prague", label: "🇨🇿 Prague (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Warsaw", label: "🇵🇱 Warsaw (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Stockholm", label: "🇸🇪 Stockholm (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Oslo", label: "🇳🇴 Oslo (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Copenhagen", label: "🇩🇰 Copenhagen (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Helsinki", label: "🇫🇮 Helsinki (EET/EEST) UTC+2/+3", group: "🌍 Europe" },
+        { value: "Europe/Athens", label: "🇬🇷 Athens (EET/EEST) UTC+2/+3", group: "🌍 Europe" },
+        { value: "Europe/Istanbul", label: "🇹🇷 Istanbul (TRT) UTC+3", group: "🌍 Europe" },
+        { value: "Europe/Bucharest", label: "🇷🇴 Bucharest (EET/EEST) UTC+2/+3", group: "🌍 Europe" },
+        { value: "Europe/Budapest", label: "🇭🇺 Budapest (CET/CEST) UTC+1/+2", group: "🌍 Europe" },
+        { value: "Europe/Moscow", label: "🇷🇺 Moscow (MSK) UTC+3", group: "🌍 Europe" },
+        { value: "Europe/Kiev", label: "🇺🇦 Kyiv (EET/EEST) UTC+2/+3", group: "🌍 Europe" },
+        
+        // Asia
+        { value: "Asia/Shanghai", label: "🇨🇳 Beijing/Shanghai (CST) UTC+8", group: "🌏 Asia" },
+        { value: "Asia/Hong_Kong", label: "🇭🇰 Hong Kong (HKT) UTC+8", group: "🌏 Asia" },
+        { value: "Asia/Taipei", label: "🇹🇼 Taipei (CST) UTC+8", group: "🌏 Asia" },
+        { value: "Asia/Tokyo", label: "🇯🇵 Tokyo (JST) UTC+9", group: "🌏 Asia" },
+        { value: "Asia/Seoul", label: "🇰🇷 Seoul (KST) UTC+9", group: "🌏 Asia" },
+        { value: "Asia/Singapore", label: "🇸🇬 Singapore (SGT) UTC+8", group: "🌏 Asia" },
+        { value: "Asia/Bangkok", label: "🇹🇭 Bangkok (ICT) UTC+7", group: "🌏 Asia" },
+        { value: "Asia/Jakarta", label: "🇮🇩 Jakarta (WIB) UTC+7", group: "🌏 Asia" },
+        { value: "Asia/Manila", label: "🇵🇭 Manila (PST) UTC+8", group: "🌏 Asia" },
+        { value: "Asia/Kuala_Lumpur", label: "🇲🇾 Kuala Lumpur (MYT) UTC+8", group: "🌏 Asia" },
+        { value: "Asia/Kolkata", label: "🇮🇳 Mumbai/Delhi (IST) UTC+5:30", group: "🌏 Asia" },
+        
+        // Oceania
+        { value: "Australia/Sydney", label: "🇦🇺 Sydney (AEST/AEDT) UTC+10/+11", group: "🌏 Oceania" },
+        { value: "Australia/Melbourne", label: "🇦🇺 Melbourne (AEST/AEDT) UTC+10/+11", group: "🌏 Oceania" },
+        { value: "Australia/Perth", label: "🇦🇺 Perth (AWST) UTC+8", group: "🌏 Oceania" },
+        { value: "Pacific/Auckland", label: "🇳🇿 Auckland (NZST/NZDT) UTC+12/+13", group: "🌏 Oceania" }
+];
+
+export const CURRENCIES = [
+            { symbol: '$', code: 'USD', name: 'US Dollar', nameCN: '美元', flag: '🇺🇸' },
+            { symbol: '€', code: 'EUR', name: 'Euro', nameCN: '欧元', flag: '🇪🇺' },
+            { symbol: '£', code: 'GBP', name: 'British Pound', nameCN: '英镑', flag: '🇬🇧' },
+            { symbol: '¥', code: 'JPY', name: 'Japanese Yen', nameCN: '日元', flag: '🇯🇵' },
+            { symbol: '¥', code: 'CNY', name: 'Chinese Yuan', nameCN: '人民币', flag: '🇨🇳' },
+            { symbol: '₹', code: 'INR', name: 'Indian Rupee', nameCN: '印度卢比', flag: '🇮🇳' },
+            { symbol: 'C$', code: 'CAD', name: 'Canadian Dollar', nameCN: '加元', flag: '🇨🇦' },
+            { symbol: 'A$', code: 'AUD', name: 'Australian Dollar', nameCN: '澳元', flag: '🇦🇺' },
+            { symbol: 'CHF', code: 'CHF', name: 'Swiss Franc', nameCN: '瑞士法郎', flag: '🇨🇭' },
+            { symbol: 'kr', code: 'SEK', name: 'Swedish Krona', nameCN: '瑞典克朗', flag: '🇸🇪' },
+            { symbol: 'kr', code: 'NOK', name: 'Norwegian Krone', nameCN: '挪威克朗', flag: '🇳🇴' },
+            { symbol: 'kr', code: 'DKK', name: 'Danish Krone', nameCN: '丹麦克朗', flag: '🇩🇰' },
+            { symbol: 'zł', code: 'PLN', name: 'Polish Złoty', nameCN: '波兰兹罗提', flag: '🇵🇱' },
+            { symbol: 'Kč', code: 'CZK', name: 'Czech Koruna', nameCN: '捷克克朗', flag: '🇨🇿' },
+            { symbol: '₽', code: 'RUB', name: 'Russian Ruble', nameCN: '俄罗斯卢布', flag: '🇷🇺' },
+            { symbol: '₩', code: 'KRW', name: 'South Korean Won', nameCN: '韩元', flag: '🇰🇷' },
+            { symbol: 'S$', code: 'SGD', name: 'Singapore Dollar', nameCN: '新加坡元', flag: '🇸🇬' },
+            { symbol: 'HK$', code: 'HKD', name: 'Hong Kong Dollar', nameCN: '港币', flag: '🇭🇰' },
+            { symbol: 'NT$', code: 'TWD', name: 'Taiwan Dollar', nameCN: '新台币', flag: '🇹🇼' },
+            { symbol: '฿', code: 'THB', name: 'Thai Baht', nameCN: '泰铢', flag: '🇹🇭' },
+            { symbol: 'Rp', code: 'IDR', name: 'Indonesian Rupiah', nameCN: '印尼盾', flag: '🇮🇩' },
+            { symbol: 'RM', code: 'MYR', name: 'Malaysian Ringgit', nameCN: '马来西亚林吉特', flag: '🇲🇾' },
+            { symbol: '₱', code: 'PHP', name: 'Philippine Peso', nameCN: '菲律宾比索', flag: '🇵🇭' },
+            { symbol: '₪', code: 'ILS', name: 'Israeli Shekel', nameCN: '以色列谢克尔', flag: '🇮🇱' },
+            { symbol: 'AED', code: 'AED', name: 'UAE Dirham', nameCN: '阿联酋迪拉姆', flag: '🇦🇪' },
+            { symbol: 'SAR', code: 'SAR', name: 'Saudi Riyal', nameCN: '沙特里亚尔', flag: '🇸🇦' },
+            { symbol: 'R', code: 'ZAR', name: 'South African Rand', nameCN: '南非兰特', flag: '🇿🇦' },
+            { symbol: 'R$', code: 'BRL', name: 'Brazilian Real', nameCN: '巴西雷亚尔', flag: '🇧🇷' },
+            { symbol: '$', code: 'MXN', name: 'Mexican Peso', nameCN: '墨西哥比索', flag: '🇲🇽' },
+            { symbol: '$', code: 'ARS', name: 'Argentine Peso', nameCN: '阿根廷比索', flag: '🇦🇷' },
+            { symbol: '₺', code: 'TRY', name: 'Turkish Lira', nameCN: '土耳其里拉', flag: '🇹🇷' },
+            { symbol: '₴', code: 'UAH', name: 'Ukrainian Hryvnia', nameCN: '乌克兰格里夫纳', flag: '🇺🇦' },
+            { symbol: 'NZ$', code: 'NZD', name: 'New Zealand Dollar', nameCN: '新西兰元', flag: '🇳🇿' }
+];
