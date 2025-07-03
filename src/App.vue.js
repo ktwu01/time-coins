@@ -70,9 +70,33 @@ export default {
       return total ? (done / total) * 100 : 0;
     },
     workingTime() {
-      const ms = Math.min(Math.max(this.nowInTz - this.startDate, 0), this.endDate - this.startDate);
-      const minutes = Math.floor(ms / 60000);
-      return `${Math.floor(minutes/60)}:${String(minutes%60).padStart(2,'0')}`;
+      const now = this.nowInTz;
+      const start = this.startDate;
+      const end = this.endDate;
+      
+      if (now < start) {
+        // Before work starts
+        const msUntilWork = start - now;
+        const minutes = Math.floor(msUntilWork / 60000);
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        
+        if (hours > 0) {
+          return `${this.t('status.workStartsIn')} ${hours}h ${mins}min`;
+        } else {
+          return `${this.t('status.workStartsIn')} ${mins}min`;
+        }
+      } else if (now >= start && now <= end) {
+        // During work hours
+        const ms = now - start;
+        const minutes = Math.floor(ms / 60000);
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        return `${this.t('status.workingFor')} ${hours}:${String(mins).padStart(2,'0')}`;
+      } else {
+        // After work ends
+        return this.t('status.workComplete');
+      }
     },
     nextMilestone() {
       return MILESTONES.find(m => m.amount > this.earnings) || null
@@ -150,6 +174,10 @@ export default {
     settings: {
       handler() {
         localStorage.setItem('settings', JSON.stringify(this.settings))
+        // 同步设置到全局对象供动画系统使用
+        if (window.TimeCoinsApp) {
+          window.TimeCoinsApp.settings = this.settings;
+        }
       },
       deep: true
     }
@@ -218,16 +246,24 @@ export default {
       this.checkMilestones()
     }, 1000)
     
+    // 确保TimeCoinsApp存在并同步设置
+    if (!window.TimeCoinsApp) {
+      window.TimeCoinsApp = { settings: this.settings };
+    }
+    
     // 初始化动画系统 - 等待DOM完全渲染
     setTimeout(() => {
       if (window.animationManager && !window.animationManager.isAnimating) {
         const container = document.getElementById('hourglassContainer');
         if (container) {
+          // 同步设置到全局对象
+          window.TimeCoinsApp.settings = this.settings;
           window.animationManager.init();
         } else {
           console.warn('Hourglass container not found, retrying...');
           setTimeout(() => {
             if (document.getElementById('hourglassContainer')) {
+              window.TimeCoinsApp.settings = this.settings;
               window.animationManager.init();
             }
           }, 1000);
@@ -244,6 +280,11 @@ export default {
   template: `
   <div v-if="isLoading" class="text-center py-12">Loading...</div>
   <div v-else class="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+      <button @click="switchLanguage('en')" :class="{'language-btn active': currentLanguage==='en', 'language-btn': currentLanguage!=='en'}">🇺🇸 EN</button>
+      <button @click="switchLanguage('zh')" :class="{'language-btn active': currentLanguage==='zh', 'language-btn': currentLanguage!=='zh'}">🇨🇳 中文</button>
+    </div>
     <header class="text-center mb-12">
       <div class="glass rounded-3xl p-8 mb-8">
         <div class="flex items-center justify-center mb-4">
@@ -251,10 +292,6 @@ export default {
           <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">{{ t('title') }}</h1>
         </div>
         <p class="text-gray-300 text-lg md:text-xl font-light">{{ t('subtitle') }}</p>
-        <div class="mt-4 flex justify-center gap-2">
-          <button @click="switchLanguage('en')" :class="{'font-bold underline': currentLanguage==='en'}" class="px-3 py-1 rounded">EN</button>
-          <button @click="switchLanguage('zh')" :class="{'font-bold underline': currentLanguage==='zh'}" class="px-3 py-1 rounded">中文</button>
-        </div>
       </div>
     </header>
 

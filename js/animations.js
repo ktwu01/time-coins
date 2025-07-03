@@ -139,12 +139,21 @@ class AnimationManager {
      * @returns {boolean} - Whether to create a coin
      */
     shouldCreateCoin() {
+        // Always show coins during demo/testing, check working time for production
+        const settings = window.TimeCoinsApp?.settings;
+        
+        // If no settings available, show coins anyway for demo
+        if (!settings) {
+            return Math.random() < CONFIG.COIN_ANIMATION_PROBABILITY;
+        }
+        
         // Check if user is in working time
         if (!this.isWorkingTime()) {
-            return false;
+            // Still show occasional coins even outside work hours for visual appeal
+            return Math.random() < (CONFIG.COIN_ANIMATION_PROBABILITY * 0.3);
         }
 
-        // Check probability
+        // Check probability during work hours
         return Math.random() < CONFIG.COIN_ANIMATION_PROBABILITY;
     }
 
@@ -155,7 +164,10 @@ class AnimationManager {
     isWorkingTime() {
         try {
             const settings = window.TimeCoinsApp?.settings;
-            if (!settings) return false;
+            if (!settings) {
+                console.log('Animation: No settings found, returning false for working time');
+                return false;
+            }
 
             const currentTimeStr = this.getCurrentTimeInTimezone(settings.timezone);
             const [currentHour, currentMinute] = currentTimeStr.split(':').map(Number);
@@ -164,7 +176,10 @@ class AnimationManager {
             const workStartMinutes = this.parseTimeString(settings.startTime);
             const workEndMinutes = workStartMinutes + (settings.workHours * 60);
             
-            return currentTime >= workStartMinutes && currentTime <= workEndMinutes;
+            const isWorking = currentTime >= workStartMinutes && currentTime <= workEndMinutes;
+            console.log(`Animation: Current time ${currentTimeStr}, Work ${settings.startTime}-${settings.workHours}h, Working: ${isWorking}`);
+            
+            return isWorking;
         } catch (error) {
             console.error('Error checking working time:', error);
             return false;
