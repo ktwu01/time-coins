@@ -35,7 +35,7 @@ const CURRENCIES = [
   { symbol: '¥', code: 'CNY', name: 'Chinese Yuan', flag: '🇨🇳' }
 ]
 
-import i18n from '../js/i18n.js';
+// import i18n from '../js/i18n.js';
 
 // App.vue component
 export default {
@@ -61,7 +61,7 @@ export default {
     this.currencies = currencies;
     this.timezones = timezones;
     // 语言初始化
-    this.currentLanguage = i18n.getCurrentLanguage();
+    this.currentLanguage = window.i18n.getCurrentLanguage();
     this.isLoading = false;
   },
   computed: {
@@ -155,11 +155,11 @@ export default {
   },
   methods: {
     t(key) {
-      return i18n.t(key, this.currentLanguage);
+      return window.i18n.t(key, this.currentLanguage);
     },
     switchLanguage(lang) {
       this.currentLanguage = lang;
-      i18n.switchLanguage(lang);
+      window.i18n.switchLanguage(lang);
     },
     checkMilestones() {
       const reached = MILESTONES.filter(m => this.earnings >= m.amount).pop() || null
