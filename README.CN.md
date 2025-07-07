@@ -1,4 +1,5 @@
 # 一寸光阴一寸金 Time Coins - 实时收入追踪器 💰
+![Time Coins Banner](assets/Banner-Time_Coins.png)
 
 **Vue 版本**：本仓库现已升级为完整的 Vue 3 + Vite 实现，旧的静态页面保留在 `legacy-index.html`。
 

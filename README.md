@@ -1,4 +1,5 @@
 # Time Coins - Real-Time Earnings Tracker 💰
+![Time Coins Banner](assets/Banner-Time_Coins.png)
 
 **Vue Version**: This repository now features a full Vue 3 implementation using Vite. The legacy static version is preserved as `legacy-index.html`.
 

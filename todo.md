@@ -1,1 +1,1 @@
-draft a new readme.md and readme.cn.md
+draft a new readme.md and readme.cn.md and screenshot.
