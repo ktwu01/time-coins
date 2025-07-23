@@ -322,17 +322,17 @@ export default {
     <header class="text-center mb-12">
       <div class="glass rounded-3xl p-8 mb-8">
         <div class="flex items-center justify-center mb-4">
-          <i class="fas fa-hourglass-half text-4xl text-yellow-400 mr-4 float-animation"></i>
+          <i class="fas fa-hourglass-half text-4xl text-yellow-400 mr-4 float-animation" alt="Time coins hourglass icon"></i>
           <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">{{ t('title') }}</h1>
         </div>
-        <h2 class="text-gray-300 text-lg md:text-xl font-light">{{ t('subtitle') }}</h2>
+        <p class="text-gray-300 text-lg md:text-xl font-light">{{ t('subtitle') }}</p>
       </div>
     </header>
 
-    <section class="glass gold-gradient text-black p-6 rounded-2xl mb-8">
+    <section id="salary" class="glass gold-gradient text-black p-6 rounded-2xl mb-8">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div class="text-2xl font-bold flex items-center mb-2 md:mb-0">
-          <i class="fas fa-coins mr-2"></i> {{ t('salary.mySalary') }}
+          <i class="fas fa-coins mr-2" alt="Salary coins icon"></i> {{ t('salary.mySalary') }}
         </div>
         <div class="flex flex-wrap gap-4 text-base font-semibold">
           <div>{{ t('salary.monthlyTotal') }}：<span class="text-yellow-700">{{ settings.currency }}{{ actualMonthlyEarnings?.toFixed(2) || '0.00' }}</span></div>
@@ -379,15 +379,15 @@ export default {
       </div>
     </section>
 
-    <section class="glass-dark rounded-2xl p-6 md:p-8 mb-8">
+    <section id="settings" class="glass-dark rounded-2xl p-6 md:p-8 mb-8">
       <div class="flex items-center mb-6">
-        <i class="fas fa-cog text-yellow-400 text-xl mr-3"></i>
+        <i class="fas fa-cog text-yellow-400 text-xl mr-3" alt="Settings gear icon"></i>
         <h2 class="text-2xl font-semibold text-white">{{ t('settings.title') }}</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-globe text-yellow-400 mr-2"></i>
+            <i class="fas fa-globe text-yellow-400 mr-2" alt="Timezone globe icon"></i>
             <span>{{ t('settings.timezone') }}</span>
           </label>
           <select v-model="settings.timezone" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
@@ -398,7 +398,7 @@ export default {
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-coins text-yellow-400 mr-2"></i>
+            <i class="fas fa-coins text-yellow-400 mr-2" alt="Currency coins icon"></i>
             <span>{{ t('settings.currency') }}</span>
           </label>
           <select v-model="settings.currency" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300">
@@ -407,42 +407,42 @@ export default {
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-dollar-sign text-yellow-400 mr-2"></i>
+            <i class="fas fa-dollar-sign text-yellow-400 mr-2" alt="Hourly rate dollar icon"></i>
             <span>{{ t('settings.hourlyRate') }}</span>
           </label>
           <input type="number" v-model.number="settings.hourlyRate" min="1" step="0.5" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-clock text-yellow-400 mr-2"></i>
+            <i class="fas fa-clock text-yellow-400 mr-2" alt="Start time clock icon"></i>
             <span>{{ t('settings.startTime') }}</span>
           </label>
           <input type="time" v-model="settings.startTime" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-business-time text-yellow-400 mr-2"></i>
+            <i class="fas fa-business-time text-yellow-400 mr-2" alt="Work hours business time icon"></i>
             <span>{{ t('settings.workHours') }}</span>
           </label>
           <input type="number" v-model.number="settings.workHours" min="1" max="24" step="0.5" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-calendar-alt text-yellow-400 mr-2"></i>
+            <i class="fas fa-calendar-alt text-yellow-400 mr-2" alt="Work days calendar icon"></i>
             <span>{{ t('settings.workDays') }}</span>
           </label>
           <input type="number" v-model.number="settings.workDays" min="1" max="31" step="1" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-plus-circle text-yellow-400 mr-2"></i>
+            <i class="fas fa-plus-circle text-yellow-400 mr-2" alt="Overtime days plus icon"></i>
             <span>{{ t('settings.overtimeDays') }}</span>
           </label>
           <input type="number" v-model.number="settings.overtimeDays" min="0" max="31" step="1" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
         </div>
         <div class="space-y-2">
           <label class="flex items-center text-sm font-medium text-gray-300">
-            <i class="fas fa-bolt text-yellow-400 mr-2"></i>
+            <i class="fas fa-bolt text-yellow-400 mr-2" alt="Overtime rate bolt icon"></i>
             <span>{{ t('settings.overtimeRate') }}</span>
           </label>
           <input type="number" v-model.number="settings.overtimeRate" min="0" step="0.01" class="w-full px-4 py-3 bg-black/30 border border-gray-600 rounded-xl text-white elegant-input transition-all duration-300" />
@@ -451,7 +451,7 @@ export default {
     </section>
 
     <div v-if="milestone" class="glass gold-gradient text-black p-4 rounded-2xl mb-8 text-center font-semibold text-lg">
-      <i class="fas fa-trophy mr-2"></i>
+      <i class="fas fa-trophy mr-2" alt="Milestone trophy icon"></i>
       <span>{{ milestone.message }}</span>
       <div class="text-sm mt-1 opacity-75" v-if="nextMilestone">
         <span>{{ t('milestones.nextMilestone') }} {{ settings.currency }}{{ remainingToNextMilestone.toFixed(2) }}</span>
@@ -463,7 +463,7 @@ export default {
     
     <div v-else-if="nextMilestone" class="glass-dark rounded-2xl p-4 mb-8 text-center">
       <div class="text-white text-lg font-medium mb-2">
-        <i class="fas fa-target mr-2 text-yellow-400"></i>
+        <i class="fas fa-target mr-2 text-yellow-400" alt="Next milestone target icon"></i>
         {{ t('milestones.nextMilestone') }} {{ settings.currency }}{{ nextMilestone.amount }}
       </div>
       <div class="text-gray-300 text-sm mb-3">
@@ -474,12 +474,12 @@ export default {
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+    <div id="dashboard" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
       <div class="glass-dark rounded-2xl p-8 text-center">
-        <h3 class="text-xl font-semibold mb-6 flex items-center justify-center">
-          <i class="fas fa-hourglass-start text-yellow-400 mr-3"></i>
+        <h2 class="text-xl font-semibold mb-6 flex items-center justify-center">
+          <i class="fas fa-hourglass-start text-yellow-400 mr-3" alt="Value generator hourglass icon"></i>
           <span>{{ t('dashboard.valueGenerator') }}</span>
-        </h3>
+        </h2>
         <div class="flex justify-center mb-6">
           <div class="hourglass-shape float-animation" id="hourglassContainer">
             <div id="coinContainer" class="absolute inset-0"></div>
@@ -487,7 +487,7 @@ export default {
         </div>
         <div class="glass rounded-xl p-4 text-center">
           <div class="flex items-center justify-center text-gray-300">
-            <i class="fas fa-clock mr-2 text-yellow-400"></i>
+            <i class="fas fa-clock mr-2 text-yellow-400" alt="Working time clock icon"></i>
             <span>{{ workingTime }}</span>
           </div>
         </div>
@@ -507,21 +507,21 @@ export default {
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
             <div class="flex items-center justify-between mb-2">
-              <i class="fas fa-wallet text-yellow-400 text-xl"></i>
+              <i class="fas fa-wallet text-yellow-400 text-xl" alt="Earned today wallet icon"></i>
               <span class="text-xs text-gray-400 uppercase tracking-wide">{{ t('dashboard.earnedToday') }}</span>
             </div>
             <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ earnings?.toFixed(2) || '0.00' }}</div>
           </div>
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300">
             <div class="flex items-center justify-between mb-2">
-              <i class="fas fa-target text-yellow-400 text-xl"></i>
+              <i class="fas fa-target text-yellow-400 text-xl" alt="Daily target icon"></i>
               <span class="text-xs text-gray-400 uppercase tracking-wide">{{ t('dashboard.dailyTarget') }}</span>
             </div>
             <div class="text-2xl md:text-3xl font-bold text-white">{{ settings.currency }}{{ dailyIncome?.toFixed(2) || '0.00' }}</div>
           </div>
           <div class="glass-dark rounded-xl p-6 stat-card transition-all duration-300 sm:col-span-2">
             <div class="flex items-center justify-between mb-2">
-              <i class="fas fa-stopwatch text-yellow-400 text-xl"></i>
+              <i class="fas fa-stopwatch text-yellow-400 text-xl" alt="Time working stopwatch icon"></i>
               <span class="text-xs text-gray-400 uppercase tracking-wide">{{ t('dashboard.timeWorking') }}</span>
             </div>
             <div class="text-2xl md:text-3xl font-bold text-white">{{ workingTime }}</div>
@@ -531,6 +531,14 @@ export default {
     </div>
 
     <footer class="text-center text-gray-500 text-sm">
+      <nav class="glass rounded-xl p-4 mb-4">
+        <div class="flex flex-wrap justify-center gap-4 text-sm">
+          <a href="#settings" class="text-yellow-400 hover:text-yellow-300 transition-colors">{{ t('settings.title') }}</a>
+          <a href="#dashboard" class="text-yellow-400 hover:text-yellow-300 transition-colors">{{ t('dashboard.valueGenerator') }}</a>
+          <a href="#salary" class="text-yellow-400 hover:text-yellow-300 transition-colors">{{ t('salary.mySalary') }}</a>
+          <a href="https://github.com/ktwu01/time-coins" class="text-yellow-400 hover:text-yellow-300 transition-colors" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </nav>
       <div class="glass rounded-xl p-4">
         <p>{{ t('footer.text') }}</p>
       </div>

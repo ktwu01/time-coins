@@ -83,6 +83,15 @@ Settings are persisted to localStorage and include:
 - Base path configuration in vite.config.js: `base: './'`
 - SEO optimized with meta tags, structured data, and robots.txt
 
+### SEO Best Practices
+- **HTML Structure**: Use proper H1/H2 heading hierarchy for content structure
+- **ALT Attributes**: All icons and images must have descriptive ALT attributes for accessibility
+- **Meta Tags**: Comprehensive SEO meta tags including OpenGraph and Twitter Cards
+- **Structured Data**: Schema.org JSON-LD markup for rich snippets
+- **Minified Assets**: Use minified CSS (styles.min.css) for better performance
+- **Internal Links**: Include navigation with internal anchors to improve link ratio
+- **Semantic HTML**: Use proper section IDs for deep linking and navigation
+
 ## Development Guidelines
 
 ### When Adding Features
