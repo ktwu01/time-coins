@@ -325,7 +325,7 @@ export default {
           <i class="fas fa-hourglass-half text-4xl text-yellow-400 mr-4 float-animation"></i>
           <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">{{ t('title') }}</h1>
         </div>
-        <p class="text-gray-300 text-lg md:text-xl font-light">{{ t('subtitle') }}</p>
+        <h2 class="text-gray-300 text-lg md:text-xl font-light">{{ t('subtitle') }}</h2>
       </div>
     </header>
 

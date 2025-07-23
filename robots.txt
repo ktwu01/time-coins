@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ktwu01.github.io/time-coins/sitemap.xml
