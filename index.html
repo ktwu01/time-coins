@@ -66,10 +66,39 @@
   <title>Time Coins - Real-Time Earnings Tracker & Productivity Dashboard</title>
 
   <!-- External Dependencies -->
+  <script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Marcellus', 'serif'],
+            sans: ['Work Sans', 'system-ui', 'sans-serif'],
+            mono: ['Space Mono', 'ui-monospace', 'monospace']
+          },
+          colors: {
+            yellow: {
+              50: '#FBF3DF', 100: '#F3E3B7', 200: '#E7CB86', 300: '#DDB35C',
+              400: '#D2A544', 500: '#B98D34', 600: '#A8791F', 700: '#8C6415',
+              800: '#6E4E10', 900: '#4F380A'
+            },
+            gray: {
+              50: '#F7F5EE', 100: '#EDEAE0', 200: '#DAD5C4', 300: '#C7BFA9',
+              400: '#A79C86', 500: '#8A8069', 600: '#5A5342', 700: '#423C2E',
+              800: '#2C2719', 900: '#17140D'
+            },
+            patina: {
+              400: '#6FA98D', 500: '#4F8069', 600: '#3F6E5A'
+            }
+          }
+        }
+      }
+    };
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <!-- Custom Styles -->
   <link rel="stylesheet" href="css/styles.min.css">
 </head>
