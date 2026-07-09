@@ -322,8 +322,8 @@ export default {
     <header class="text-center mb-12">
       <div class="glass rounded-3xl p-8 mb-8">
         <div class="flex items-center justify-center mb-4">
-          <i class="fas fa-hourglass-half text-4xl text-yellow-400 mr-4 float-animation" alt="Time coins hourglass icon"></i>
-          <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">{{ t('title') }}</h1>
+          <i class="fas fa-hourglass-half text-4xl text-patina-400 mr-4 float-animation" alt="Time coins hourglass icon"></i>
+          <h1 class="font-display text-4xl md:text-6xl bg-gradient-to-r from-white via-yellow-400 to-white bg-clip-text text-transparent">{{ t('title') }}</h1>
         </div>
         <p class="text-gray-300 text-lg md:text-xl font-light">{{ t('subtitle') }}</p>
       </div>
@@ -382,7 +382,7 @@ export default {
     <section id="settings" class="glass-dark rounded-2xl p-6 md:p-8 mb-8">
       <div class="flex items-center mb-6">
         <i class="fas fa-cog text-yellow-400 text-xl mr-3" alt="Settings gear icon"></i>
-        <h2 class="text-2xl font-semibold text-white">{{ t('settings.title') }}</h2>
+        <h2 class="font-display text-2xl text-white">{{ t('settings.title') }}</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         <div class="space-y-2">
@@ -476,8 +476,8 @@ export default {
 
     <div id="dashboard" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
       <div class="glass-dark rounded-2xl p-8 text-center">
-        <h2 class="text-xl font-semibold mb-6 flex items-center justify-center">
-          <i class="fas fa-hourglass-start text-yellow-400 mr-3" alt="Value generator hourglass icon"></i>
+        <h2 class="font-display text-xl mb-6 flex items-center justify-center">
+          <i class="fas fa-hourglass-start text-patina-400 mr-3" alt="Value generator hourglass icon"></i>
           <span>{{ t('dashboard.valueGenerator') }}</span>
         </h2>
         <div class="flex justify-center mb-6">
@@ -487,8 +487,8 @@ export default {
         </div>
         <div class="glass rounded-xl p-4 text-center">
           <div class="flex items-center justify-center text-gray-300">
-            <i class="fas fa-clock mr-2 text-yellow-400" alt="Working time clock icon"></i>
-            <span>{{ workingTime }}</span>
+            <i class="fas fa-clock mr-2 text-patina-400" alt="Working time clock icon"></i>
+            <span class="font-mono tabular-nums">{{ workingTime }}</span>
           </div>
         </div>
       </div>
